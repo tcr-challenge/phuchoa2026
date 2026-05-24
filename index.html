@@ -95,30 +95,33 @@
       margin-bottom: 16px;
     }
 
-    /* M / F toggle buttons */
-    .mf-group {
+    /* M / F static labels */
+    .mf-labels {
       display: flex;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
+      align-items: center;
+      gap: 4px;
       flex-shrink: 0;
+      padding: 0 6px;
     }
-    .mf-btn {
-      width: 52px;
-      background: var(--surface);
-      border: none;
-      border-right: 1px solid var(--border);
-      color: var(--muted);
+    .mf-m {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
+      font-size: 26px;
       letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.18s;
-      display: flex; align-items: center; justify-content: center;
+      color: #4fc3f7;
+      line-height: 1;
     }
-    .mf-btn:last-child { border-right: none; }
-    .mf-btn.active { background: var(--accent); color: #0a0a0f; }
-    .mf-btn:hover:not(.active) { background: var(--surface2); color: var(--text); }
+    .mf-sep {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .mf-f {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+      color: #f48fb1;
+      line-height: 1;
+    }
 
     .bib-input {
       flex: 1;
@@ -624,11 +627,12 @@
 
   <div class="search-container">
 
-    <!-- BIB ROW: [M][F] [số bib............] [TÌM KIẾM] -->
+    <!-- BIB ROW: M/F [số bib............] [TÌM KIẾM] -->
     <div class="bib-row">
-      <div class="mf-group">
-        <button class="mf-btn active" id="mf-M" onclick="selectMF('M')">M</button>
-        <button class="mf-btn"        id="mf-F" onclick="selectMF('F')">F</button>
+      <div class="mf-labels">
+        <span class="mf-m">M</span>
+        <span class="mf-sep">/</span>
+        <span class="mf-f">F</span>
       </div>
       <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
              placeholder="044" maxlength="6"
@@ -676,6 +680,14 @@
         <div id="viewer-subtitle" class="viewer-subtitle"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
+    <button onclick="clearResults()" style="
+      padding:9px 16px;background:var(--surface2);border:1px solid var(--border);
+      border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;
+      transition:all 0.2s;white-space:nowrap;flex-shrink:0;
+    " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+      ← Tất cả ảnh
+    </button>
     </div>
     <!-- Result grid — same thumbnail size as browse grid -->
     <div class="result-grid" id="result-grid"></div>
@@ -715,6 +727,43 @@
   <div class="pagination" id="pagination"></div>
 </div>
 
+<!-- FOOTER -->
+<footer style="
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+  padding: 36px 24px 28px;
+  text-align: center;
+  background: var(--surface);
+">
+  <div style="
+    font-family:'Bebas Neue',sans-serif;
+    font-size: clamp(18px,4vw,26px);
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  ">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
+  <div style="
+    font-family:'Bebas Neue',sans-serif;
+    font-size: clamp(14px,3vw,20px);
+    letter-spacing: 2px;
+    color: var(--accent2);
+    margin-bottom: 16px;
+  ">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
+  <a href="https://www.facebook.com/search/top?q=Mr.%20D%E1%BA%BB o" target="_blank" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  " onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    Facebook: Mr. Dẻo
+  </a>
+  <div style="margin-top:16px;font-size:12px;color:var(--border);">© 2026 Marathon Photos</div>
+</footer>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -733,7 +782,6 @@ const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) |
 
 let PHOTOS = [];
 let faceModelsLoaded = false;
-let selectedPrefix = 'M'; // default M
 
 // Browse grid state
 let browsePage = 1;
@@ -788,16 +836,6 @@ function loadDemoData() {
 }
 
 // =====================================================================
-// M / F SELECT
-// =====================================================================
-function selectMF(val) {
-  selectedPrefix = val;
-  document.querySelectorAll('.mf-btn').forEach(b => {
-    b.classList.toggle('active', b.id === 'mf-' + val);
-  });
-}
-
-// =====================================================================
 // BIB SEARCH
 // =====================================================================
 function searchByBib() {
@@ -807,10 +845,7 @@ function searchByBib() {
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
 
   const last3 = digits.slice(-3).padStart(3, '0');
-
-  // Search all prefixes but highlight selected one first
   const allBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
-  const primaryBib = selectedPrefix.toUpperCase() + last3;
 
   setStatus(`Đang tìm BIB ${allBibs.join(' / ')}...`, 'loading');
 
@@ -839,6 +874,9 @@ function showViewer(list, startIdx, label) {
 
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
+
+  // Ẩn browse section khi có kết quả tìm kiếm
+  document.getElementById('browse-section').style.display = 'none';
 
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
 
@@ -977,6 +1015,14 @@ function lbKeyHandler(e) {
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
 });
+
+function clearResults() {
+  document.getElementById('viewer-section').style.display = 'none';
+  document.getElementById('browse-section').style.display = '';
+  document.getElementById('bib-input').value = '';
+  setStatus('', '');
+  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 // =====================================================================
 // BROWSE GRID
