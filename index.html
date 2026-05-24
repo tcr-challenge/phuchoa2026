@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marathon Photos — Tìm Ảnh Của Bạn</title>
+  <title>Tìm Ảnh — Phúc Hoà City Trail 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -19,9 +20,10 @@
       --muted: #7070a0;
       --success: #4ade80;
       --radius: 12px;
-      /* thumbnail size — same as browse grid cards */
       --thumb-w: 180px;
       --thumb-ratio: 3/2;
+      --font-display: 'Bebas Neue', Impact, sans-serif;
+      --font-body:    'Outfit', 'Segoe UI', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,9 +31,12 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* HEADER */
@@ -41,14 +46,15 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 14px 24px;
-      display: flex; align-items: center;
+      display: flex; align-items: center; justify-content: center;
     }
     .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 3px;
       color: var(--accent);
       text-decoration: none;
+      text-align: center;
     }
     .logo span { color: var(--accent2); }
 
@@ -65,18 +71,21 @@
       pointer-events: none;
     }
     .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 8vw, 84px);
-      letter-spacing: 4px;
-      line-height: 0.95;
-      margin-bottom: 14px;
+      font-family: var(--font-display);
+      font-size: clamp(44px, 9vw, 90px);
+      letter-spacing: 5px;
+      line-height: 0.92;
+      margin-bottom: 16px;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
     .hero p {
       color: var(--muted);
+      font-family: var(--font-body);
       font-size: 15px;
+      font-weight: 400;
       max-width: 460px;
       margin: 0 auto 36px;
+      line-height: 1.65;
     }
 
     /* SEARCH AREA */
@@ -87,7 +96,7 @@
       z-index: 10;
     }
 
-    /* ── BIB ROW ── */
+    /* BIB ROW */
     .bib-row {
       display: flex;
       gap: 10px;
@@ -95,7 +104,6 @@
       margin-bottom: 16px;
     }
 
-    /* M / F static labels */
     .mf-labels {
       display: flex;
       align-items: center;
@@ -104,20 +112,21 @@
       padding: 0 6px;
     }
     .mf-m {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
+      font-family: var(--font-display);
+      font-size: 28px;
       letter-spacing: 1px;
       color: #4fc3f7;
       line-height: 1;
     }
     .mf-sep {
-      color: var(--muted);
-      font-size: 18px;
+      color: var(--border);
+      font-size: 20px;
       line-height: 1;
+      font-weight: 300;
     }
     .mf-f {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
+      font-family: var(--font-display);
+      font-size: 28px;
       letter-spacing: 1px;
       color: #f48fb1;
       line-height: 1;
@@ -125,29 +134,29 @@
 
     .bib-input {
       flex: 1;
-      padding: 16px 20px;
+      padding: 15px 20px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       color: var(--text);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px;
-      letter-spacing: 5px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: 6px;
       outline: none;
       transition: border-color 0.2s;
       min-width: 0;
     }
-    .bib-input::placeholder { color: var(--border); font-size: 22px; }
+    .bib-input::placeholder { color: var(--border); font-size: 24px; letter-spacing: 4px; }
     .bib-input:focus { border-color: var(--accent); }
 
     .search-btn {
-      padding: 16px 28px;
+      padding: 15px 28px;
       background: var(--accent);
       color: #0a0a0f;
       border: none;
       border-radius: var(--radius);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
+      font-family: var(--font-display);
+      font-size: 19px;
       letter-spacing: 2px;
       cursor: pointer;
       transition: all 0.2s;
@@ -157,92 +166,17 @@
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
 
-    /* ── FACE TOOL ── */
-    .face-tool {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      margin-bottom: 6px;
-    }
-    .face-tool-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .face-tool-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      color: var(--accent2);
-    }
-    .face-tool-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
-    .face-upload-area {
-      border: 2px dashed var(--border);
-      border-radius: 10px;
-      padding: 22px 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: var(--surface2);
-      position: relative;
-    }
-    .face-upload-area:hover, .face-upload-area.dragover {
-      border-color: var(--accent2);
-      background: rgba(255,107,53,0.05);
-    }
-    .face-upload-area input {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-    }
-    .upload-icon { font-size: 32px; margin-bottom: 6px; }
-    .face-upload-area .u-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-    .face-upload-area .u-sub { color: var(--muted); font-size: 12px; }
-
-    /* face preview row */
-    .face-preview-row {
-      display: none;
-      align-items: center;
-      gap: 14px;
-      margin-top: 12px;
-    }
-    .face-preview-row img {
-      height: 72px;
-      border-radius: 8px;
-      border: 2px solid var(--accent2);
-      object-fit: cover;
-    }
-    .face-preview-row .fp-info { flex: 1; font-size: 13px; color: var(--muted); }
-    #face-search-btn {
-      padding: 12px 22px;
-      background: var(--accent2);
-      color: white;
-      border: none;
-      border-radius: 9px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    #face-search-btn:hover { background: #ff8555; }
-    #face-search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
     /* STATUS */
     .status-bar {
       max-width: 700px;
       margin: 10px auto 0;
+      font-family: var(--font-body);
       font-size: 13px;
+      font-weight: 500;
       color: var(--muted);
       text-align: center;
       min-height: 20px;
+      letter-spacing: 0.2px;
     }
     .status-bar.loading { color: var(--accent); }
     .status-bar.success { color: var(--success); }
@@ -265,9 +199,7 @@
     }
     .progress-wrap.active { display: block; }
 
-    /* ============================
-       RESULT VIEWER
-       ============================ */
+    /* RESULT VIEWER */
     #viewer-section {
       display: none;
       max-width: 1100px;
@@ -284,16 +216,19 @@
       margin-bottom: 20px;
     }
     .viewer-bib {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 38px;
-      letter-spacing: 4px;
+      font-family: var(--font-display);
+      font-size: 40px;
+      letter-spacing: 5px;
       color: var(--accent);
       line-height: 1;
     }
     .viewer-subtitle {
+      font-family: var(--font-body);
       font-size: 13px;
+      font-weight: 400;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 5px;
+      letter-spacing: 0.2px;
     }
     .folder-link-btn {
       display: inline-flex;
@@ -305,12 +240,13 @@
       border-radius: 8px;
       color: var(--text);
       text-decoration: none;
+      font-family: var(--font-body);
       font-size: 13px;
+      font-weight: 500;
       transition: all 0.2s;
     }
     .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ── RESULT GRID — same card size as browse grid ── */
     .result-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr));
@@ -338,16 +274,14 @@
       background: rgba(0,0,0,0.72);
       backdrop-filter: blur(4px);
       color: var(--accent);
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: var(--font-display);
       font-size: 13px;
       letter-spacing: 1px;
       padding: 2px 7px;
       border-radius: 4px;
     }
 
-    /* ============================
-       LIGHTBOX POPUP
-       ============================ */
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed; inset: 0; z-index: 2000;
@@ -357,8 +291,14 @@
       justify-content: center;
       flex-direction: column;
       padding: 16px;
+      cursor: pointer; /* indicates the whole backdrop is clickable */
     }
     .lightbox.open { display: flex; }
+
+    /* inner wrapper stops propagation */
+    .lb-inner {
+      display: contents;
+    }
 
     .lb-close {
       position: absolute; top: 18px; right: 18px;
@@ -383,6 +323,7 @@
       max-width: 92vw;
       max-height: 78vh;
       flex: 1;
+      cursor: default;
     }
     .lb-img {
       max-width: 88vw;
@@ -392,6 +333,7 @@
       display: block;
       box-shadow: 0 20px 60px rgba(0,0,0,0.6);
       transition: opacity 0.2s;
+      cursor: default;
     }
     .lb-img.hidden { opacity: 0; }
     .lb-spinner {
@@ -428,14 +370,15 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+      cursor: default;
     }
     .lb-bib-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 3px;
+      font-family: var(--font-display);
+      font-size: 30px;
+      letter-spacing: 4px;
       color: var(--accent);
     }
-    .lb-counter { font-size: 13px; color: var(--muted); }
+    .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
     .lb-folder-btn {
       display: inline-flex;
       align-items: center;
@@ -446,12 +389,13 @@
       border-radius: 8px;
       color: var(--text);
       text-decoration: none;
+      font-family: var(--font-body);
       font-size: 13px;
+      font-weight: 500;
       transition: all 0.2s;
     }
     .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* LB THUMB STRIP */
     .lb-thumbs {
       display: flex;
       gap: 6px;
@@ -462,6 +406,7 @@
       scrollbar-width: thin;
       scrollbar-color: var(--border) transparent;
       margin-top: 10px;
+      cursor: default;
     }
     .lb-thumbs::-webkit-scrollbar { height: 3px; }
     .lb-thumb {
@@ -491,9 +436,9 @@
       margin: 0 auto;
     }
     .section-title {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: var(--font-display);
       font-size: 18px;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: var(--muted);
       margin-bottom: 16px;
       display: flex; align-items: center; gap: 12px;
@@ -509,13 +454,13 @@
       border: 1px solid var(--border);
       padding: 2px 10px;
       border-radius: 20px;
+      font-family: var(--font-body);
       font-size: 12px;
-      color: var(--accent);
-      font-family: 'DM Sans', sans-serif;
       font-weight: 600;
+      color: var(--accent);
     }
 
-    /* PHOTO GRID (browse) */
+    /* PHOTO GRID */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -543,7 +488,7 @@
       background: rgba(0,0,0,0.72);
       backdrop-filter: blur(4px);
       color: var(--accent);
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: var(--font-display);
       font-size: 13px;
       letter-spacing: 1px;
       padding: 2px 7px;
@@ -570,8 +515,9 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.18s;
       display: flex; align-items: center; justify-content: center;
@@ -588,7 +534,9 @@
       color: var(--text);
       padding: 13px 18px;
       border-radius: 10px;
+      font-family: var(--font-body);
       font-size: 14px;
+      font-weight: 500;
       z-index: 3000;
       transform: translateY(100px);
       opacity: 0;
@@ -599,35 +547,33 @@
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
-      .viewer-bib { font-size: 28px; }
+      .viewer-bib { font-size: 30px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-      .bib-input { font-size: 22px; }
-      .mf-btn { width: 44px; font-size: 19px; }
-      .search-btn { padding: 16px 16px; font-size: 16px; }
+      .bib-input { font-size: 24px; letter-spacing: 4px; }
+      .search-btn { padding: 15px 14px; font-size: 16px; }
       .bib-row { flex-wrap: nowrap; }
-      .face-tool { padding: 14px 14px; }
-      .face-preview-row { flex-wrap: wrap; }
+      .mf-m, .mf-f { font-size: 24px; }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- HEADER — centered -->
 <header>
-  <a class="logo" href="#">MARATHON<span>PHOTOS</span></a>
+  <a class="logo" href="#">TÌM ẢNH — <span>PHÚC HOÀ CITY TRAIL 2026</span></a>
 </header>
 
 <!-- HERO -->
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
-  <p>Nhập số BIB hoặc upload ảnh chân dung để tìm khoảnh khắc của bạn trong giải marathon</p>
+  <p>Nhập số BIB để tìm khoảnh khắc của bạn trong giải marathon</p>
 
   <div class="search-container">
 
-    <!-- BIB ROW: M/F [số bib............] [TÌM KIẾM] -->
+    <!-- BIB ROW: M/F [số bib] [TÌM KIẾM] -->
     <div class="bib-row">
       <div class="mf-labels">
         <span class="mf-m">M</span>
@@ -635,33 +581,10 @@
         <span class="mf-f">F</span>
       </div>
       <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
-             placeholder="044" maxlength="6"
-             oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+             placeholder="044" maxlength="3"
+             oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3)"
              onkeydown="if(event.key==='Enter') searchByBib()">
       <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
-    </div>
-
-    <!-- FACE TOOL: upload ảnh để tìm -->
-    <div class="face-tool">
-      <div class="face-tool-header">
-        <span style="font-size:22px;">🤳</span>
-        <span class="face-tool-label">TÌM ẢNH BẰNG MẶT</span>
-        <span class="face-tool-sub">Upload ảnh để tìm kiếm</span>
-      </div>
-      <div class="face-upload-area" id="face-drop"
-           ondragover="event.preventDefault();this.classList.add('dragover')"
-           ondragleave="this.classList.remove('dragover')"
-           ondrop="handleFaceDrop(event)">
-        <input type="file" accept="image/*" id="face-file" onchange="handleFaceFile(event)">
-        <div class="upload-icon">📷</div>
-        <div class="u-title">Kéo thả hoặc click để chọn ảnh</div>
-        <div class="u-sub">Ảnh selfie / ảnh rõ mặt để tìm kiếm</div>
-      </div>
-      <div class="face-preview-row" id="face-preview-row">
-        <img id="face-preview-img" src="" alt="preview">
-        <div class="fp-info">Ảnh đã chọn. Nhấn tìm kiếm →</div>
-        <button id="face-search-btn" onclick="searchByFace()">🔍 TÌM</button>
-      </div>
     </div>
 
     <div class="status-bar" id="status-bar"></div>
@@ -671,7 +594,7 @@
   </div>
 </div>
 
-<!-- VIEWER SECTION (shown after search) -->
+<!-- VIEWER SECTION -->
 <div id="viewer-section">
   <div style="max-width:1100px;margin:0 auto;padding:0 20px;">
     <div class="viewer-header">
@@ -680,25 +603,24 @@
         <div id="viewer-subtitle" class="viewer-subtitle"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
-    <button onclick="clearResults()" style="
-      padding:9px 16px;background:var(--surface2);border:1px solid var(--border);
-      border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;
-      transition:all 0.2s;white-space:nowrap;flex-shrink:0;
-    " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
-      ← Tất cả ảnh
-    </button>
+      <button onclick="clearResults()" style="
+        padding:9px 16px;background:var(--surface2);border:1px solid var(--border);
+        border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;
+        transition:all 0.2s;white-space:nowrap;flex-shrink:0;
+      " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+        ← Tất cả ảnh
+      </button>
     </div>
-    <!-- Result grid — same thumbnail size as browse grid -->
     <div class="result-grid" id="result-grid"></div>
   </div>
 </div>
 
-<!-- LIGHTBOX POPUP -->
-<div class="lightbox" id="lightbox">
+<!-- LIGHTBOX — click backdrop to close -->
+<div class="lightbox" id="lightbox" onclick="handleLightboxBackdropClick(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
 
-  <div class="lb-main">
+  <div class="lb-main" onclick="event.stopPropagation()">
     <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
     <div style="position:relative;">
       <div class="lb-spinner" id="lb-spinner">Đang tải ảnh...</div>
@@ -708,16 +630,16 @@
     <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
   </div>
 
-  <div class="lb-info">
+  <div class="lb-info" onclick="event.stopPropagation()">
     <div class="lb-bib-label" id="lb-bib-label"></div>
     <div class="lb-counter" id="lb-counter"></div>
     <a class="lb-folder-btn" id="lb-folder-btn" href="#" target="_blank">📁 Mở thư mục Google Drive</a>
   </div>
 
-  <div class="lb-thumbs" id="lb-thumbs"></div>
+  <div class="lb-thumbs" id="lb-thumbs" onclick="event.stopPropagation()"></div>
 </div>
 
-<!-- BROWSE SECTION (always visible) -->
+<!-- BROWSE SECTION -->
 <div class="section" id="browse-section">
   <div class="section-title">
     ẢNH MỚI NHẤT
@@ -731,77 +653,62 @@
 <footer style="
   border-top: 1px solid var(--border);
   margin-top: 60px;
-  padding: 36px 24px 28px;
+  padding: 40px 24px 32px;
   text-align: center;
   background: var(--surface);
 ">
   <div style="
-    font-family:'Bebas Neue',sans-serif;
-    font-size: clamp(18px,4vw,26px);
+    font-family: var(--font-display);
+    font-size: clamp(16px,3.5vw,24px);
     letter-spacing: 3px;
     color: var(--accent);
     margin-bottom: 6px;
   ">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
   <div style="
-    font-family:'Bebas Neue',sans-serif;
-    font-size: clamp(14px,3vw,20px);
+    font-family: var(--font-display);
+    font-size: clamp(13px,2.5vw,18px);
     letter-spacing: 2px;
     color: var(--accent2);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   ">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
-  <a href="https://www.facebook.com/search/top?q=Mr.%20D%E1%BA%BB o" target="_blank" style="
+  <a href="https://www.facebook.com/search/top?q=Mr.%20D%E1%BA%BBo" target="_blank" style="
     display: inline-flex;
     align-items: center;
     gap: 8px;
     color: var(--muted);
     text-decoration: none;
+    font-family: var(--font-body);
     font-size: 14px;
+    font-weight: 500;
     transition: color 0.2s;
   " onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     Facebook: Mr. Dẻo
   </a>
-  <div style="margin-top:16px;font-size:12px;color:var(--border);">© 2026 Marathon Photos</div>
+  <div style="margin-top:18px;font-family:var(--font-body);font-size:12px;color:var(--border);letter-spacing:0.5px;">© 2026 Marathon Photos</div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// =====================================================================
-// === CONFIG — SỬA TẠI ĐÂY =========================================
-// =====================================================================
 const CONFIG = {
-  jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json', // URL raw GitHub file photos.json
-  folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',   // VD: https://drive.google.com/drive/folders/{BIB}
-  prefixes:       ['M', 'F'],   // Tiền tố BIB
+  jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json',
+  folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',
+  prefixes:       ['M', 'F'],
 };
-// =====================================================================
 
-// Detect mobile
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
 
 let PHOTOS = [];
-let faceModelsLoaded = false;
-
-// Browse grid state
 let browsePage = 1;
 const PAGE_SIZE = IS_MOBILE ? 12 : 24;
-
-// Viewer / lightbox state
 let viewerList = [];
 let viewerIndex = 0;
 
-// =====================================================================
-// INIT
-// =====================================================================
 document.addEventListener('DOMContentLoaded', () => {
   fetchPhotos();
-  // lazy-load face-api only when needed
 });
 
-// =====================================================================
-// FETCH PHOTOS
-// =====================================================================
 async function fetchPhotos() {
   if (!CONFIG.jsonUrl) { loadDemoData(); return; }
   setStatus('Đang tải danh sách ảnh...', 'loading');
@@ -835,9 +742,6 @@ function loadDemoData() {
   renderBrowseGrid();
 }
 
-// =====================================================================
-// BIB SEARCH
-// =====================================================================
 function searchByBib() {
   const raw = document.getElementById('bib-input').value.trim();
   if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
@@ -865,17 +769,12 @@ function searchByBib() {
   showViewer(matches, 0, allBibs.join(' / '));
 }
 
-// =====================================================================
-// VIEWER
-// =====================================================================
 function showViewer(list, startIdx, label) {
   viewerList = list;
   viewerIndex = startIdx !== null ? startIdx : 0;
 
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
-
-  // Ẩn browse section khi có kết quả tìm kiếm
   document.getElementById('browse-section').style.display = 'none';
 
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
@@ -893,7 +792,6 @@ function showViewer(list, startIdx, label) {
 
   document.getElementById('viewer-subtitle').textContent = list.length + ' ảnh — click để xem lớn';
 
-  // Folder links
   const seen = new Set();
   const linksHtml = list
     .filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
@@ -902,9 +800,7 @@ function showViewer(list, startIdx, label) {
     .join('');
   document.getElementById('viewer-folder-links').innerHTML = linksHtml;
 
-  // Build result grid (same card size as browse grid)
   buildResultGrid(list);
-
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -919,9 +815,7 @@ function buildResultGrid(list) {
   `).join('');
 }
 
-// =====================================================================
-// LIGHTBOX
-// =====================================================================
+/* ---- LIGHTBOX ---- */
 function openLightbox(idx) {
   viewerIndex = idx;
   document.getElementById('lightbox').classList.add('open');
@@ -935,6 +829,13 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
   document.removeEventListener('keydown', lbKeyHandler);
+}
+
+/* Close when clicking the dark backdrop (not on image/info/thumbs) */
+function handleLightboxBackdropClick(e) {
+  if (e.target === document.getElementById('lightbox')) {
+    closeLightbox();
+  }
 }
 
 function lbNav(dir) {
@@ -1012,10 +913,6 @@ function lbKeyHandler(e) {
   if (e.key === 'ArrowRight') lbNav(1);
 }
 
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
-
 function clearResults() {
   document.getElementById('viewer-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
@@ -1024,9 +921,7 @@ function clearResults() {
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// =====================================================================
-// BROWSE GRID
-// =====================================================================
+/* ---- BROWSE GRID ---- */
 function renderBrowseGrid() {
   const grid = document.getElementById('main-grid');
   const total = PHOTOS.length;
@@ -1094,138 +989,7 @@ function goPage(p) {
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// =====================================================================
-// FACE SEARCH — upload ảnh để tìm
-// =====================================================================
-let faceScriptLoaded = false;
-
-async function ensureFaceApi() {
-  if (faceScriptLoaded) return;
-  await new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js';
-    s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  });
-  faceScriptLoaded = true;
-}
-
-async function loadFaceModels() {
-  if (faceModelsLoaded) return;
-  await ensureFaceApi();
-  try {
-    const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model';
-    await Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-    ]);
-    faceModelsLoaded = true;
-  } catch(e) {
-    console.warn('Face models load failed:', e);
-  }
-}
-
-function handleFaceFile(e) {
-  const file = e.target.files[0];
-  if (file) showFacePreview(file);
-}
-function handleFaceDrop(e) {
-  e.preventDefault();
-  document.getElementById('face-drop').classList.remove('dragover');
-  const file = e.dataTransfer.files[0];
-  if (file) showFacePreview(file);
-}
-function showFacePreview(file) {
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    document.getElementById('face-preview-img').src = ev.target.result;
-    document.getElementById('face-preview-row').style.display = 'flex';
-  };
-  reader.readAsDataURL(file);
-}
-
-async function searchByFace() {
-  setStatus('Đang tải model nhận diện...', 'loading');
-  await loadFaceModels();
-  if (!faceModelsLoaded) { setStatus('Không thể tải model. Vui lòng thử lại.', 'error'); return; }
-
-  const btn = document.getElementById('face-search-btn');
-  btn.disabled = true;
-  setStatus('🤖 Đang phân tích khuôn mặt...', 'loading');
-  showProgress(15);
-
-  try {
-    const img = document.getElementById('face-preview-img');
-    const detection = await faceapi
-      .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
-      .withFaceLandmarks()
-      .withFaceDescriptor();
-
-    showProgress(40);
-
-    if (!detection) {
-      setStatus('Không phát hiện khuôn mặt rõ ràng. Thử ảnh khác.', 'error');
-      btn.disabled = false;
-      hideProgress();
-      return;
-    }
-
-    const queryDescriptor = detection.descriptor;
-    setStatus('Đang so sánh với ' + PHOTOS.length + ' ảnh...', 'loading');
-    showProgress(60);
-
-    const photosWithFaces = PHOTOS.filter(p => p.faceDescriptor);
-    let results = [];
-
-    if (photosWithFaces.length > 0) {
-      results = photosWithFaces
-        .map(p => ({ photo: p, dist: faceapi.euclideanDistance(queryDescriptor, new Float32Array(p.faceDescriptor)) }))
-        .filter(r => r.dist < 0.55)
-        .sort((a, b) => a.dist - b.dist)
-        .slice(0, 50)
-        .map(r => r.photo);
-    } else {
-      const batch = PHOTOS.slice(0, 200);
-      let done = 0;
-      for (const photo of batch) {
-        try {
-          const thumbImg = await loadImageFromUrl(photo.thumb);
-          const det = await faceapi
-            .detectSingleFace(thumbImg, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
-            .withFaceLandmarks()
-            .withFaceDescriptor();
-          if (det) {
-            const dist = faceapi.euclideanDistance(queryDescriptor, det.descriptor);
-            if (dist < 0.55) results.push({ photo, dist });
-          }
-        } catch(e) {}
-        done++;
-        showProgress(60 + Math.floor(done / batch.length * 35));
-      }
-      results = results.sort((a,b)=>a.dist-b.dist).slice(0,30).map(r=>r.photo);
-    }
-
-    showProgress(100);
-    setTimeout(hideProgress, 1500);
-
-    if (results.length === 0) {
-      setStatus('Không tìm thấy ảnh phù hợp với khuôn mặt này', 'error');
-    } else {
-      setStatus(`✓ Tìm thấy ${results.length} ảnh có khuôn mặt khớp`, 'success');
-      setTimeout(() => setStatus('', ''), 2500);
-      showViewer(results, null, 'Kết quả khuôn mặt');
-    }
-  } catch(e) {
-    setStatus('Lỗi nhận diện mặt: ' + e.message, 'error');
-    hideProgress();
-  }
-  btn.disabled = false;
-}
-
-// =====================================================================
-// UTILITIES
-// =====================================================================
+/* ---- UTILITIES ---- */
 function setStatus(msg, type) {
   const el = document.getElementById('status-bar');
   el.textContent = msg;
@@ -1245,15 +1009,7 @@ function showToast(msg, type) {
   t.className = 'toast show' + (type ? ' ' + type : '');
   setTimeout(() => t.className = 'toast', 3000);
 }
-function loadImageFromUrl(url) {
-  return new Promise((res, rej) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => res(img);
-    img.onerror = rej;
-    img.src = url;
-  });
-}
 </script>
 </body>
 </html>
+
