@@ -6,10 +6,7 @@
   <title>Marathon Photos — Tìm Ảnh Của Bạn</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- face-api.js -->
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
-  <!-- Tesseract OCR -->
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 
   <style>
     :root {
@@ -38,11 +35,11 @@
     /* HEADER */
     header {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,15,0.92);
+      background: rgba(10,10,15,0.95);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 14px 24px;
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: center;
     }
     .logo {
       font-family: 'Bebas Neue', sans-serif;
@@ -50,43 +47,39 @@
       letter-spacing: 2px;
       color: var(--accent);
       text-decoration: none;
-      flex-shrink: 0;
     }
     .logo span { color: var(--accent2); }
 
     /* HERO */
     .hero {
-      padding: 60px 24px 40px;
+      padding: 56px 24px 36px;
       text-align: center;
       position: relative;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(42px, 8vw, 88px);
+      font-size: clamp(40px, 8vw, 84px);
       letter-spacing: 4px;
       line-height: 0.95;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
     .hero p {
       color: var(--muted);
-      font-size: 16px;
-      max-width: 480px;
-      margin: 0 auto 40px;
+      font-size: 15px;
+      max-width: 420px;
+      margin: 0 auto 36px;
     }
 
     /* SEARCH TABS */
     .search-container {
-      max-width: 680px;
+      max-width: 640px;
       margin: 0 auto;
       position: relative;
       z-index: 10;
@@ -101,7 +94,7 @@
     }
     .tab-btn {
       flex: 1;
-      padding: 12px;
+      padding: 13px;
       background: none;
       border: none;
       color: var(--muted);
@@ -112,59 +105,11 @@
       transition: all 0.2s;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .tab-btn.active {
-      background: var(--accent);
-      color: #0a0a0f;
-    }
-    .tab-btn svg { width: 16px; height: 16px; }
-
-    /* PREFIX TOGGLE */
-    .prefix-toggle {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .prefix-btn {
-      flex: 1;
-      padding: 10px 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.5px;
-    }
-    .prefix-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .prefix-btn.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
-    .prefix-btn#prefix-F.active { background: #f472b6; border-color: #f472b6; color: #0a0a0f; }
-    .prefix-btn#prefix-ALL.active { background: var(--surface2); border-color: var(--text); color: var(--text); }
-
-    .bib-prefix-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      flex-shrink: 0;
-      background: var(--accent);
-      color: #0a0a0f;
-      border-radius: var(--radius);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
-      letter-spacing: 2px;
-      transition: background 0.2s;
-    }
-    .bib-prefix-display.female { background: #f472b6; }
-    .bib-prefix-display.all { background: var(--surface2); color: var(--muted); font-size: 14px; letter-spacing: 0; }
+    .tab-btn.active { background: var(--accent); color: #0a0a0f; }
+    .tab-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
     /* BIB SEARCH */
-    .bib-search {
-      display: flex;
-      gap: 10px;
-    }
+    .bib-search { display: flex; gap: 10px; }
     .bib-input {
       flex: 1;
       padding: 16px 20px;
@@ -173,8 +118,8 @@
       border-radius: var(--radius);
       color: var(--text);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 4px;
+      font-size: 30px;
+      letter-spacing: 5px;
       outline: none;
       transition: border-color 0.2s;
     }
@@ -194,14 +139,14 @@
       white-space: nowrap;
     }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
-    .search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .search-btn:active { transform: translateY(0); }
 
-    /* FACE SEARCH */
+    /* FACE PANEL */
     #face-search-panel { display: none; }
     .face-upload-area {
       border: 2px dashed var(--border);
       border-radius: var(--radius);
-      padding: 48px 24px;
+      padding: 44px 24px;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
@@ -212,15 +157,11 @@
       border-color: var(--accent);
       background: rgba(247,201,72,0.04);
     }
-    .face-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
-    .upload-icon { font-size: 48px; margin-bottom: 12px; }
-    .face-preview {
-      display: none;
-      position: relative;
-      margin-top: 16px;
-    }
+    .face-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .upload-icon { font-size: 44px; margin-bottom: 10px; }
+    .face-preview { display: none; margin-top: 14px; text-align: center; }
     .face-preview img {
-      max-height: 180px;
+      max-height: 170px;
       border-radius: 8px;
       border: 2px solid var(--accent);
     }
@@ -242,10 +183,10 @@
     #face-search-btn:hover { background: #ff8555; }
     #face-search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* STATUS BAR */
+    /* STATUS */
     .status-bar {
-      max-width: 680px;
-      margin: 12px auto 0;
+      max-width: 640px;
+      margin: 10px auto 0;
       font-size: 13px;
       color: var(--muted);
       text-align: center;
@@ -255,10 +196,9 @@
     .status-bar.success { color: var(--success); }
     .status-bar.error { color: #f87171; }
 
-    /* PROGRESS */
     .progress-wrap {
-      max-width: 680px;
-      margin: 8px auto 0;
+      max-width: 640px;
+      margin: 6px auto 0;
       height: 3px;
       background: var(--surface2);
       border-radius: 2px;
@@ -270,18 +210,259 @@
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       width: 0%;
       transition: width 0.3s;
-      border-radius: 2px;
     }
     .progress-wrap.active { display: block; }
 
+    /* ============================
+       RESULT VIEWER
+       ============================ */
+    #viewer-section {
+      display: none;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .viewer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .viewer-bib {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .viewer-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .folder-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* THUMBNAIL STRIP (main viewer) */
+    .thumb-strip-wrap { position: relative; }
+    .thumb-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .thumb-strip::-webkit-scrollbar { height: 4px; }
+    .thumb-strip::-webkit-scrollbar-track { background: transparent; }
+    .thumb-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .thumb-item {
+      flex-shrink: 0;
+      width: 110px;
+      height: 76px;
+      border-radius: 7px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: var(--surface2);
+      position: relative;
+    }
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb-item:hover { border-color: var(--muted); transform: scale(1.04); }
+    .thumb-item.active { border-color: var(--accent); }
+    /* zoom icon overlay */
+    .thumb-item::after {
+      content: '🔍';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      opacity: 0;
+      transition: all 0.18s;
+    }
+    .thumb-item:hover::after { background: rgba(0,0,0,0.35); opacity: 1; }
+
+    /* ============================
+       LIGHTBOX POPUP
+       ============================ */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.93);
+      backdrop-filter: blur(14px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 16px;
+    }
+    .lightbox.open { display: flex; }
+
+    .lb-close {
+      position: absolute; top: 18px; right: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    .lb-close:hover { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
+
+    .lb-main {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 92vw;
+      max-height: 78vh;
+      flex: 1;
+    }
+    .lb-img {
+      max-width: 88vw;
+      max-height: 76vh;
+      border-radius: 10px;
+      object-fit: contain;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: opacity 0.2s;
+    }
+    .lb-img.hidden { opacity: 0; }
+    .lb-spinner {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 13px;
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(10,10,15,0.75);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      z-index: 5;
+    }
+    .lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
+    #lb-prev { left: -64px; }
+    #lb-next { right: -64px; }
+
+    .lb-info {
+      margin-top: 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .lb-bib-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+      color: var(--accent);
+    }
+    .lb-counter {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .lb-folder-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* LB THUMB STRIP */
+    .lb-thumbs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 2px 2px;
+      max-width: 88vw;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      margin-top: 10px;
+    }
+    .lb-thumbs::-webkit-scrollbar { height: 3px; }
+    .lb-thumb {
+      flex-shrink: 0;
+      width: 72px; height: 50px;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.16s;
+      background: var(--surface2);
+    }
+    .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lb-thumb:hover { border-color: var(--muted); }
+    .lb-thumb.active { border-color: var(--accent); }
+
+    @media (max-width: 680px) {
+      #lb-prev { left: 4px; }
+      #lb-next { right: 4px; }
+      .lb-img { max-height: 55vh; }
+    }
+
     /* SECTION */
-    .section { padding: 40px 24px; max-width: 1400px; margin: 0 auto; }
+    .section {
+      padding: 36px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing: 2px;
       color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex; align-items: center; gap: 12px;
     }
     .section-title::after {
@@ -301,11 +482,11 @@
       font-weight: 600;
     }
 
-    /* PHOTO GRID */
+    /* PHOTO GRID (browse) */
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
     }
     .photo-card {
       position: relative;
@@ -315,40 +496,24 @@
       cursor: pointer;
       background: var(--surface2);
       border: 1px solid var(--border);
-      transition: all 0.2s;
-      group: true;
+      transition: all 0.18s;
     }
     .photo-card:hover {
       transform: scale(1.03);
       border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(247,201,72,0.2);
+      box-shadow: 0 0 18px rgba(247,201,72,0.18);
       z-index: 2;
     }
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: opacity 0.3s;
-    }
-    .photo-card img.loading { opacity: 0; }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; }
     .photo-card .bib-tag {
-      position: absolute; bottom: 6px; left: 6px;
-      background: rgba(0,0,0,0.75);
+      position: absolute; bottom: 5px; left: 5px;
+      background: rgba(0,0,0,0.72);
       backdrop-filter: blur(4px);
       color: var(--accent);
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       letter-spacing: 1px;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-    .photo-card .match-badge {
-      position: absolute; top: 6px; right: 6px;
-      background: var(--success);
-      color: #0a0a0f;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 4px;
     }
     .skeleton {
@@ -363,253 +528,33 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 32px;
+      margin-top: 28px;
       flex-wrap: wrap;
     }
     .page-btn {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.18s;
       display: flex; align-items: center; justify-content: center;
     }
     .page-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-btn.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 700; }
     .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-    /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(12px);
-      padding: 20px;
-    }
-    .lightbox.open { display: flex; align-items: center; justify-content: center; flex-direction: column; }
-    .lb-close {
-      position: absolute; top: 20px; right: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .lb-close:hover { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
-    .lb-img {
-      max-width: 90vw;
-      max-height: 75vh;
-      border-radius: 8px;
-      object-fit: contain;
-    }
-    .lb-info {
-      margin-top: 16px;
-      text-align: center;
-    }
-    .lb-bib {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      letter-spacing: 4px;
-      color: var(--accent);
-    }
-    .lb-folder-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 14px;
-      transition: all 0.2s;
-    }
-    .lb-folder-link:hover { border-color: var(--accent); color: var(--accent); }
-    .lb-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .lb-nav:hover { border-color: var(--accent); color: var(--accent); }
-    #lb-prev { left: 16px; }
-    #lb-next { right: 16px; }
-    @media (max-width: 640px) {
-      .lb-nav { display: none; }
-    }
-
-    /* RESULTS HEADER */
-    .results-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: gap;
-      gap: 12px;
-    }
-    .results-bib {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      letter-spacing: 3px;
-      color: var(--accent);
-    }
-    .folder-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 13px;
-      transition: all 0.2s;
-    }
-    .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* EMPTY STATE */
+    /* EMPTY / NO RESULT */
     .empty-state {
       text-align: center;
-      padding: 80px 24px;
+      padding: 70px 24px;
       color: var(--muted);
     }
-    .empty-state .icon { font-size: 56px; margin-bottom: 16px; }
-    .empty-state h3 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
-
-    /* AI OCR PANEL */
-    .ai-ocr-panel {
-      max-width: 680px;
-      margin: 16px auto 0;
-      display: none;
-    }
-    .ai-ocr-panel.active { display: block; }
-    .ocr-dropzone {
-      border: 2px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: var(--surface);
-      position: relative;
-    }
-    .ocr-dropzone:hover { border-color: var(--accent2); background: rgba(255,107,53,0.04); }
-    .ocr-dropzone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
-    .ocr-dropzone p { color: var(--muted); font-size: 14px; margin-top: 8px; }
-
-    /* CONFIG MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      align-items: center; justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 560px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    .modal h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .form-group { margin-bottom: 20px; }
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .form-input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-input:focus { border-color: var(--accent); }
-    .form-help { font-size: 12px; color: var(--muted); margin-top: 6px; }
-    .form-actions {
-      display: flex; gap: 12px; margin-top: 28px;
-    }
-    .btn-primary {
-      flex: 1;
-      padding: 14px;
-      background: var(--accent);
-      color: #0a0a0f;
-      border: none;
-      border-radius: 8px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-primary:hover { background: #ffe080; }
-    .btn-secondary {
-      padding: 14px 20px;
-      background: none;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--text); color: var(--text); }
-    .config-btn {
-      margin-left: auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex; align-items: center; gap: 6px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .config-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .empty-state .icon { font-size: 52px; margin-bottom: 14px; }
+    .empty-state h3 { font-size: 19px; margin-bottom: 8px; color: var(--text); }
 
     /* TOAST */
     .toast {
@@ -617,27 +562,23 @@
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 14px 20px;
+      padding: 13px 18px;
       border-radius: 10px;
       font-size: 14px;
       z-index: 3000;
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.3s;
-      max-width: 320px;
+      max-width: 300px;
     }
     .toast.show { transform: none; opacity: 1; }
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    .no-results { 
-      text-align: center; padding: 60px; color: var(--muted);
-      font-size: 15px;
-    }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+    @media (max-width: 600px) {
+      .viewer-bib { font-size: 28px; }
+      .thumb-item { width: 72px; height: 50px; }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .bib-input { font-size: 22px; }
     }
   </style>
@@ -647,57 +588,46 @@
 <!-- HEADER -->
 <header>
   <a class="logo" href="#">MARATHON<span>PHOTOS</span></a>
-  <button class="config-btn" id="config-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    Cấu hình
-  </button>
 </header>
 
 <!-- HERO -->
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
-  <p>Nhập số BIB hoặc upload ảnh chân dung để tìm khoảnh khắc của bạn trong giải marathon</p>
+  <p>Nhập số BIB hoặc upload ảnh selfie để tìm khoảnh khắc của bạn trong giải marathon</p>
 
   <div class="search-container">
+    <!-- TABS -->
     <div class="search-tabs">
       <button class="tab-btn active" id="tab-bib" onclick="switchTab('bib')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
         Tìm theo số BIB
       </button>
       <button class="tab-btn" id="tab-face" onclick="switchTab('face')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
-        Nhận diện khuôn mặt
-      </button>
-      <button class="tab-btn" id="tab-ocr" onclick="switchTab('ocr')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
-        Quét ảnh tìm BIB
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M20 21a8 8 0 1 0-16 0"/>
+        </svg>
+        Quét khuôn mặt để tìm ảnh
       </button>
     </div>
 
     <!-- BIB PANEL -->
     <div id="bib-search-panel">
-      <div class="prefix-toggle">
-        <button class="prefix-btn active" id="prefix-M" onclick="setPrefix('M')">
-          <span class="prefix-icon">♂</span> NAM — M
-        </button>
-        <button class="prefix-btn" id="prefix-F" onclick="setPrefix('F')">
-          <span class="prefix-icon">♀</span> NỮ — F
-        </button>
-        <button class="prefix-btn" id="prefix-ALL" onclick="setPrefix('ALL')">
-          👥 TẤT CẢ
-        </button>
-      </div>
       <div class="bib-search">
-        <div class="bib-prefix-display" id="bib-prefix-display">M</div>
-        <input class="bib-input" id="bib-input" type="text" placeholder="044" maxlength="5"
-               oninput="normalizeBib(this)" onkeydown="if(event.key==='Enter') searchByBib()">
+        <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
+               placeholder="044" maxlength="6"
+               oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+               onkeydown="if(event.key==='Enter') searchByBib()">
         <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
       </div>
     </div>
 
     <!-- FACE PANEL -->
     <div id="face-search-panel">
-      <div class="face-upload-area" id="face-drop" 
+      <div class="face-upload-area" id="face-drop"
            ondragover="event.preventDefault();this.classList.add('dragover')"
            ondragleave="this.classList.remove('dragover')"
            ondrop="handleFaceDrop(event)">
@@ -708,22 +638,8 @@
       </div>
       <div class="face-preview" id="face-preview">
         <img id="face-preview-img" src="" alt="preview">
-        <canvas id="face-canvas" style="display:none;"></canvas>
       </div>
       <button id="face-search-btn" onclick="searchByFace()">🔍 TÌM THEO KHUÔN MẶT</button>
-    </div>
-
-    <!-- OCR PANEL -->
-    <div class="ai-ocr-panel" id="ocr-panel">
-      <div class="ocr-dropzone" id="ocr-drop"
-           ondragover="event.preventDefault();this.classList.add('dragover')"
-           ondragleave="this.classList.remove('dragover')"
-           ondrop="handleOcrDrop(event)">
-        <input type="file" accept="image/*" id="ocr-file" onchange="handleOcrFile(event)">
-        <div style="font-size:36px;">📷</div>
-        <div style="font-weight:600;margin-top:8px;">Upload ảnh chứa số BIB</div>
-        <p>AI sẽ tự động đọc số BIB từ vùng ngực → đùi</p>
-      </div>
     </div>
 
     <div class="status-bar" id="status-bar"></div>
@@ -733,165 +649,95 @@
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="section" id="main-section">
-  <!-- RESULTS will inject here -->
-  <div id="results-area"></div>
-
-  <!-- DEFAULT GRID -->
-  <div id="default-grid-area">
-    <div class="section-title">
-      ẢNH MỚI NHẤT
-      <span class="count-badge" id="total-count">--</span>
+<!-- VIEWER SECTION (shown after search) -->
+<div id="viewer-section">
+  <div class="viewer-header">
+    <div>
+      <div id="viewer-bib" class="viewer-bib"></div>
+      <div id="viewer-subtitle" class="viewer-subtitle"></div>
     </div>
-    <div class="photo-grid" id="main-grid"></div>
-    <div class="pagination" id="pagination"></div>
+    <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
+  </div>
+
+  <!-- THUMBNAIL STRIP (click to open lightbox) -->
+  <div class="thumb-strip-wrap">
+    <div class="thumb-strip" id="thumb-strip"></div>
   </div>
 </div>
 
-<!-- LIGHTBOX -->
+<!-- LIGHTBOX POPUP -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
-  <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
-  <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
-  <img class="lb-img" id="lb-img" src="" alt="">
-  <div class="lb-info">
-    <div class="lb-bib" id="lb-bib"></div>
-    <a class="lb-folder-link" id="lb-folder" href="#" target="_blank">
-      📁 Xem thư mục gốc (Google Drive)
-    </a>
+
+  <div class="lb-main">
+    <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
+    <div style="position:relative;">
+      <div class="lb-spinner" id="lb-spinner">Đang tải ảnh...</div>
+      <img class="lb-img hidden" id="lb-img" src="" alt=""
+           onload="onLbImgLoad()" onerror="onLbImgError()">
+    </div>
+    <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
   </div>
+
+  <div class="lb-info">
+    <div class="lb-bib-label" id="lb-bib-label"></div>
+    <div class="lb-counter" id="lb-counter"></div>
+    <a class="lb-folder-btn" id="lb-folder-btn" href="#" target="_blank">📁 Mở thư mục Google Drive</a>
+  </div>
+
+  <div class="lb-thumbs" id="lb-thumbs"></div>
 </div>
 
-<!-- CONFIG MODAL -->
-<div class="modal-overlay" id="config-modal">
-  <div class="modal">
-    <h2>⚙️ CẤU HÌNH HỆ THỐNG</h2>
-    
-    <div class="form-group">
-      <label class="form-label">Google Drive 1 — Base URL ảnh</label>
-      <input class="form-input" id="cfg-drive1" type="text" placeholder="https://drive.google.com/uc?export=view&id=...">
-      <p class="form-help">URL folder Google Drive 1 (dạng share public)</p>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Google Drive 2 — Base URL ảnh (tùy chọn)</label>
-      <input class="form-input" id="cfg-drive2" type="text" placeholder="https://drive.google.com/drive/folders/...">
-      <p class="form-help">URL folder Google Drive 2 nếu có</p>
-    </div>
-    <div class="form-group">
-      <label class="form-label">URL file photos.json (GitHub raw)</label>
-      <input class="form-input" id="cfg-json" type="text" placeholder="https://raw.githubusercontent.com/username/repo/main/photos.json">
-      <p class="form-help">File JSON chứa danh sách ảnh (xem hướng dẫn bên dưới)</p>
-    </div>
-    <div class="form-group">
-      <label class="form-label">URL folder root cho từng BIB</label>
-      <input class="form-input" id="cfg-folder-template" type="text" placeholder="https://drive.google.com/drive/folders/{BIB}">
-      <p class="form-help">Dùng {BIB} làm placeholder. VD: .../folders/{BIB}</p>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tiền tố BIB</label>
-      <div style="display:flex;gap:12px;margin-top:4px;">
-        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-          <input type="checkbox" id="cfg-prefix-M" value="M" style="accent-color:var(--accent);width:16px;height:16px;"> 
-          <span style="font-family:'Bebas Neue';font-size:18px;color:var(--accent);letter-spacing:2px;">M — Nam</span>
-        </label>
-        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-          <input type="checkbox" id="cfg-prefix-F" value="F" style="accent-color:#f472b6;width:16px;height:16px;">
-          <span style="font-family:'Bebas Neue';font-size:18px;color:#f472b6;letter-spacing:2px;">F — Nữ</span>
-        </label>
-      </div>
-      <p class="form-help">Tick vào loại BIB có trong giải của anh</p>
-    </div>
-
-    <details style="margin-top:20px;">
-      <summary style="cursor:pointer;color:var(--muted);font-size:13px;margin-bottom:12px;">📄 Hướng dẫn tạo file photos.json</summary>
-      <pre style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;overflow:auto;color:#a0f0c0;">[
-  {
-    "id": "FILE_ID_HOAC_FILENAME",
-    "bib": "M044",
-    "thumb": "URL_ANH_THUMBNAIL",
-    "full": "URL_ANH_FULL",
-    "drive": 1
-  },
-  ...
-]</pre>
-      <p class="form-help" style="margin-top:8px;">Mỗi object là 1 ảnh. "bib" là số bib đầy đủ (M044). "thumb" là URL ảnh nhỏ chất lượng thấp. "full" là URL ảnh chất lượng cao hơn.</p>
-    </details>
-
-    <div class="form-actions">
-      <button class="btn-primary" onclick="saveConfig()">LƯU CẤU HÌNH</button>
-      <button class="btn-secondary" onclick="closeConfig()">Hủy</button>
-    </div>
+<!-- BROWSE SECTION (always visible, below search result) -->
+<div class="section" id="browse-section">
+  <div class="section-title">
+    ẢNH MỚI NHẤT
+    <span class="count-badge" id="total-count">--</span>
   </div>
+  <div class="photo-grid" id="main-grid"></div>
+  <div class="pagination" id="pagination"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 // =====================================================================
-// CONFIG
+// ===  CONFIG — SỬA TẠI ĐÂY  =========================================
 // =====================================================================
-const DEFAULT_CONFIG = {
-  drive1: '',
-  drive2: '',
-  jsonUrl: '',
-  folderTemplate: '',
-  prefixes: ['M', 'F']  // hỗ trợ nhiều tiền tố
+const CONFIG = {
+  jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json',   // URL raw GitHub file photos.json
+  folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',   // VD: https://drive.google.com/drive/folders/{BIB}
+  prefixes:       ['M', 'F'],   // Tiền tố BIB
 };
+// =====================================================================
 
-let CONFIG = { ...DEFAULT_CONFIG };
 let PHOTOS = [];
-let faceDescriptors = null;
 let faceModelsLoaded = false;
-let currentPage = 1;
-const PAGE_SIZE = 15;
-let currentResults = null;
-let lbIndex = 0;
-let lbList = [];
-let faceDetector = null;
-let queryFaceDescriptor = null;
-let activePrefix = 'M';  // prefix đang chọn: 'M', 'F', hoặc 'ALL'
+
+// Browse grid state
+let browsePage = 1;
+const PAGE_SIZE = 24;
+
+// Viewer state
+let viewerList = [];
+let viewerIndex = 0;
 
 // =====================================================================
 // INIT
 // =====================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  loadConfig();
   loadFaceModels();
-  if (CONFIG.jsonUrl) {
-    fetchPhotos();
-  } else {
-    showConfigModal();
-  }
+  fetchPhotos();
 });
 
-function loadConfig() {
-  try {
-    const saved = localStorage.getItem('marathon_cfg');
-    if (saved) CONFIG = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
-  } catch(e) {}
-}
-
-function saveConfig() {
-  CONFIG.drive1 = document.getElementById('cfg-drive1').value.trim();
-  CONFIG.drive2 = document.getElementById('cfg-drive2').value.trim();
-  CONFIG.jsonUrl = document.getElementById('cfg-json').value.trim();
-  CONFIG.folderTemplate = document.getElementById('cfg-folder-template').value.trim();
-  CONFIG.prefixes = [];
-  if (document.getElementById('cfg-prefix-M').checked) CONFIG.prefixes.push('M');
-  if (document.getElementById('cfg-prefix-F').checked) CONFIG.prefixes.push('F');
-  if (CONFIG.prefixes.length === 0) CONFIG.prefixes = ['M','F'];
-  localStorage.setItem('marathon_cfg', JSON.stringify(CONFIG));
-  closeConfig();
-  showToast('Đã lưu cấu hình!', 'success');
-  fetchPhotos();
-}
-
 // =====================================================================
-// FETCH PHOTOS INDEX
+// FETCH PHOTOS
 // =====================================================================
 async function fetchPhotos() {
-  if (!CONFIG.jsonUrl) return;
+  if (!CONFIG.jsonUrl) {
+    loadDemoData();
+    return;
+  }
   setStatus('Đang tải danh sách ảnh...', 'loading');
   showProgress(20);
   try {
@@ -902,86 +748,273 @@ async function fetchPhotos() {
     document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
     setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh`, 'success');
     setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
-    currentResults = null;
-    currentPage = 1;
-    renderGrid();
+    browsePage = 1;
+    renderBrowseGrid();
   } catch(e) {
     setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
     hideProgress();
-    // Demo mode with sample data
     loadDemoData();
   }
 }
 
 function loadDemoData() {
-  // Demo data for testing UI without real data
-  PHOTOS = Array.from({length: 50}, (_, i) => {
+  PHOTOS = Array.from({length: 48}, (_, i) => {
     const num = String(i + 1).padStart(3, '0');
-    const bib = 'M' + num;
+    const prefix = i % 3 === 0 ? 'F' : 'M';
+    const bib = prefix + num;
     return {
       id: 'demo_' + i,
       bib: bib,
       thumb: `https://picsum.photos/seed/${bib}/300/200`,
-      full: `https://picsum.photos/seed/${bib}/800/533`,
+      full: `https://picsum.photos/seed/${bib}/900/600`,
+      folderUrl: '',
       drive: 1
     };
   });
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
-  currentResults = null;
-  currentPage = 1;
-  renderGrid();
+  browsePage = 1;
+  renderBrowseGrid();
 }
 
 // =====================================================================
-// RENDER GRID
+// TABS
 // =====================================================================
-function getPagedPhotos() {
-  const list = currentResults !== null ? currentResults : PHOTOS;
-  const start = (currentPage - 1) * PAGE_SIZE;
-  return { list, page: list.slice(start, start + PAGE_SIZE), total: list.length };
+function switchTab(tab) {
+  ['bib', 'face'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  document.getElementById('bib-search-panel').style.display = tab === 'bib' ? '' : 'none';
+  document.getElementById('face-search-panel').style.display = tab === 'face' ? '' : 'none';
 }
 
-function renderGrid() {
+// =====================================================================
+// BIB SEARCH
+// =====================================================================
+function searchByBib() {
+  const raw = document.getElementById('bib-input').value.trim();
+  if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
+
+  const digits = raw.replace(/[^0-9]/g, '');
+  if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
+
+  // Luôn dùng 3 chữ số cuối, padStart về 3 chữ số
+  const last3 = digits.slice(-3).padStart(3, '0');
+
+  // Tìm theo tất cả prefix có trong CONFIG
+  const searchBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
+
+  setStatus(`Đang tìm BIB ${searchBibs.join(' / ')}...`, 'loading');
+
+  const matches = PHOTOS.filter(p => {
+    const pb = p.bib.toUpperCase();
+    return searchBibs.some(bib => pb === bib);
+  });
+
+  if (matches.length === 0) {
+    setStatus('', '');
+    showViewer([], null, searchBibs.join(' / '));
+    return;
+  }
+
+  setStatus(`✓ Tìm thấy ${matches.length} ảnh`, 'success');
+  setTimeout(() => setStatus('', ''), 2500);
+  showViewer(matches, 0, searchBibs.join(' / '));
+}
+
+// =====================================================================
+// VIEWER + LIGHTBOX
+// =====================================================================
+function showViewer(list, startIdx, label) {
+  viewerList = list;
+  viewerIndex = startIdx !== null ? startIdx : 0;
+
+  const section = document.getElementById('viewer-section');
+  section.style.display = 'block';
+
+  document.getElementById('viewer-bib').textContent = 'BIB ' + label;
+
+  if (list.length === 0) {
+    document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
+    document.getElementById('thumb-strip').innerHTML = `
+      <div style="color:var(--muted);padding:40px 0;font-size:14px;">
+        BIB <strong style="color:var(--accent)">${label}</strong> chưa có ảnh trong hệ thống
+      </div>`;
+    document.getElementById('viewer-folder-links').innerHTML = '';
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  document.getElementById('viewer-subtitle').textContent = list.length + ' ảnh — click để xem lớn';
+
+  // Folder links — lấy folderUrl trực tiếp từng ảnh trong photos.json
+  const seen = new Set();
+  const linksHtml = list
+    .filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
+    .slice(0, 4) // tối đa 4 link khác nhau
+    .map(p => `<a class="folder-link-btn" href="${p.folderUrl}" target="_blank">📁 Thư mục ${p.bib}</a>`)
+    .join('');
+  document.getElementById('viewer-folder-links').innerHTML = linksHtml;
+
+  // Build thumb strip
+  buildThumbStrip(list);
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function buildThumbStrip(list) {
+  const strip = document.getElementById('thumb-strip');
+  strip.innerHTML = list.map((photo, i) => `
+    <div class="thumb-item" onclick="openLightbox(${i})" title="Ảnh ${i+1} — BIB ${photo.bib}">
+      <img src="${photo.thumb}" alt="bib ${photo.bib}" loading="lazy"
+           onerror="this.src='https://placehold.co/110x76/1c1c27/7070a0?text=?'">
+    </div>
+  `).join('');
+}
+
+// =====================================================================
+// LIGHTBOX
+// =====================================================================
+function openLightbox(idx) {
+  viewerIndex = idx;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderLightboxImage();
+  buildLbThumbs();
+  document.addEventListener('keydown', lbKeyHandler);
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', lbKeyHandler);
+}
+
+function lbNav(dir) {
+  viewerIndex = (viewerIndex + dir + viewerList.length) % viewerList.length;
+  renderLightboxImage();
+  syncLbThumbs();
+}
+
+function renderLightboxImage() {
+  const photo = viewerList[viewerIndex];
+  if (!photo) return;
+
+  const img = document.getElementById('lb-img');
+  const spinner = document.getElementById('lb-spinner');
+
+  img.classList.add('hidden');
+  spinner.style.display = 'flex';
+  spinner.textContent = 'Đang tải ảnh...';
+
+  // Dùng thumbnail size lớn hơn để hiển thị — Google Drive thumbnail API hỗ trợ sz=w1200
+  // Nếu thumb url dùng sz=w300, đổi thành w1200 để chất lượng tốt hơn
+  let displayUrl = photo.thumb;
+  if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) {
+    displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
+  } else if (photo.full && !photo.full.includes('export=view')) {
+    displayUrl = photo.full;
+  }
+  img.src = displayUrl;
+
+  // BIB label
+  document.getElementById('lb-bib-label').textContent = 'BIB ' + photo.bib;
+  document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + viewerList.length;
+
+  // Folder link — dùng folderUrl từ photo object
+  const folderBtn = document.getElementById('lb-folder-btn');
+  if (photo.folderUrl) {
+    folderBtn.href = photo.folderUrl;
+    folderBtn.style.display = '';
+  } else {
+    folderBtn.style.display = 'none';
+  }
+}
+
+function onLbImgLoad() {
+  document.getElementById('lb-img').classList.remove('hidden');
+  document.getElementById('lb-spinner').style.display = 'none';
+}
+function onLbImgError() {
+  document.getElementById('lb-spinner').textContent = 'Không thể tải ảnh này';
+}
+
+function buildLbThumbs() {
+  const strip = document.getElementById('lb-thumbs');
+  strip.innerHTML = viewerList.map((photo, i) => `
+    <div class="lb-thumb ${i === viewerIndex ? 'active' : ''}" onclick="lbGoTo(${i})">
+      <img src="${photo.thumb}" alt="" loading="lazy"
+           onerror="this.src='https://placehold.co/72x50/1c1c27/7070a0?text=?'">
+    </div>
+  `).join('');
+  syncLbThumbs();
+}
+
+function syncLbThumbs() {
+  const thumbs = document.querySelectorAll('.lb-thumb');
+  thumbs.forEach((el, i) => el.classList.toggle('active', i === viewerIndex));
+  const active = thumbs[viewerIndex];
+  if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function lbGoTo(idx) {
+  viewerIndex = idx;
+  renderLightboxImage();
+  syncLbThumbs();
+}
+
+function lbKeyHandler(e) {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+}
+
+// Click ngoài lightbox để đóng
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// =====================================================================
+// BROWSE GRID
+// =====================================================================
+function renderBrowseGrid() {
   const grid = document.getElementById('main-grid');
-  const { page, total } = getPagedPhotos();
+  const total = PHOTOS.length;
+  const start = (browsePage - 1) * PAGE_SIZE;
+  const page = PHOTOS.slice(start, start + PAGE_SIZE);
 
   if (total === 0) {
-    grid.innerHTML = '<div class="no-results">Không tìm thấy ảnh nào</div>';
+    grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>';
     document.getElementById('pagination').innerHTML = '';
     return;
   }
 
-  // Skeletons first
-  grid.innerHTML = page.map((_, i) =>
-    `<div class="photo-card skeleton" style="aspect-ratio:3/2;"></div>`
-  ).join('');
+  // Skeleton first
+  grid.innerHTML = page.map(() => '<div class="photo-card skeleton" style="aspect-ratio:3/2;"></div>').join('');
 
-  // Then load actual images (lazy)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const card = entry.target;
-        if (card.dataset.loaded) return;
-        card.dataset.loaded = '1';
-        const photo = page[parseInt(card.dataset.idx)];
-        if (!photo) return;
-        card.classList.remove('skeleton');
-        card.innerHTML = `
-          <img class="loading" src="${photo.thumb}" alt="bib ${photo.bib}"
-               onload="this.classList.remove('loading')"
-               onerror="this.src='https://placehold.co/300x200/1c1c27/7070a0?text=No+Image'">
-          <div class="bib-tag">${photo.bib}</div>
-        `;
-        card.onclick = () => openLightbox(photo, getPagedPhotos().page, parseInt(card.dataset.idx));
-        observer.unobserve(card);
-      }
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      if (card.dataset.loaded) return;
+      card.dataset.loaded = '1';
+      const photo = page[parseInt(card.dataset.idx)];
+      if (!photo) return;
+      card.classList.remove('skeleton');
+      card.innerHTML = `
+        <img src="${photo.thumb}" alt="bib ${photo.bib}"
+             onerror="this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'">
+        <div class="bib-tag">${photo.bib}</div>
+      `;
+      card.onclick = () => {
+        // Set viewerList to all PHOTOS so lightbox can navigate the full set
+        viewerList = PHOTOS;
+        openLightbox(start + parseInt(card.dataset.idx));
+      };
+      observer.unobserve(card);
     });
-  }, { rootMargin: '100px' });
+  }, { rootMargin: '120px' });
 
-  // Re-render with real cards
-  grid.innerHTML = page.map((photo, i) =>
-    `<div class="photo-card skeleton" data-idx="${i}"></div>`
-  ).join('');
+  grid.innerHTML = page.map((_, i) => `<div class="photo-card skeleton" data-idx="${i}"></div>`).join('');
   grid.querySelectorAll('.photo-card').forEach(card => observer.observe(card));
 
   renderPagination(total);
@@ -990,19 +1023,14 @@ function renderGrid() {
 function renderPagination(total) {
   const totalPages = Math.ceil(total / PAGE_SIZE);
   if (totalPages <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
-  
-  let html = '';
-  html += `<button class="page-btn" ${currentPage===1?'disabled':''} onclick="goPage(${currentPage-1})">‹</button>`;
-  
-  const range = getPaginationRange(currentPage, totalPages);
+
+  let html = `<button class="page-btn" ${browsePage===1?'disabled':''} onclick="goPage(${browsePage-1})">‹</button>`;
+  const range = getPaginationRange(browsePage, totalPages);
   range.forEach(p => {
-    if (p === '...') {
-      html += `<button class="page-btn" disabled>…</button>`;
-    } else {
-      html += `<button class="page-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
-    }
+    if (p === '...') html += `<button class="page-btn" disabled>…</button>`;
+    else html += `<button class="page-btn ${p===browsePage?'active':''}" onclick="goPage(${p})">${p}</button>`;
   });
-  html += `<button class="page-btn" ${currentPage===totalPages?'disabled':''} onclick="goPage(${currentPage+1})">›</button>`;
+  html += `<button class="page-btn" ${browsePage===totalPages?'disabled':''} onclick="goPage(${browsePage+1})">›</button>`;
   document.getElementById('pagination').innerHTML = html;
 }
 
@@ -1014,221 +1042,9 @@ function getPaginationRange(cur, total) {
 }
 
 function goPage(p) {
-  currentPage = p;
-  renderGrid();
-  window.scrollTo({ top: document.getElementById('main-section').offsetTop - 80, behavior: 'smooth' });
-}
-
-// =====================================================================
-// BIB SEARCH
-// =====================================================================
-// =====================================================================
-// PREFIX TOGGLE
-// =====================================================================
-function setPrefix(p) {
-  activePrefix = p;
-  ['M','F','ALL'].forEach(x => {
-    document.getElementById('prefix-' + x).classList.toggle('active', x === p);
-  });
-  const display = document.getElementById('bib-prefix-display');
-  if (p === 'M') {
-    display.textContent = 'M';
-    display.className = 'bib-prefix-display';
-  } else if (p === 'F') {
-    display.textContent = 'F';
-    display.className = 'bib-prefix-display female';
-  } else {
-    display.textContent = 'M/F';
-    display.className = 'bib-prefix-display all';
-  }
-  document.getElementById('bib-input').placeholder = p === 'ALL' ? 'M044 / F044' : '044';
-}
-
-function normalizeBib(input) {
-  input.value = input.value.toUpperCase();
-}
-
-function searchByBib() {
-  let raw = document.getElementById('bib-input').value.trim().toUpperCase();
-  if (!raw) return;
-
-  // Nếu user tự gõ M hoặc F vào ô input → tự detect prefix
-  let detectedPrefix = null;
-  if (/^[MF]\d+/.test(raw)) {
-    detectedPrefix = raw[0];
-    raw = raw.slice(1);
-  }
-
-  const digits = raw.replace(/[^0-9]/g, '');
-  if (!digits) { showToast('Vui lòng nhập số BIB', 'error'); return; }
-
-  const last3 = digits.slice(-3).padStart(3, '0');
-
-  // Build danh sách BIB cần tìm
-  let searchBibs = [];
-  if (detectedPrefix) {
-    searchBibs = [detectedPrefix + last3];
-  } else if (activePrefix === 'ALL') {
-    searchBibs = ['M' + last3, 'F' + last3];
-  } else {
-    searchBibs = [activePrefix + last3];
-  }
-
-  const displayBib = searchBibs.join(' / ');
-  setStatus(`Đang tìm BIB ${displayBib}...`, 'loading');
-
-  const matches = PHOTOS.filter(p => {
-    const pb = p.bib.toUpperCase();
-    return searchBibs.some(bib => pb === bib || pb.endsWith(last3));
-  });
-
-  currentResults = matches;
-  currentPage = 1;
-
-  const area = document.getElementById('results-area');
-  if (matches.length > 0) {
-    // Phân nhóm theo prefix M / F
-    const mCount = matches.filter(p => p.bib.startsWith('M')).length;
-    const fCount = matches.filter(p => p.bib.startsWith('F')).length;
-    const breakdown = (mCount && fCount)
-      ? `<span style="color:var(--accent)">♂ Nam: ${mCount} ảnh</span> &nbsp;·&nbsp; <span style="color:#f472b6">♀ Nữ: ${fCount} ảnh</span>`
-      : (mCount ? `<span style="color:var(--accent)">♂ Nam BIB ${searchBibs[0]}: ${mCount} ảnh</span>`
-                : `<span style="color:#f472b6">♀ Nữ BIB ${searchBibs[0]}: ${fCount} ảnh</span>`);
-
-    const folderLinks = searchBibs.map(bib => {
-      const url = CONFIG.folderTemplate ? CONFIG.folderTemplate.replace('{BIB}', bib) : null;
-      return url ? `<a class="folder-link-btn" href="${url}" target="_blank">📁 Thư mục ${bib}</a>` : '';
-    }).join('');
-
-    area.innerHTML = `
-      <div class="results-header">
-        <div>
-          <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Kết quả tìm kiếm</div>
-          <div class="results-bib">BIB ${displayBib}</div>
-          <div style="font-size:13px;margin-top:6px;">${breakdown}</div>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">${folderLinks}</div>
-      </div>`;
-    setStatus(`✓ Tìm thấy ${matches.length} ảnh`, 'success');
-  } else {
-    area.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">🔍</div>
-        <h3>Không tìm thấy ảnh nào</h3>
-        <p>BIB <strong style="color:var(--accent)">${displayBib}</strong> chưa có ảnh trong hệ thống</p>
-      </div>`;
-    setStatus('', '');
-  }
-
-  renderGrid();
-  window.scrollTo({ top: document.getElementById('main-section').offsetTop - 80, behavior: 'smooth' });
-}
-
-// =====================================================================
-// OCR — SCAN BIB FROM IMAGE
-// =====================================================================
-async function handleOcrFile(e) {
-  const file = e.target.files[0];
-  if (file) await runOcrOnImage(file);
-}
-async function handleOcrDrop(e) {
-  e.preventDefault();
-  document.getElementById('ocr-drop').classList.remove('dragover');
-  const file = e.dataTransfer.files[0];
-  if (file) await runOcrOnImage(file);
-}
-
-async function runOcrOnImage(file) {
-  setStatus('🔍 Đang quét số BIB từ ảnh...', 'loading');
-  showProgress(10);
-
-  try {
-    // Step 1: Load image, crop to torso area (chest to thigh = 20% to 80% of height)
-    const img = await loadImageFromFile(file);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Crop: chest to thigh region (y: 20%~80%, full width)
-    const cropY = Math.floor(img.height * 0.18);
-    const cropH = Math.floor(img.height * 0.65);
-    canvas.width = img.width;
-    canvas.height = cropH;
-    ctx.drawImage(img, 0, cropY, img.width, cropH, 0, 0, img.width, cropH);
-    
-    // Enhance contrast for better OCR
-    enhanceForOCR(ctx, canvas.width, canvas.height);
-    showProgress(30);
-
-    const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
-    
-    // Step 2: Run Tesseract
-    const worker = await Tesseract.createWorker('eng', 1, {
-      logger: m => {
-        if (m.status === 'recognizing text') {
-          showProgress(30 + Math.floor(m.progress * 50));
-        }
-      }
-    });
-    await worker.setParameters({
-      tessedit_char_whitelist: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ',
-      tessedit_pageseg_mode: Tesseract.PSM.SPARSE_TEXT,
-    });
-    
-    const result = await worker.recognize(blob);
-    await worker.terminate();
-    showProgress(90);
-
-    const text = result.data.text;
-    const bibNum = extractBibNumber(text);
-    showProgress(100);
-
-    if (bibNum) {
-      setStatus(`✓ Nhận diện được BIB: ${bibNum}`, 'success');
-      document.getElementById('bib-input').value = bibNum;
-      switchTab('bib');
-      setTimeout(() => searchByBib(), 300);
-    } else {
-      setStatus('Không đọc được số BIB rõ ràng. Thử nhập thủ công.', 'error');
-    }
-    setTimeout(hideProgress, 1500);
-  } catch(e) {
-    setStatus('Lỗi quét OCR: ' + e.message, 'error');
-    hideProgress();
-  }
-}
-
-function enhanceForOCR(ctx, w, h) {
-  const imageData = ctx.getImageData(0, 0, w, h);
-  const data = imageData.data;
-  // Grayscale + contrast boost
-  for (let i = 0; i < data.length; i += 4) {
-    const gray = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
-    const contrast = Math.min(255, Math.max(0, (gray - 128) * 1.5 + 128));
-    data[i] = data[i+1] = data[i+2] = contrast;
-  }
-  ctx.putImageData(imageData, 0, 0);
-}
-
-function extractBibNumber(text) {
-  // Try full pattern with M or F prefix first
-  const fullPattern = /([MF])\s*([0-9]{2,4})/gi;
-  let m = fullPattern.exec(text);
-  if (m) return m[1].toUpperCase() + m[2].padStart(3, '0');
-
-  // Try standalone 3–4 digit numbers
-  const numPattern = /\b([0-9]{3,4})\b/g;
-  const candidates = [];
-  let match;
-  while ((match = numPattern.exec(text)) !== null) {
-    candidates.push(match[1]);
-  }
-  if (candidates.length > 0) {
-    const best = candidates.sort((a, b) => a.length - b.length)[0];
-    // Use currently selected prefix, or 'M' as default
-    const prefix = activePrefix === 'ALL' ? 'M' : activePrefix;
-    return prefix + best.slice(-3).padStart(3, '0');
-  }
-  return null;
+  browsePage = p;
+  renderBrowseGrid();
+  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // =====================================================================
@@ -1258,12 +1074,10 @@ function handleFaceDrop(e) {
   const file = e.dataTransfer.files[0];
   if (file) showFacePreview(file);
 }
-
 function showFacePreview(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
-    const img = document.getElementById('face-preview-img');
-    img.src = e.target.result;
+    document.getElementById('face-preview-img').src = e.target.result;
     document.getElementById('face-preview').style.display = 'block';
     document.getElementById('face-search-btn').style.display = 'block';
   };
@@ -1272,10 +1086,9 @@ function showFacePreview(file) {
 
 async function searchByFace() {
   if (!faceModelsLoaded) {
-    setStatus('Đang tải model nhận diện mặt... Vui lòng thử lại sau ít giây', 'loading');
+    setStatus('Đang tải model nhận diện... Vui lòng thử lại sau ít giây', 'loading');
     await loadFaceModels();
   }
-
   const btn = document.getElementById('face-search-btn');
   btn.disabled = true;
   setStatus('🤖 Đang phân tích khuôn mặt...', 'loading');
@@ -1287,169 +1100,67 @@ async function searchByFace() {
       .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
       .withFaceLandmarks()
       .withFaceDescriptor();
-    
+
     showProgress(40);
 
     if (!detection) {
-      setStatus('Không phát hiện khuôn mặt rõ ràng trong ảnh. Thử ảnh khác.', 'error');
+      setStatus('Không phát hiện khuôn mặt rõ ràng. Thử ảnh khác.', 'error');
       btn.disabled = false;
       hideProgress();
       return;
     }
 
-    queryFaceDescriptor = detection.descriptor;
+    const queryDescriptor = detection.descriptor;
     setStatus('Đang so sánh với ' + PHOTOS.length + ' ảnh...', 'loading');
     showProgress(60);
 
-    // Compare with all photos that have face descriptors pre-computed
-    // If no pre-computed descriptors available, scan thumbnails on the fly (slower)
     const photosWithFaces = PHOTOS.filter(p => p.faceDescriptor);
-
     let results = [];
+
     if (photosWithFaces.length > 0) {
-      // Fast path: compare against pre-computed descriptors
-      results = computeFaceSimilarity(queryFaceDescriptor, photosWithFaces);
+      results = photosWithFaces
+        .map(p => ({ photo: p, dist: faceapi.euclideanDistance(queryDescriptor, new Float32Array(p.faceDescriptor)) }))
+        .filter(r => r.dist < 0.55)
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, 50)
+        .map(r => r.photo);
     } else {
-      // Slow path: scan thumbnails in batches
-      results = await scanThumbnailsForFace(queryFaceDescriptor);
+      // Fallback: scan first 200 thumbnails
+      const batch = PHOTOS.slice(0, 200);
+      let done = 0;
+      for (const photo of batch) {
+        try {
+          const thumbImg = await loadImageFromUrl(photo.thumb);
+          const det = await faceapi
+            .detectSingleFace(thumbImg, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
+            .withFaceLandmarks()
+            .withFaceDescriptor();
+          if (det) {
+            const dist = faceapi.euclideanDistance(queryDescriptor, det.descriptor);
+            if (dist < 0.55) results.push({ photo, dist });
+          }
+        } catch(e) {}
+        done++;
+        showProgress(60 + Math.floor(done / batch.length * 35));
+      }
+      results = results.sort((a,b)=>a.dist-b.dist).slice(0,30).map(r=>r.photo);
     }
 
     showProgress(100);
+    setTimeout(hideProgress, 1500);
 
     if (results.length === 0) {
       setStatus('Không tìm thấy ảnh phù hợp với khuôn mặt này', 'error');
     } else {
-      currentResults = results.map(r => r.photo);
-      currentPage = 1;
-      document.getElementById('results-area').innerHTML = `
-        <div class="results-header">
-          <div>
-            <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Kết quả nhận diện mặt</div>
-            <div class="results-bib" style="font-size:22px;">Tìm thấy ${results.length} ảnh phù hợp</div>
-          </div>
-        </div>`;
-      renderGrid();
       setStatus(`✓ Tìm thấy ${results.length} ảnh có khuôn mặt khớp`, 'success');
+      setTimeout(() => setStatus('', ''), 2500);
+      showViewer(results, null, 'Kết quả khuôn mặt');
     }
-    setTimeout(hideProgress, 1500);
   } catch(e) {
     setStatus('Lỗi nhận diện mặt: ' + e.message, 'error');
     hideProgress();
   }
   btn.disabled = false;
-}
-
-function computeFaceSimilarity(descriptor, photos) {
-  return photos
-    .map(p => ({
-      photo: p,
-      dist: faceapi.euclideanDistance(descriptor, new Float32Array(p.faceDescriptor))
-    }))
-    .filter(r => r.dist < 0.55) // threshold
-    .sort((a, b) => a.dist - b.dist)
-    .slice(0, 50);
-}
-
-async function scanThumbnailsForFace(queryDescriptor) {
-  // Scan first 200 thumbnails for face matching (demo/fallback)
-  const batch = PHOTOS.slice(0, 200);
-  const results = [];
-  let done = 0;
-  for (const photo of batch) {
-    try {
-      const img = await loadImageFromUrl(photo.thumb);
-      const det = await faceapi
-        .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
-        .withFaceLandmarks()
-        .withFaceDescriptor();
-      if (det) {
-        const dist = faceapi.euclideanDistance(queryDescriptor, det.descriptor);
-        if (dist < 0.55) results.push({ photo, dist });
-      }
-    } catch(e) {}
-    done++;
-    showProgress(60 + Math.floor(done / batch.length * 35));
-  }
-  return results.sort((a,b) => a.dist - b.dist).slice(0, 30);
-}
-
-// =====================================================================
-// LIGHTBOX
-// =====================================================================
-function openLightbox(photo, list, idx) {
-  lbList = list;
-  lbIndex = idx;
-  showLightboxPhoto(photo);
-  document.getElementById('lightbox').classList.add('open');
-  document.addEventListener('keydown', lbKeyHandler);
-}
-
-function showLightboxPhoto(photo) {
-  const img = document.getElementById('lb-img');
-  img.src = '';
-  img.src = photo.full || photo.thumb;
-  document.getElementById('lb-bib').textContent = 'BIB ' + photo.bib;
-  
-  const folderUrl = CONFIG.folderTemplate
-    ? CONFIG.folderTemplate.replace('{BIB}', photo.bib)
-    : (photo.folderUrl || '#');
-  
-  const link = document.getElementById('lb-folder');
-  link.href = folderUrl;
-  link.style.display = folderUrl && folderUrl !== '#' ? '' : 'none';
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.removeEventListener('keydown', lbKeyHandler);
-}
-
-function lbNav(dir) {
-  lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
-  showLightboxPhoto(lbList[lbIndex]);
-}
-
-function lbKeyHandler(e) {
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') lbNav(-1);
-  if (e.key === 'ArrowRight') lbNav(1);
-}
-
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
-
-// =====================================================================
-// CONFIG MODAL
-// =====================================================================
-function showConfigModal() {
-  document.getElementById('cfg-drive1').value = CONFIG.drive1 || '';
-  document.getElementById('cfg-drive2').value = CONFIG.drive2 || '';
-  document.getElementById('cfg-json').value = CONFIG.jsonUrl || '';
-  document.getElementById('cfg-folder-template').value = CONFIG.folderTemplate || '';
-  const prefixes = CONFIG.prefixes || ['M','F'];
-  document.getElementById('cfg-prefix-M').checked = prefixes.includes('M');
-  document.getElementById('cfg-prefix-F').checked = prefixes.includes('F');
-  document.getElementById('config-modal').classList.add('open');
-}
-function closeConfig() {
-  document.getElementById('config-modal').classList.remove('open');
-}
-document.getElementById('config-btn').addEventListener('click', showConfigModal);
-document.getElementById('config-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeConfig();
-});
-
-// =====================================================================
-// TABS
-// =====================================================================
-function switchTab(tab) {
-  ['bib','face','ocr'].forEach(t => {
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
-  });
-  document.getElementById('bib-search-panel').style.display = tab === 'bib' ? '' : 'none';
-  document.getElementById('face-search-panel').style.display = tab === 'face' ? '' : 'none';
-  document.getElementById('ocr-panel').style.display = tab === 'ocr' ? 'block' : 'none';
 }
 
 // =====================================================================
@@ -1460,7 +1171,6 @@ function setStatus(msg, type) {
   el.textContent = msg;
   el.className = 'status-bar' + (type ? ' ' + type : '');
 }
-
 function showProgress(pct) {
   document.getElementById('progress-wrap').classList.add('active');
   document.getElementById('progress-fill').style.width = pct + '%';
@@ -1469,24 +1179,12 @@ function hideProgress() {
   document.getElementById('progress-wrap').classList.remove('active');
   document.getElementById('progress-fill').style.width = '0%';
 }
-
 function showToast(msg, type) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.className = 'toast show' + (type ? ' ' + type : '');
   setTimeout(() => t.className = 'toast', 3000);
 }
-
-function loadImageFromFile(file) {
-  return new Promise((res, rej) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => res(img);
-    img.onerror = rej;
-    img.src = url;
-  });
-}
-
 function loadImageFromUrl(url) {
   return new Promise((res, rej) => {
     const img = new Image();
