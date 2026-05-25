@@ -547,6 +547,83 @@
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
+    /* ONLINE COUNTER */
+    .stats-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      user-select: none;
+    }
+    .online-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(19,19,26,0.92);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .online-pill:hover { border-color: var(--success); }
+    .visits-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(19,19,26,0.92);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .visits-pill:hover { border-color: var(--accent); }
+    .online-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .visits-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+    .online-count {
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--success);
+    }
+    .visits-count {
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
     /* MOBILE */
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
@@ -671,7 +748,7 @@
     color: var(--accent2);
     margin-bottom: 20px;
   ">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
-  <a href="https://facebook.com/thuongcatrunners" target="_blank" style="
+  <a href="https://www.facebook.com/search/top?q=Mr.%20D%E1%BA%BBo" target="_blank" style="
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -683,10 +760,24 @@
     transition: color 0.2s;
   " onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-    THUONG CAT RUNNERS - TCR
+    Facebook: Mr. Dẻo
   </a>
   <div style="margin-top:18px;font-family:var(--font-body);font-size:12px;color:var(--border);letter-spacing:0.5px;">© 2026 Marathon Photos</div>
 </footer>
+
+<!-- STATS WIDGET -->
+<div class="stats-widget" id="stats-widget">
+  <div class="online-pill" id="online-pill" title="Đang xem trang lúc này">
+    <span class="online-dot"></span>
+    <span class="online-count" id="online-count">--</span>
+    <span>đang online</span>
+  </div>
+  <div class="visits-pill" id="visits-pill" title="Tổng lượt truy cập">
+    <span class="visits-dot">👁</span>
+    <span class="visits-count" id="visits-count">--</span>
+    <span>lượt xem</span>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1009,7 +1100,78 @@ function showToast(msg, type) {
   t.className = 'toast show' + (type ? ' ' + type : '');
   setTimeout(() => t.className = 'toast', 3000);
 }
+
+/* ---- ONLINE COUNTER (Firebase Realtime Database) ---- */
+/*
+ * Để bật tính năng này:
+ * 1. Vào https://console.firebase.google.com → Tạo project mới
+ * 2. Build → Realtime Database → Create database (chọn test mode)
+ * 3. Project Settings → General → Your apps → Add app (Web) → Copy config
+ * 4. Dán firebaseConfig bên dưới
+ * 5. Vào Realtime Database → Rules → đổi thành:
+ *    { "rules": { ".read": true, ".write": true } }
+ */
+(function () {
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
+    authDomain:        "phuchoatrail2026.firebaseapp.com",
+    databaseURL:       "https://phuchoatrail2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId:         "phuchoatrail2026",
+    storageBucket:     "phuchoatrail2026.firebasestorage.app",
+    messagingSenderId: "665306842437",
+    appId:             "1:665306842437:web:9ffc0f64e15bb01b542a2c",
+  };
+
+  // (đã cấu hình — bỏ qua check placeholder)
+
+  // Load Firebase SDK
+  const s1 = document.createElement('script');
+  s1.src = 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js';
+  s1.onload = () => {
+    const s2 = document.createElement('script');
+    s2.src = 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js';
+    s2.onload = () => initOnlineCounter(firebaseConfig);
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s1);
+})();
+
+function initOnlineCounter(config) {
+  try {
+    firebase.initializeApp(config);
+    const db        = firebase.database();
+    const connRef   = db.ref('.info/connected');
+    const onlineRef = db.ref('online_users');
+    const visitsRef = db.ref('total_visits');
+    const myRef     = onlineRef.push();
+
+    // ── Online realtime ──
+    connRef.on('value', snap => {
+      if (!snap.val()) return;
+      myRef.onDisconnect().remove();
+      myRef.set({ t: Date.now() });
+    });
+
+    onlineRef.on('value', snap => {
+      const el = document.getElementById('online-count');
+      if (el) el.textContent = snap.numChildren();
+    });
+
+    // ── Tổng lượt truy cập: tăng 1 mỗi lần mở trang ──
+    visitsRef.transaction(cur => (cur || 0) + 1);
+
+    visitsRef.on('value', snap => {
+      const total = snap.val() || 0;
+      const el = document.getElementById('visits-count');
+      if (el) el.textContent = total.toLocaleString('vi-VN');
+    });
+
+  } catch (e) {
+    console.warn('Firebase error:', e);
+    const w = document.getElementById('stats-widget');
+    if (w) w.style.display = 'none';
+  }
+}
 </script>
 </body>
 </html>
-
