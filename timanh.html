@@ -1029,6 +1029,11 @@ const CONFIG = {
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
 
 let PHOTOS = [];
+// ── BIB index: Map<bibUpper, Photo[]> — tra cứu O(1) thay vì filter O(n) ──
+let BIB_INDEX = new Map();
+// ── Folder index: Map<folderUrl, Photo[]> — cho event tabs O(1) ──
+let FOLDER_INDEX = new Map();
+
 let browsePage = 1;
 const PAGE_SIZE = IS_MOBILE ? 12 : 24;
 const VIEWER_PAGE_SIZE = IS_MOBILE ? 10 : 20;
@@ -1037,30 +1042,109 @@ let viewerIndex = 0;
 let viewerPage = 1;
 let viewerAllList = [];
 
+// ── localStorage cache key ──
+const CACHE_KEY   = 'photos_cache_v2';
+const CACHE_TS_KEY = 'photos_cache_ts_v2';
+const CACHE_TTL   = 5 * 60 * 1000; // 5 phút — tránh fetch lại khi F5
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchPhotos();
 });
 
+function buildIndexes(photos) {
+  BIB_INDEX.clear();
+  FOLDER_INDEX.clear();
+  for (const p of photos) {
+    // BIB index
+    const bib = (p.bib || '').toUpperCase();
+    if (bib) {
+      if (!BIB_INDEX.has(bib)) BIB_INDEX.set(bib, []);
+      BIB_INDEX.get(bib).push(p);
+    }
+    // Folder index
+    const furl = p.folderUrl || '';
+    if (furl) {
+      if (!FOLDER_INDEX.has(furl)) FOLDER_INDEX.set(furl, []);
+      FOLDER_INDEX.get(furl).push(p);
+    }
+  }
+}
+
 async function fetchPhotos() {
   if (!CONFIG.jsonUrl) { loadDemoData(); return; }
-  setStatus('Đang tải danh sách ảnh...', 'loading');
-  showProgress(20);
+
+  // ── Thử dùng cache localStorage trước ──
   try {
-    const res = await fetch(CONFIG.jsonUrl + '?t=' + Date.now());
+    const ts = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0');
+    if (Date.now() - ts < CACHE_TTL) {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        PHOTOS = JSON.parse(cached);
+        buildIndexes(PHOTOS);
+        document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
+        setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh (cache)`, 'success');
+        setTimeout(() => setStatus('', ''), 1500);
+        browsePage = 1;
+        renderBrowseGrid();
+        updateEventBadges();
+        initKkSlideshow();
+        // Refresh ngầm
+        _fetchAndCache(true);
+        return;
+      }
+    }
+  } catch(_) {}
+
+  setStatus('Đang tải danh sách ảnh...', 'loading');
+  showProgress(10);
+  await _fetchAndCache(false);
+}
+
+async function _fetchAndCache(silent) {
+  try {
+    // Thêm cache-busting chỉ khi không phải silent refresh
+    const url = CONFIG.jsonUrl + (silent ? '' : '?t=' + Date.now());
+    const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    PHOTOS = await res.json();
-    showProgress(100);
-    document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
-    setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh`, 'success');
-    setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
-    browsePage = 1;
-    renderBrowseGrid();
-    updateEventBadges();
-    initKkSlideshow();
+
+    // ── Stream + parse theo chunk để không block UI với 20k entries ──
+    const text = await res.text();
+    if (!silent) showProgress(80);
+
+    // Parse trên microtask để tránh freeze
+    await new Promise(r => setTimeout(r, 0));
+    const data = JSON.parse(text);
+    if (!silent) showProgress(100);
+
+    PHOTOS = data;
+    buildIndexes(PHOTOS);
+
+    // Lưu vào localStorage (nếu < 8MB)
+    try {
+      if (text.length < 8_000_000) {
+        localStorage.setItem(CACHE_KEY, text);
+        localStorage.setItem(CACHE_TS_KEY, String(Date.now()));
+      }
+    } catch(_) {}
+
+    if (!silent) {
+      document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
+      setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh`, 'success');
+      setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
+      browsePage = 1;
+      renderBrowseGrid();
+      updateEventBadges();
+      initKkSlideshow();
+    } else {
+      // silent refresh xong → cập nhật count nếu có thay đổi
+      document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
+    }
   } catch(e) {
-    setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
-    hideProgress();
-    loadDemoData();
+    if (!silent) {
+      setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
+      hideProgress();
+      loadDemoData();
+    }
   }
 }
 
@@ -1085,12 +1169,8 @@ function searchByBib() {
   const last3 = digits.slice(-3).padStart(3, '0');
   const allBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
 
-  setStatus(`Đang tìm BIB ${allBibs.join(' / ')}...`, 'loading');
-
-  const matches = PHOTOS.filter(p => {
-    const pb = p.bib.toUpperCase();
-    return allBibs.some(bib => pb === bib);
-  });
+  // ── O(1) lookup thay vì O(n) filter ──
+  const matches = allBibs.flatMap(bib => BIB_INDEX.get(bib) || []);
 
   if (matches.length === 0) {
     setStatus('', '');
@@ -1177,16 +1257,55 @@ function goViewerPage(p) {
   document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+/* ── Shared IntersectionObserver — 1 instance cho toàn trang ── */
+let _gridObserver = null;
+function getGridObserver() {
+  if (_gridObserver) return _gridObserver;
+  _gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      if (card.dataset.loaded) return;
+      card.dataset.loaded = '1';
+      const photo = card._photo;
+      if (!photo) return;
+      card.classList.remove('skeleton');
+      const img = document.createElement('img');
+      img.src = photo.thumb;
+      img.alt = 'bib ' + photo.bib;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function() { this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'; };
+      const tag = document.createElement('div');
+      tag.className = 'bib-tag';
+      tag.textContent = photo.bib;
+      card.appendChild(img);
+      card.appendChild(tag);
+      _gridObserver.unobserve(card);
+    });
+  }, { rootMargin: '200px' });
+  return _gridObserver;
+}
+
+function _buildCardGrid(containerEl, list, onClickFn) {
+  const observer = getGridObserver();
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < list.length; i++) {
+    const card = document.createElement('div');
+    card.className = containerEl.id === 'result-grid' ? 'result-card skeleton' : 'photo-card skeleton';
+    card._photo = list[i];
+    const ci = i;
+    card.addEventListener('click', () => onClickFn(ci));
+    frag.appendChild(card);
+    observer.observe(card);
+  }
+  containerEl.innerHTML = '';
+  containerEl.appendChild(frag);
+}
+
 function buildResultGrid(list, globalOffset) {
-  const offset = globalOffset || 0;
   const grid = document.getElementById('result-grid');
-  grid.innerHTML = list.map((photo, i) => `
-    <div class="result-card" onclick="openLightbox(${i})" title="Ảnh ${offset+i+1} — BIB ${photo.bib}">
-      <img src="${photo.thumb}" alt="bib ${photo.bib}" loading="lazy"
-           onerror="this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'">
-      <div class="bib-tag">${photo.bib}</div>
-    </div>
-  `).join('');
+  _buildCardGrid(grid, list, (i) => openLightbox(i));
 }
 
 /* ---- LIGHTBOX ---- */
@@ -1247,6 +1366,16 @@ function renderLightboxImage() {
   } else {
     folderBtn.style.display = 'none';
   }
+
+  // ── Preload ảnh kế tiếp & trước để chuyển ảnh không lag ──
+  [viewerIndex + 1, viewerIndex - 1].forEach(ni => {
+    if (ni < 0 || ni >= viewerList.length) return;
+    const p = viewerList[ni];
+    let url = p.thumb;
+    if (url && url.includes('drive.google.com/thumbnail')) url = url.replace(/sz=w\d+/, 'sz=w1200');
+    const pre = new Image();
+    pre.src = url;
+  });
 }
 
 function onLbImgLoad() {
@@ -1304,7 +1433,7 @@ function renderBrowseGrid() {
   const grid = document.getElementById('main-grid');
   const total = PHOTOS.length;
   const start = (browsePage - 1) * PAGE_SIZE;
-  const page = PHOTOS.slice(start, start + PAGE_SIZE);
+  const page  = PHOTOS.slice(start, start + PAGE_SIZE);
 
   if (total === 0) {
     grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>';
@@ -1312,30 +1441,10 @@ function renderBrowseGrid() {
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const card = entry.target;
-      if (card.dataset.loaded) return;
-      card.dataset.loaded = '1';
-      const photo = page[parseInt(card.dataset.idx)];
-      if (!photo) return;
-      card.classList.remove('skeleton');
-      card.innerHTML = `
-        <img src="${photo.thumb}" alt="bib ${photo.bib}"
-             onerror="this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'">
-        <div class="bib-tag">${photo.bib}</div>
-      `;
-      card.onclick = () => {
-        viewerList = PHOTOS;
-        openLightbox(start + parseInt(card.dataset.idx));
-      };
-      observer.unobserve(card);
-    });
-  }, { rootMargin: '120px' });
-
-  grid.innerHTML = page.map((_, i) => `<div class="photo-card skeleton" data-idx="${i}"></div>`).join('');
-  grid.querySelectorAll('.photo-card').forEach(card => observer.observe(card));
+  _buildCardGrid(grid, page, (i) => {
+    viewerList = page;
+    openLightbox(i);
+  });
 
   renderPagination(total);
 }
@@ -1423,7 +1532,8 @@ function updateEventBadges() {
     const fid = CONFIG.eventFolders[key];
     if (!fid || fid.startsWith('FOLDER_ID')) return;
     const folderUrl = `https://drive.google.com/drive/folders/${fid}`;
-    const photos = PHOTOS.filter(p => p.folderUrl === folderUrl);
+    // O(1) lookup
+    const photos = FOLDER_INDEX.get(folderUrl) || [];
     if (photos.length > 0) {
       etabCache[key] = photos;
       document.getElementById('etab-count-' + key).textContent = photos.length.toLocaleString();
@@ -1522,12 +1632,40 @@ let kkActiveEl = 'a'; // 'a' or 'b' — ping-pong between two img tags
 
 const KK_INTERVAL = 4000; // ms giữa các ảnh
 
-function initKkSlideshow() {
-  const fid = CONFIG.eventFolders.khoanhkhac;
-  if (!fid || fid.startsWith('FOLDER_ID')) return; // chưa cấu hình
+// Cấu hình repo GitHub chứa ảnh khoảnh khắc
+const KK_GITHUB = {
+  owner:  'tcr-challenge',   // tên tài khoản GitHub
+  repo:   'phuchoa2026',     // tên repo
+  branch: 'main',            // nhánh
+  folder: 'images',          // thư mục chứa ảnh trong repo
+};
 
-  const folderUrl = `https://drive.google.com/drive/folders/${fid}`;
-  const photos = PHOTOS.filter(p => p.folderUrl === folderUrl);
+async function initKkSlideshow() {
+  // Lấy danh sách file từ GitHub Contents API
+  const apiUrl = `https://api.github.com/repos/${KK_GITHUB.owner}/${KK_GITHUB.repo}/contents/${KK_GITHUB.folder}?ref=${KK_GITHUB.branch}`;
+  let files;
+  try {
+    const res = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    files = await res.json();
+  } catch(e) {
+    console.warn('KK Slideshow: không lấy được danh sách ảnh từ GitHub —', e.message);
+    return;
+  }
+
+  // Lọc chỉ lấy file ảnh
+  const imgExts = /\.(jpe?g|png|gif|webp|avif)$/i;
+  const rawBase = `https://raw.githubusercontent.com/${KK_GITHUB.owner}/${KK_GITHUB.repo}/${KK_GITHUB.branch}/${KK_GITHUB.folder}/`;
+
+  const photos = files
+    .filter(f => f.type === 'file' && imgExts.test(f.name))
+    .map(f => ({
+      thumb: rawBase + encodeURIComponent(f.name),
+      full:  rawBase + encodeURIComponent(f.name),
+      bib:   '',
+      folderUrl: '',
+    }));
+
   if (photos.length === 0) return;
 
   kkPhotos = photos;
