@@ -690,7 +690,7 @@ function showViewer(list, startIdx, label) {
   }
   document.getElementById('viewer-subtitle').textContent = list.length + ' ảnh — click để xem lớn';
   const seen = new Set();
-  const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; }).slice(0, 4).map(p => `<a class="folder-link-btn" href="${p.folderUrl}" target="_blank">📁 Thư mục ${p.bib}</a>`).join('');
+  const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; }).slice(0, 4).map(p => `<a class="folder-link-btn" href="${p.folderUrl}" target="_blank">📁 TẢI TẤT CẢ ẢNH ${p.bib}</a>`).join('');
   document.getElementById('viewer-folder-links').innerHTML = linksHtml;
   buildResultGrid(list);
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
