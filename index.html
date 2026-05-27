@@ -117,8 +117,6 @@
     .page-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-btn.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 700; }
     .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-    /* JUMP-TO-PAGE */
     .page-jump { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .page-jump-label { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; }
     .page-jump-input { width: 52px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; text-align: center; outline: none; transition: border-color 0.2s; }
@@ -144,6 +142,30 @@
     .online-count { font-family: var(--font-display); font-size: 15px; letter-spacing: 1px; color: var(--success); }
     .visits-count { font-family: var(--font-display); font-size: 15px; letter-spacing: 1px; color: var(--accent); }
 
+    /* ALBUM TABS */
+    .album-tabs-wrap { max-width: 700px; margin: 18px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-size: 15px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
+    .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
+    .album-tab-btn:hover { border-color: var(--accent); color: var(--text); }
+    .album-tab-btn:hover::before { opacity: 1; }
+    .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
+    .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
+    .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
+
+    /* ALBUM SECTION */
+    #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
+    .album-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .album-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .album-title { font-family: var(--font-display); font-size: 32px; letter-spacing: 4px; color: var(--accent); line-height: 1; }
+    .album-meta { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 400; }
+    .album-back-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .album-back-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
+    .album-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
+    .album-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
+    .album-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .album-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-size: 13px; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; }
+
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
       .viewer-bib { font-size: 30px; }
@@ -153,6 +175,9 @@
       .bib-row { flex-wrap: nowrap; }
       .mf-m, .mf-f { font-size: 24px; }
       .page-jump-label { display: none; }
+      .album-tabs-wrap { gap: 6px; padding: 0 8px; }
+      .album-tab-btn { padding: 8px 12px; font-size: 13px; }
+      .album-title { font-size: 24px; }
     }
   </style>
 </head>
@@ -178,6 +203,20 @@
     </div>
     <div class="status-bar" id="status-bar"></div>
     <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
+    <!-- ALBUM TABS -->
+    <div class="album-tabs-wrap">
+      <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
+        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
+        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span>
+      </button>
+    </div>
+
     <!-- NOTICE BANNER -->
     <div class="notice-banner">
       <div class="notice-inner">
@@ -226,6 +265,19 @@
     <div class="result-grid" id="result-grid"></div>
     <div class="pagination" id="viewer-pagination"></div>
   </div>
+</div>
+
+<!-- ALBUM SECTION -->
+<div id="album-section">
+  <div class="album-header">
+    <div class="album-header-left">
+      <div class="album-title" id="album-title"></div>
+      <div class="album-meta" id="album-meta"></div>
+    </div>
+    <button class="album-back-btn" onclick="closeAlbumTab()">← Trang chủ</button>
+  </div>
+  <div id="album-grid" class="album-grid"></div>
+  <div class="pagination" id="album-pagination"></div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -286,11 +338,10 @@ let PHOTOS = [];
 let browsePage = 1;
 const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
 
-// viewer state
-let viewerAllList = [];   // full result list for current search
+let viewerAllList = [];
 let viewerPage = 1;
 const VIEWER_PAGE_SIZE = 50;
-let viewerIndex = 0;      // index within viewerAllList for lightbox
+let viewerIndex = 0;
 
 document.addEventListener('DOMContentLoaded', () => { fetchPhotos(); });
 
@@ -308,6 +359,7 @@ async function fetchPhotos() {
     setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
     browsePage = 1;
     renderBrowseGrid();
+    updateAlbumTabCounts();
   } catch(e) {
     setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
     hideProgress();
@@ -320,11 +372,19 @@ function loadDemoData() {
     const num = String(i + 1).padStart(3, '0');
     const prefix = i % 3 === 0 ? 'F' : 'M';
     const bib = prefix + num;
-    return { id: 'demo_' + i, bib, thumb: 'https://picsum.photos/seed/' + bib + '/300/200', full: 'https://picsum.photos/seed/' + bib + '/900/600', folderUrl: '', drive: 1 };
+    const tabs = ['khai-mac', 'start-finish', 'khoanh-khac'];
+    return {
+      id: 'demo_' + i, bib,
+      thumb: 'https://picsum.photos/seed/' + bib + '/300/200',
+      full:  'https://picsum.photos/seed/' + bib + '/900/600',
+      folderUrl: '', drive: 1,
+      tab: tabs[i % 3]
+    };
   });
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
   renderBrowseGrid();
+  updateAlbumTabCounts();
 }
 
 function searchByBib() {
@@ -345,12 +405,11 @@ function searchByBib() {
 function showViewer(list, label) {
   viewerAllList = list;
   viewerPage = 1;
-
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
   document.getElementById('browse-section').style.display = 'none';
+  document.getElementById('album-section').style.display = 'none';
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
-
   if (list.length === 0) {
     document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
     document.getElementById('result-grid').innerHTML = '<div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">BIB <strong style="color:var(--accent)">' + label + '</strong> chưa có ảnh trong hệ thống</div>';
@@ -359,12 +418,10 @@ function showViewer(list, label) {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
-
   const seen = new Set();
   const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
     .slice(0, 4).map(p => '<a class="folder-link-btn" href="' + p.folderUrl + '" target="_blank">📁 TẢI TẤT CẢ ẢNH ' + p.bib + '</a>').join('');
   document.getElementById('viewer-folder-links').innerHTML = linksHtml;
-
   renderViewerPage();
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -374,17 +431,14 @@ function renderViewerPage() {
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
   const start = (viewerPage - 1) * VIEWER_PAGE_SIZE;
   const pageItems = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
-
   document.getElementById('viewer-subtitle').textContent =
     total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
-
   const grid = document.getElementById('result-grid');
   grid.innerHTML = pageItems.map((photo, i) =>
-    '<div class="result-card" onclick="openLightboxViewer(' + (start + i) + ')" title="Ảnh ' + (start+i+1) + ' — BIB ' + photo.bib + '">' +
-    '<img src="' + photo.thumb + '" alt="bib ' + photo.bib + '" loading="lazy" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
-    '<div class="bib-tag">' + photo.bib + '</div></div>'
+    '<div class="result-card" onclick="openLightboxViewer(' + (start + i) + ')" title="Ảnh ' + (start+i+1) + '">' +
+    '<img src="' + photo.thumb + '" alt="" loading="lazy" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+    (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '') + '</div>'
   ).join('');
-
   renderViewerPagination(total);
 }
 
@@ -396,28 +450,23 @@ function renderViewerPagination(total) {
 }
 
 function goViewerPage(p) {
-  viewerPage = p;
-  renderViewerPage();
+  viewerPage = p; renderViewerPage();
   document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function jumpViewerPage() {
   const input = document.getElementById('viewer-jump-input');
-  const total = viewerAllList.length;
-  const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
+  const totalPages = Math.ceil(viewerAllList.length / VIEWER_PAGE_SIZE);
   const p = parseInt(input.value);
   if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
-  input.value = '';
-  goViewerPage(p);
+  input.value = ''; goViewerPage(p);
 }
 
-/* Lightbox — works across all pages of viewer */
 function openLightboxViewer(globalIdx) {
   viewerIndex = globalIdx;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderLightboxImage();
-  buildLbThumbs();
+  renderLightboxImage(); buildLbThumbs();
   document.addEventListener('keydown', lbKeyHandler);
 }
 
@@ -442,7 +491,7 @@ function renderLightboxImage() {
   if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
   else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
-  document.getElementById('lb-bib-label').textContent = 'BIB ' + photo.bib;
+  document.getElementById('lb-bib-label').textContent = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
   document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + list.length;
   const folderBtn = document.getElementById('lb-folder-btn');
   if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; } else { folderBtn.style.display = 'none'; }
@@ -476,7 +525,6 @@ function clearResults() {
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-/* ── BROWSE GRID ── */
 function renderBrowseGrid() {
   const grid = document.getElementById('main-grid');
   const total = PHOTOS.length;
@@ -492,15 +540,14 @@ function renderBrowseGrid() {
       const photo = page[parseInt(card.dataset.idx)];
       if (!photo) return;
       card.classList.remove('skeleton');
-      card.innerHTML = '<img src="' + photo.thumb + '" alt="bib ' + photo.bib + '" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
-        '<div class="bib-tag">' + photo.bib + '</div>';
+      card.innerHTML = '<img src="' + photo.thumb + '" alt="" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+        (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
       card.onclick = () => {
         viewerAllList = PHOTOS;
         viewerIndex = start + parseInt(card.dataset.idx);
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
-        renderLightboxImage();
-        buildLbThumbs();
+        renderLightboxImage(); buildLbThumbs();
         document.addEventListener('keydown', lbKeyHandler);
       };
       observer.unobserve(card);
@@ -519,8 +566,7 @@ function renderBrowsePagination(total) {
 }
 
 function goBrowsePage(p) {
-  browsePage = p;
-  renderBrowseGrid();
+  browsePage = p; renderBrowseGrid();
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -529,34 +575,22 @@ function jumpBrowsePage() {
   const totalPages = Math.ceil(PHOTOS.length / BROWSE_PAGE_SIZE);
   const p = parseInt(input.value);
   if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
-  input.value = '';
-  goBrowsePage(p);
+  input.value = ''; goBrowsePage(p);
 }
 
-/* ── SHARED PAGINATION BUILDER ── */
 function buildPaginationHTML(cur, total, gofn) {
-  const jumpId = gofn === 'goBrowsePage' ? 'browse-jump-input' : 'viewer-jump-input';
-  const jumpFn = gofn === 'goBrowsePage' ? 'jumpBrowsePage' : 'jumpViewerPage';
-
+  const jumpId = gofn === 'goBrowsePage' ? 'browse-jump-input' : (gofn === 'goAlbumPage' ? 'album-jump-input' : 'viewer-jump-input');
+  const jumpFn = gofn === 'goBrowsePage' ? 'jumpBrowsePage' : (gofn === 'goAlbumPage' ? 'jumpAlbumPage' : 'jumpViewerPage');
   let html = '<button class="page-btn" ' + (cur===1?'disabled':'onclick="'+gofn+'('+(cur-1)+')"') + '>‹</button>';
-
-  const range = getPaginationRange(cur, total);
-  range.forEach(p => {
+  getPaginationRange(cur, total).forEach(p => {
     if (p === '...') html += '<button class="page-btn" disabled>…</button>';
     else html += '<button class="page-btn ' + (p===cur?'active':'') + '" onclick="' + gofn + '(' + p + ')">' + p + '</button>';
   });
-
   html += '<button class="page-btn" ' + (cur===total?'disabled':'onclick="'+gofn+'('+(cur+1)+')"') + '>›</button>';
-
-  // jump to page
-  html += '<div class="page-divider"></div>';
-  html += '<div class="page-jump">';
+  html += '<div class="page-divider"></div><div class="page-jump">';
   html += '<span class="page-jump-label">Đến trang</span>';
-  html += '<input class="page-jump-input" id="' + jumpId + '" type="number" min="1" max="' + total + '" placeholder="' + cur + '"';
-  html += ' onkeydown="if(event.key===\'Enter\') ' + jumpFn + '()">';
-  html += '<button class="page-jump-btn" onclick="' + jumpFn + '()">Đi ›</button>';
-  html += '</div>';
-
+  html += '<input class="page-jump-input" id="' + jumpId + '" type="number" min="1" max="' + total + '" placeholder="' + cur + '" onkeydown="if(event.key===\'Enter\') ' + jumpFn + '()">';
+  html += '<button class="page-jump-btn" onclick="' + jumpFn + '()">Đi ›</button></div>';
   return html;
 }
 
@@ -567,35 +601,129 @@ function getPaginationRange(cur, total) {
   return [1,'...',cur-1,cur,cur+1,'...',total];
 }
 
-/* ── UTILS ── */
 function setStatus(msg, type) { const el = document.getElementById('status-bar'); el.textContent = msg; el.className = 'status-bar' + (type ? ' ' + type : ''); }
 function showProgress(pct) { document.getElementById('progress-wrap').classList.add('active'); document.getElementById('progress-fill').style.width = pct + '%'; }
 function hideProgress() { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
-/* ── ROTATING NOTICE ── */
+/* ══ NOTICE BANNER ══ */
 (function () {
   const slot = document.getElementById('notice-slot');
   const msgs = slot.querySelectorAll('.notice-msg');
   let cur = 0;
-  function setSlotWidth(idx) {
-    const w = msgs[idx].scrollWidth;
-    slot.style.width = w + 'px';
-    slot.style.transition = 'width 0.5s ease';
-  }
+  function setSlotWidth(idx) { slot.style.width = msgs[idx].scrollWidth + 'px'; slot.style.transition = 'width 0.5s ease'; }
   requestAnimationFrame(() => setSlotWidth(0));
   setInterval(() => {
-    const prev = cur;
-    cur = (cur + 1) % msgs.length;
-    msgs[prev].classList.remove('active');
-    msgs[prev].classList.add('exit');
+    const prev = cur; cur = (cur + 1) % msgs.length;
+    msgs[prev].classList.remove('active'); msgs[prev].classList.add('exit');
     setTimeout(() => msgs[prev].classList.remove('exit'), 550);
-    msgs[cur].classList.add('active');
-    setSlotWidth(cur);
+    msgs[cur].classList.add('active'); setSlotWidth(cur);
   }, 5000);
 })();
 
-/* ── FIREBASE ── */
+/* ══ ALBUM TABS ══
+   Lọc theo field "tab" trong photos.json
+   Giá trị khớp với Python: "khai-mac" | "start-finish" | "khoanh-khac"
+*/
+const ALBUM_DEFS = [
+  { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
+  { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
+  { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
+];
+const ALBUM_PAGE_SIZE = 50;
+let activeAlbumKey   = null;
+let albumCurrentList = [];
+let albumPage        = 1;
+
+function updateAlbumTabCounts() {
+  ALBUM_DEFS.forEach(def => {
+    // ✅ FIX: dùng p.tab (khớp với field Python ghi ra)
+    const count = PHOTOS.filter(p => p.tab === def.key).length;
+    const el = document.getElementById('tc-' + def.key);
+    if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
+  });
+}
+
+function openAlbumTab(key) {
+  ALBUM_DEFS.forEach(def => {
+    const btn = document.getElementById('tab-' + def.key);
+    if (btn) btn.classList.toggle('active', def.key === key);
+  });
+  activeAlbumKey = key;
+  // ✅ FIX: dùng p.tab (khớp với field Python ghi ra)
+  albumCurrentList = PHOTOS.filter(p => p.tab === key);
+  albumPage = 1;
+  const def = ALBUM_DEFS.find(d => d.key === key);
+  document.getElementById('browse-section').style.display  = 'none';
+  document.getElementById('viewer-section').style.display  = 'none';
+  document.getElementById('album-section').style.display   = 'block';
+  document.getElementById('album-title').textContent = def ? def.icon + ' ' + def.label : key.toUpperCase();
+  renderAlbumPage();
+  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeAlbumTab() {
+  ALBUM_DEFS.forEach(def => {
+    const btn = document.getElementById('tab-' + def.key);
+    if (btn) btn.classList.remove('active');
+  });
+  activeAlbumKey = null; albumCurrentList = [];
+  document.getElementById('album-section').style.display  = 'none';
+  document.getElementById('browse-section').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderAlbumPage() {
+  const total      = albumCurrentList.length;
+  const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE) || 1;
+  const start      = (albumPage - 1) * ALBUM_PAGE_SIZE;
+  const pageItems  = albumCurrentList.slice(start, start + ALBUM_PAGE_SIZE);
+  document.getElementById('album-meta').textContent =
+    total.toLocaleString() + ' ảnh — Trang ' + albumPage + '/' + totalPages + ' — click để xem lớn';
+  const grid = document.getElementById('album-grid');
+  if (total === 0) {
+    grid.innerHTML = '<div style="color:var(--muted);padding:60px 0;font-size:14px;grid-column:1/-1;text-align:center;">Album này chưa có ảnh. Ảnh sẽ sớm được cập nhật!</div>';
+    document.getElementById('album-pagination').innerHTML = '';
+    return;
+  }
+  grid.innerHTML = pageItems.map((photo, i) =>
+    '<div class="album-card" onclick="openLightboxAlbum(' + (start + i) + ')">' +
+    '<img src="' + photo.thumb + '" alt="" loading="lazy" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+    (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '') + '</div>'
+  ).join('');
+  renderAlbumPagination(total);
+}
+
+function renderAlbumPagination(total) {
+  const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE);
+  const el = document.getElementById('album-pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  el.innerHTML = buildPaginationHTML(albumPage, totalPages, 'goAlbumPage');
+}
+
+function goAlbumPage(p) {
+  albumPage = p; renderAlbumPage();
+  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function jumpAlbumPage() {
+  const input      = document.getElementById('album-jump-input');
+  const totalPages = Math.ceil(albumCurrentList.length / ALBUM_PAGE_SIZE);
+  const p          = parseInt(input.value);
+  if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
+  input.value = ''; goAlbumPage(p);
+}
+
+function openLightboxAlbum(globalIdx) {
+  viewerAllList = albumCurrentList;
+  viewerIndex   = globalIdx;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderLightboxImage(); buildLbThumbs();
+  document.addEventListener('keydown', lbKeyHandler);
+}
+
+/* ══ FIREBASE ══ */
 (function () {
   const firebaseConfig = {
     apiKey: "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
