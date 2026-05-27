@@ -184,7 +184,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       padding: 14px 22px;
       background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.07) 100%);
       border: 1px solid rgba(247,201,72,0.28);
@@ -202,6 +201,15 @@
     @keyframes sweep {
       0%   { left: -60%; }
       100% { left: 160%; }
+    }
+    /* inner wrapper: shrinks/grows with text, lychees hug it */
+    .notice-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
     }
     .notice-lychee {
       font-size: 24px;
@@ -227,14 +235,59 @@
       z-index: 1;
       text-align: center;
     }
+    /* rotating messages */
+    .notice-slot {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      height: 44px;
+      overflow: hidden;
+      transition: width 0.5s ease;
+      min-width: 80px;
+    }
+    .notice-msg {
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%) translateY(14px);
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+    .notice-msg.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .notice-msg.exit {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-14px);
+    }
+
+    .notice-text {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.2px;
+      line-height: 1.4;
+      text-align: center;
+    }
     .notice-text strong {
       color: #fff;
       font-weight: 700;
       letter-spacing: 0.3px;
+      display: block;
     }
     @media (max-width: 600px) {
-      .notice-text { font-size: 12.5px; }
+      .notice-text { font-size: 11.5px; }
       .notice-lychee { font-size: 20px; }
+      .notice-slot { height: 52px; }
+      .notice-msg { height: 52px; }
     }
     /* ── END NOTICE BANNER ── */
 
@@ -452,12 +505,28 @@
 
     <!-- NOTICE BANNER -->
     <div class="notice-banner">
-      <span class="notice-lychee">🍒</span>
-      <div class="notice-text">
-        <strong>VẪN CÒN RẤT NHIỀU ẢNH CHƯA UP LÊN</strong><br>
-        Các bác đừng rời xa em nha! 🙏
+      <div class="notice-inner">
+        <span class="notice-lychee">🍒</span>
+        <div class="notice-slot" id="notice-slot">
+          <div class="notice-msg notice-text active">
+            <strong>VẪN CÒN RẤT NHIỀU ẢNH CHƯA UP LÊN</strong>
+            Các bác đừng rời xa em nha!
+          </div>
+          <div class="notice-msg notice-text">
+            <strong>PHÚC HÒA CITY TRAIL 2026</strong>
+            Đón Mùa Vải Sớm 🍒
+          </div>
+          <div class="notice-msg notice-text">
+            <strong>CỘNG ĐỒNG CHẠY BỘ RUN4SELF</strong>
+            Chinh Phục Hồ Tây 🏃
+          </div>
+          <div class="notice-msg notice-text">
+            <strong>Special thank for Mr. Dẻo and Team CPHT</strong>
+            TCR 💛
+          </div>
+        </div>
+        <span class="notice-lychee">🍒</span>
       </div>
-      <span class="notice-lychee">🍒</span>
     </div>
 
   </div>
@@ -777,6 +846,34 @@ function showToast(msg, type) { const t = document.getElementById('toast'); t.te
     document.head.appendChild(s2);
   };
   document.head.appendChild(s1);
+})();
+
+/* ── ROTATING NOTICE ── */
+(function () {
+  const slot = document.getElementById('notice-slot');
+  const msgs = slot.querySelectorAll('.notice-msg');
+  let cur = 0;
+
+  function setSlotWidth(idx) {
+    const w = msgs[idx].scrollWidth;
+    slot.style.width = w + 'px';
+    slot.style.transition = 'width 0.5s ease';
+  }
+
+  // init width on first paint
+  requestAnimationFrame(() => setSlotWidth(0));
+
+  setInterval(() => {
+    const prev = cur;
+    cur = (cur + 1) % msgs.length;
+
+    msgs[prev].classList.remove('active');
+    msgs[prev].classList.add('exit');
+    setTimeout(() => msgs[prev].classList.remove('exit'), 550);
+
+    msgs[cur].classList.add('active');
+    setSlotWidth(cur);
+  }, 5000);
 })();
 
 function initOnlineCounter(config) {
