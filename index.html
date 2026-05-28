@@ -45,21 +45,8 @@
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width 0.3s; }
     .progress-wrap.active { display: block; }
 
-    /* NOTICE BANNER */
-    .notice-banner { max-width: 700px; margin: 20px auto 0; display: flex; align-items: center; justify-content: center; padding: 14px 22px; background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.07) 100%); border: 1px solid rgba(247,201,72,0.28); border-radius: var(--radius); position: relative; overflow: hidden; }
-    .notice-banner::before { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(247,201,72,0.06), transparent); animation: sweep 4s ease-in-out infinite; }
-    @keyframes sweep { 0% { left: -60%; } 100% { left: 160%; } }
-    .notice-inner { display: inline-flex; align-items: center; justify-content: center; gap: 10px; position: relative; z-index: 1; }
-    .notice-lychee { font-size: 24px; line-height: 1; flex-shrink: 0; animation: wobble 2.4s ease-in-out infinite; }
-    .notice-lychee:last-child { animation-delay: 0.6s; }
-    @keyframes wobble { 0%, 100% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.15); } }
-    .notice-slot { position: relative; z-index: 1; text-align: center; height: 44px; overflow: hidden; transition: width 0.5s ease; min-width: 80px; }
-    .notice-msg { position: absolute; top: 0; left: 50%; transform: translateX(-50%) translateY(14px); white-space: nowrap; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 44px; opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
-    .notice-msg.active { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-    .notice-msg.exit { opacity: 0; transform: translateX(-50%) translateY(-14px); }
-    .notice-text { font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.2px; line-height: 1.4; text-align: center; }
-    .notice-text strong { color: #fff; font-weight: 700; letter-spacing: 0.3px; display: block; }
-    @media (max-width: 600px) { .notice-text { font-size: 11.5px; } .notice-lychee { font-size: 20px; } .notice-slot { height: 52px; } .notice-msg { height: 52px; } }
+    /* NOTICE BANNER — hidden */
+    .notice-banner { display: none; }
 
     /* VIEWER */
     #viewer-section { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
@@ -217,8 +204,8 @@
       </button>
     </div>
 
-    <!-- NOTICE BANNER -->
-    <div class="notice-banner">
+    <!-- NOTICE BANNER — hidden -->
+    <div class="notice-banner" style="display:none;">
       <div class="notice-inner">
         <span class="notice-lychee">🍒</span>
         <div class="notice-slot" id="notice-slot">
@@ -606,25 +593,7 @@ function showProgress(pct) { document.getElementById('progress-wrap').classList.
 function hideProgress() { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
-/* ══ NOTICE BANNER ══ */
-(function () {
-  const slot = document.getElementById('notice-slot');
-  const msgs = slot.querySelectorAll('.notice-msg');
-  let cur = 0;
-  function setSlotWidth(idx) { slot.style.width = msgs[idx].scrollWidth + 'px'; slot.style.transition = 'width 0.5s ease'; }
-  requestAnimationFrame(() => setSlotWidth(0));
-  setInterval(() => {
-    const prev = cur; cur = (cur + 1) % msgs.length;
-    msgs[prev].classList.remove('active'); msgs[prev].classList.add('exit');
-    setTimeout(() => msgs[prev].classList.remove('exit'), 550);
-    msgs[cur].classList.add('active'); setSlotWidth(cur);
-  }, 5000);
-})();
-
-/* ══ ALBUM TABS ══
-   Lọc theo field "tab" trong photos.json
-   Giá trị khớp với Python: "khai-mac" | "start-finish" | "khoanh-khac"
-*/
+/* ══ ALBUM TABS ══ */
 const ALBUM_DEFS = [
   { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
@@ -637,7 +606,6 @@ let albumPage        = 1;
 
 function updateAlbumTabCounts() {
   ALBUM_DEFS.forEach(def => {
-    // ✅ FIX: dùng p.tab (khớp với field Python ghi ra)
     const count = PHOTOS.filter(p => p.tab === def.key).length;
     const el = document.getElementById('tc-' + def.key);
     if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
@@ -650,7 +618,6 @@ function openAlbumTab(key) {
     if (btn) btn.classList.toggle('active', def.key === key);
   });
   activeAlbumKey = key;
-  // ✅ FIX: dùng p.tab (khớp với field Python ghi ra)
   albumCurrentList = PHOTOS.filter(p => p.tab === key);
   albumPage = 1;
   const def = ALBUM_DEFS.find(d => d.key === key);
