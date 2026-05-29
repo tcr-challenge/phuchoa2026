@@ -6,838 +6,335 @@
   <title>Tìm Ảnh — Phúc Hoà City Trail 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #13131a;
-      --surface2: #1c1c27;
-      --border: #2a2a3d;
-      --accent: #f7c948;
-      --accent2: #ff6b35;
-      --text: #f0f0f5;
-      --muted: #7070a0;
-      --success: #4ade80;
-      --radius: 12px;
-      --thumb-w: 180px;
-      --thumb-ratio: 3/2;
-      --font-display: 'Bebas Neue', Impact, sans-serif;
-      --font-body:    'Outfit', 'Segoe UI', sans-serif;
+      --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c27; --border: #2a2a3d;
+      --accent: #f7c948; --accent2: #ff6b35; --text: #f0f0f5; --muted: #7070a0;
+      --success: #4ade80; --radius: 12px; --thumb-w: 180px; --thumb-ratio: 3/2;
+      --font-display: 'Montserrat', 'Segoe UI', sans-serif;
+      --font-body: 'Open Sans', 'Segoe UI', Roboto, sans-serif;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(10,10,15,0.95);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .logo {
-      font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: 3px;
-      color: var(--accent);
-      text-decoration: none;
-      text-align: center;
-    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: center; }
+    .logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-decoration: none; text-align: center; }
     .logo span { color: var(--accent2); }
-
-    /* HERO */
-    .hero {
-      padding: 56px 24px 36px;
-      text-align: center;
-      position: relative;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(44px, 9vw, 90px);
-      letter-spacing: 5px;
-      line-height: 0.92;
-      margin-bottom: 16px;
-    }
+    .hero { padding: 56px 24px 36px; text-align: center; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%); pointer-events: none; }
+    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 7vw, 64px); letter-spacing: 2px; line-height: 1.05; margin-bottom: 16px; }
     .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero p {
-      color: var(--muted);
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 400;
-      max-width: 460px;
-      margin: 0 auto 36px;
-      line-height: 1.65;
-    }
-
-    /* SEARCH AREA */
-    .search-container {
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* BIB ROW */
-    .bib-row {
-      display: flex;
-      gap: 10px;
-      align-items: stretch;
-      margin-bottom: 16px;
-    }
-
-    .mf-labels {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-      padding: 0 6px;
-    }
-    .mf-m {
-      font-family: var(--font-display);
-      font-size: 28px;
-      letter-spacing: 1px;
-      color: #4fc3f7;
-      line-height: 1;
-    }
-    .mf-sep {
-      color: var(--border);
-      font-size: 20px;
-      line-height: 1;
-      font-weight: 300;
-    }
-    .mf-f {
-      font-family: var(--font-display);
-      font-size: 28px;
-      letter-spacing: 1px;
-      color: #f48fb1;
-      line-height: 1;
-    }
-
-    .bib-input {
-      flex: 1;
-      padding: 15px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-family: var(--font-display);
-      font-size: 32px;
-      letter-spacing: 6px;
-      outline: none;
-      transition: border-color 0.2s;
-      min-width: 0;
-    }
-    .bib-input::placeholder { color: var(--border); font-size: 24px; letter-spacing: 4px; }
+    .hero p { color: var(--muted); font-family: var(--font-body); font-size: 15px; font-weight: 400; max-width: 460px; margin: 0 auto 36px; line-height: 1.65; }
+    .search-container { max-width: 700px; margin: 0 auto; position: relative; z-index: 10; }
+    .bib-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 16px; }
+    .mf-labels { display: flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 0 6px; }
+    .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
+    .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
+    .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
+    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: 4px; outline: none; transition: border-color 0.2s; min-width: 0; }
+    .bib-input::placeholder { color: var(--border); font-size: 20px; letter-spacing: 3px; }
     .bib-input:focus { border-color: var(--accent); }
-
-    .search-btn {
-      padding: 15px 28px;
-      background: var(--accent);
-      color: #0a0a0f;
-      border: none;
-      border-radius: var(--radius);
-      font-family: var(--font-display);
-      font-size: 19px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+    .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
-
-    /* STATUS */
-    .status-bar {
-      max-width: 700px;
-      margin: 10px auto 0;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      text-align: center;
-      min-height: 20px;
-      letter-spacing: 0.2px;
-    }
+    .status-bar { max-width: 700px; margin: 10px auto 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; min-height: 20px; letter-spacing: 0.2px; }
     .status-bar.loading { color: var(--accent); }
     .status-bar.success { color: var(--success); }
     .status-bar.error { color: #f87171; }
-
-    .progress-wrap {
-      max-width: 700px;
-      margin: 6px auto 0;
-      height: 3px;
-      background: var(--surface2);
-      border-radius: 2px;
-      overflow: hidden;
-      display: none;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      width: 0%;
-      transition: width 0.3s;
-    }
+    .progress-wrap { max-width: 700px; margin: 6px auto 0; height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; display: none; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width 0.3s; }
     .progress-wrap.active { display: block; }
 
-    /* RESULT VIEWER */
-    #viewer-section {
-      display: none;
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+    /* NOTICE BANNER — hidden */
+    .notice-banner { display: none; }
 
-    .viewer-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .viewer-bib {
-      font-family: var(--font-display);
-      font-size: 40px;
-      letter-spacing: 5px;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .viewer-subtitle {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--muted);
-      margin-top: 5px;
-      letter-spacing: 0.2px;
-    }
-    .folder-link-btn {
-      display: inline-flex;
+    /* VIEWER */
+    #viewer-section { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .viewer-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .viewer-bib { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: 3px; color: var(--accent); line-height: 1; }
+    .viewer-subtitle { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 5px; letter-spacing: 0.2px; }
+
+    /* RUNNER INFO CARD — hiển thị dưới viewer-bib khi search */
+    .runner-info-card {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 16px;
+      background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%);
+      border: 1px solid rgba(247,201,72,0.3);
+      border-radius: 10px;
+      flex-direction: row;
       align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
+      gap: 0;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .runner-info-card.visible { display: inline-flex; }
+    .runner-info-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      padding-right: 14px;
+    }
+    .runner-info-sep {
+      width: 1px;
+      align-self: stretch;
+      background: rgba(247,201,72,0.3);
+      flex-shrink: 0;
+      margin: 0 14px 0 0;
+    }
+    .runner-info-club {
       font-family: var(--font-body);
       font-size: 13px;
       font-weight: 500;
-      transition: all 0.2s;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
     }
-    .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr));
-      gap: 8px;
+    .runner-info-club-label {
+      color: var(--muted);
+      font-weight: 400;
     }
-    .result-card {
-      position: relative;
-      aspect-ratio: var(--thumb-ratio);
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      transition: all 0.18s;
-    }
-    .result-card:hover {
-      transform: scale(1.03);
-      border-color: var(--accent);
-      box-shadow: 0 0 18px rgba(247,201,72,0.18);
-      z-index: 2;
-    }
-    .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .result-card .bib-tag {
-      position: absolute; bottom: 5px; left: 5px;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(4px);
+    .runner-info-club-name {
       color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 13px;
-      letter-spacing: 1px;
-      padding: 2px 7px;
-      border-radius: 4px;
+      font-weight: 600;
     }
+
+    .folder-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
+    .result-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
+    .result-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
+    .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .result-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
 
     /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,0.93);
-      backdrop-filter: blur(14px);
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 16px;
-      cursor: pointer; /* indicates the whole backdrop is clickable */
-    }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.93); backdrop-filter: blur(14px); align-items: center; justify-content: center; flex-direction: column; padding: 16px; cursor: pointer; }
     .lightbox.open { display: flex; }
-
-    /* inner wrapper stops propagation */
-    .lb-inner {
-      display: contents;
-    }
-
-    .lb-close {
-      position: absolute; top: 18px; right: 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-      z-index: 10;
-    }
+    .lb-close { position: absolute; top: 18px; right: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
     .lb-close:hover { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
-
-    .lb-main {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 92vw;
-      max-height: 78vh;
-      flex: 1;
-      cursor: default;
-    }
-    .lb-img {
-      max-width: 88vw;
-      max-height: 76vh;
-      border-radius: 10px;
-      object-fit: contain;
-      display: block;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-      transition: opacity 0.2s;
-      cursor: default;
-    }
+    .lb-main { position: relative; display: flex; align-items: center; justify-content: center; max-width: 92vw; max-height: 72vh; flex: 1; cursor: default; }
+    .lb-img { max-width: 88vw; max-height: 70vh; border-radius: 10px; object-fit: contain; display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.6); transition: opacity 0.2s; cursor: default; }
     .lb-img.hidden { opacity: 0; }
-    .lb-spinner {
-      position: absolute;
-      inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: 13px;
-    }
-
-    .lb-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(10,10,15,0.75);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-      backdrop-filter: blur(6px);
-      z-index: 5;
-    }
+    .lb-spinner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+    .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,15,0.75); border: 1px solid var(--border); color: var(--text); width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; backdrop-filter: blur(6px); z-index: 5; }
     .lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
-    #lb-prev { left: -64px; }
-    #lb-next { right: -64px; }
+    #lb-prev { left: -64px; } #lb-next { right: -64px; }
 
-    .lb-info {
-      margin-top: 14px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
+    /* RUNNER CARD IN LIGHTBOX */
+    .lb-info { margin-top: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
+    .lb-bib-label { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 3px; color: var(--accent); }
+
+    /* Runner name+club block inside lightbox */
+    .lb-runner-block {
+      display: none;
+      flex-direction: row;
       align-items: center;
-      gap: 10px;
-      cursor: default;
+      gap: 0;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07));
+      border: 1px solid rgba(247,201,72,0.25);
+      border-radius: 10px;
+      width: fit-content;
     }
-    .lb-bib-label {
+    .lb-runner-block.visible { display: inline-flex; }
+    .lb-runner-name {
       font-family: var(--font-display);
-      font-size: 30px;
-      letter-spacing: 4px;
-      color: var(--accent);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      padding-right: 14px;
     }
-    .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
-    .lb-folder-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
+    .lb-runner-sep {
+      width: 1px;
+      align-self: stretch;
+      background: rgba(247,201,72,0.3);
+      flex-shrink: 0;
+      margin: 0 14px 0 0;
+    }
+    .lb-runner-club {
       font-family: var(--font-body);
       font-size: 13px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    .lb-thumbs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 4px 2px 2px;
-      max-width: 88vw;
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-      margin-top: 10px;
-      cursor: default;
-    }
-    .lb-thumbs::-webkit-scrollbar { height: 3px; }
-    .lb-thumb {
-      flex-shrink: 0;
-      width: 72px; height: 50px;
-      border-radius: 5px;
-      overflow: hidden;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.16s;
-      background: var(--surface2);
-    }
-    .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .lb-thumb:hover { border-color: var(--muted); }
-    .lb-thumb.active { border-color: var(--accent); }
-
-    @media (max-width: 680px) {
-      #lb-prev { left: 4px; }
-      #lb-next { right: 4px; }
-      .lb-img { max-height: 55vh; }
-    }
-
-    /* SECTION */
-    .section {
-      padding: 36px 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 18px;
-      letter-spacing: 3px;
-      color: var(--muted);
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .count-badge {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-family: var(--font-body);
-      font-size: 12px;
       font-weight: 600;
       color: var(--accent);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
     }
 
-    /* PHOTO GRID */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 8px;
-    }
-    .photo-card {
-      position: relative;
-      aspect-ratio: 3/2;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      transition: all 0.18s;
-    }
-    .photo-card:hover {
-      transform: scale(1.03);
-      border-color: var(--accent);
-      box-shadow: 0 0 18px rgba(247,201,72,0.18);
-      z-index: 2;
-    }
+    .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
+    .lb-folder-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-thumbs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 2px; max-width: 88vw; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) transparent; margin-top: 6px; cursor: default; }
+    .lb-thumbs::-webkit-scrollbar { height: 3px; }
+    .lb-thumb { flex-shrink: 0; width: 72px; height: 50px; border-radius: 5px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.16s; background: var(--surface2); }
+    .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lb-thumb:hover { border-color: var(--muted); } .lb-thumb.active { border-color: var(--accent); }
+    @media (max-width: 680px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-img { max-height: 50vh; } }
+
+    /* SECTIONS */
+    .section { padding: 36px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .count-badge { background: var(--surface2); border: 1px solid var(--border); padding: 2px 10px; border-radius: 20px; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent); }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+    .photo-card { position: relative; aspect-ratio: 3/2; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
+    .photo-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .photo-card img { width: 100%; height: 100%; object-fit: cover; }
-    .photo-card .bib-tag {
-      position: absolute; bottom: 5px; left: 5px;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(4px);
-      color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 13px;
-      letter-spacing: 1px;
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-    .skeleton {
-      background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
+    .photo-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
+    .skeleton { background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { to { background-position: -200% 0; } }
 
     /* PAGINATION */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 28px;
-      flex-wrap: wrap;
-    }
-    .page-btn {
-      width: 38px; height: 38px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 28px; flex-wrap: wrap; }
+    .page-btn { width: 38px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .page-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-btn.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 700; }
     .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .page-jump { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .page-jump-label { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .page-jump-input { width: 52px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; text-align: center; outline: none; transition: border-color 0.2s; }
+    .page-jump-input:focus { border-color: var(--accent); }
+    .page-jump-input::-webkit-inner-spin-button, .page-jump-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .page-jump-btn { height: 38px; padding: 0 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.3px; }
+    .page-jump-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .page-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; margin: 0 2px; }
 
     /* TOAST */
-    .toast {
-      position: fixed; bottom: 24px; right: 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 13px 18px;
-      border-radius: 10px;
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      z-index: 3000;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.3s;
-      max-width: 300px;
-    }
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 13px 18px; border-radius: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 500; z-index: 3000; transform: translateY(100px); opacity: 0; transition: all 0.3s; max-width: 300px; }
     .toast.show { transform: none; opacity: 1; }
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    /* EVENT TABS */
-    .event-tabs-nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 14px;
-    }
-    .etab-btn {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 16px;
-      background: rgba(19,19,26,0.7);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-      font-family: var(--font-display);
-      font-size: 14px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      backdrop-filter: blur(8px);
-    }
-    .etab-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .etab-btn.active { background: var(--accent); border-color: var(--accent); color: #0a0a0f; }
-    .etab-icon { font-size: 14px; }
-    .etab-count {
-      font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 700;
-      background: rgba(0,0,0,0.18);
-      padding: 1px 6px;
-      border-radius: 999px;
-    }
-    .etab-btn.active .etab-count { background: rgba(0,0,0,0.22); }
+    /* STATS */
+    .stats-widget { position: fixed; bottom: 24px; left: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 6px; user-select: none; }
+    .online-pill, .visits-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; cursor: default; white-space: nowrap; }
+    .online-pill:hover { border-color: var(--success); } .visits-pill:hover { border-color: var(--accent); }
+    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
+    .visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
+    .online-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
+    .visits-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
 
-    /* EVENT GRID SECTION */
-    .event-tabs-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 8px;
-      margin-top: 20px;
-    }
-    .etab-status {
-      text-align: center;
-      padding: 36px 0;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 8px;
-    }
-    .etab-pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
+    /* ALBUM TABS */
+    .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
+    .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
+    .album-tab-btn:hover { border-color: var(--accent); color: var(--text); }
+    .album-tab-btn:hover::before { opacity: 1; }
+    .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
+    .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
+    .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
 
-    /* STATS WIDGET */
-    .stats-widget {
-      position: fixed; bottom: 24px; left: 24px;
-      z-index: 3000; display: flex; flex-direction: column; gap: 6px; user-select: none;
-    }
-    .online-pill, .visits-pill {
-      display: flex; align-items: center; gap: 8px; padding: 8px 14px;
-      background: rgba(19,19,26,0.92); border: 1px solid var(--border);
-      border-radius: 999px; font-family: var(--font-body); font-size: 12px;
-      font-weight: 500; color: var(--muted); backdrop-filter: blur(12px);
-      transition: border-color 0.2s; cursor: default; white-space: nowrap;
-    }
-    .online-pill:hover { border-color: var(--success); }
-    .visits-pill:hover { border-color: var(--accent); }
-    .online-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--success);
-      flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100% { opacity:1; transform:scale(1); }
-      50%      { opacity:.5; transform:scale(.75); }
-    }
-    .online-count { font-family:var(--font-display); font-size:15px; letter-spacing:1px; color:var(--success); }
-    .visits-count { font-family:var(--font-display); font-size:15px; letter-spacing:1px; color:var(--accent); }
+    /* ALBUM SECTION */
+    #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
+    .album-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .album-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .album-title { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
+    .album-meta { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 400; }
+    .album-back-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .album-back-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
+    .album-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
+    .album-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
+    .album-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .album-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
 
-    /* MOBILE */
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
-      .viewer-bib { font-size: 30px; }
+      .viewer-bib { font-size: 24px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-      .bib-input { font-size: 24px; letter-spacing: 4px; }
-      .search-btn { padding: 15px 14px; font-size: 16px; }
+      .bib-input { font-size: 20px; letter-spacing: 3px; }
+      .search-btn { padding: 15px 14px; font-size: 13px; }
       .bib-row { flex-wrap: nowrap; }
-      .mf-m, .mf-f { font-size: 24px; }
+      .mf-m, .mf-f { font-size: 18px; }
+      .page-jump-label { display: none; }
+      .album-tabs-wrap { gap: 6px; padding: 0 8px; }
+      .album-tab-btn { padding: 8px 12px; font-size: 11px; }
+      .album-title { font-size: 20px; }
+      .lb-runner-name { font-size: 14px; }
     }
-
-    /* ── KHOẢNH KHẮC SLIDESHOW ── */
-    .kk-slideshow-wrap {
-      max-width: 860px;
-      margin: 32px auto 0;
-      padding: 0 24px;
-    }
-    .kk-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .kk-label {
-      font-family: var(--font-display);
-      font-size: 18px;
-      letter-spacing: 3px;
-      color: var(--muted);
-    }
-    .kk-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .kk-stage {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .kk-frame {
-      flex: 1;
-      position: relative;
-      aspect-ratio: 3/2;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-    }
-    .kk-img {
-      position: absolute;
+    /* LYCHEE LOADING OVERLAY */
+    .lychee-loading {
+      display: none;
+      position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.7s ease;
-      display: block;
+      z-index: 9999;
+      background: rgba(10,10,15,0.88);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
     }
-    .kk-img.active { opacity: 1; }
-    .kk-dots {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-      z-index: 5;
-    }
-    .kk-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-    .kk-dot.active {
-      background: var(--accent);
-      transform: scale(1.3);
-    }
-    .kk-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      background: rgba(10,10,15,0.72);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      font-size: 26px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-      backdrop-filter: blur(8px);
+    .lychee-loading.show { display: flex; }
+    .lychee-bounce {
+      font-size: 64px;
+      animation: lychee-jump 0.7s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+      filter: drop-shadow(0 8px 18px rgba(247,100,80,0.5));
       line-height: 1;
     }
-    .kk-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
-    .kk-prev { left: -22px; }
-    .kk-next { right: -22px; }
-    .kk-counter {
-      text-align: center;
-      margin-top: 10px;
+    @keyframes lychee-jump {
+      0%   { transform: translateY(0)   rotate(-8deg) scale(1);    }
+      40%  { transform: translateY(-28px) rotate(6deg) scale(1.08); }
+      70%  { transform: translateY(-42px) rotate(-4deg) scale(1.12); }
+      100% { transform: translateY(-20px) rotate(8deg) scale(1.05); }
+    }
+    .lychee-shadow {
+      width: 36px; height: 10px;
+      background: rgba(247,100,80,0.22);
+      border-radius: 50%;
+      animation: lychee-shadow 0.7s ease-in-out infinite alternate;
+      margin-top: -8px;
+    }
+    @keyframes lychee-shadow {
+      0%   { transform: scaleX(1);   opacity: 0.6; }
+      100% { transform: scaleX(0.5); opacity: 0.2; }
+    }
+    .lychee-text {
       font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-    }
-
-    /* DIVIDER */
-    .section-divider {
-      max-width: 1100px;
-      margin: 40px auto 0;
-      padding: 0 24px;
-      border: none;
-      border-top: 1px solid var(--border);
-    }
-
-    /* PAGE JUMP INPUT */
-    .page-jump {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--muted);
-      margin-left: 4px;
-    }
-    .page-jump-input {
-      width: 54px;
-      height: 38px;
-      padding: 0 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--text);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      text-align: center;
-      outline: none;
-      transition: border-color 0.2s;
+      letter-spacing: 0.3px;
+      margin-top: 4px;
     }
-    .page-jump-input:focus { border-color: var(--accent); }
-    .page-jump-btn {
-      height: 38px;
-      padding: 0 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s;
-      white-space: nowrap;
-    }
-    .page-jump-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* Viewer pagination */
-    #viewer-pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 28px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 600px) {
-      .kk-prev { left: 4px; }
-      .kk-next { right: 4px; }
-      .kk-nav { width: 36px; height: 36px; font-size: 20px; }
+    .lychee-text em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
+<div id="fb-root"></div>
 
-<!-- HEADER — centered -->
+<!-- LYCHEE LOADING -->
+<div class="lychee-loading" id="lychee-loading">
+  <div class="lychee-bounce">🍒</div>
+  <div class="lychee-shadow"></div>
+  <div class="lychee-text"><em>Vải đang được trẩy,</em> bạn chờ tôi chút nha 🌿</div>
+</div>
+
 <header>
   <a class="logo" href="#">TÌM ẢNH — <span>PHÚC HOÀ CITY TRAIL 2026</span></a>
 </header>
 
-<!-- HERO -->
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
   <p>Nhập số BIB để tìm khoảnh khắc của bạn trong giải marathon</p>
-
   <div class="search-container">
-
-    <!-- BIB ROW: M/F [số bib] [TÌM KIẾM] -->
     <div class="bib-row">
       <div class="mf-labels">
-        <span class="mf-m">M</span>
-        <span class="mf-sep">/</span>
-        <span class="mf-f">F</span>
+        <span class="mf-m">M</span><span class="mf-sep">/</span><span class="mf-f">F</span>
       </div>
       <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
              placeholder="044" maxlength="3"
@@ -845,34 +342,31 @@
              onkeydown="if(event.key==='Enter') searchByBib()">
       <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
+    <!-- ALBUM TABS — right below search -->
+    <div class="album-tabs-wrap">
+      <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
+        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
+        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-non-bib"      onclick="openAlbumTab('non-bib')">
+        <span class="tab-icon">🙌</span> NO BIB <span class="tab-count" id="tc-non-bib">...</span>
+      </button>
+    </div>
 
     <div class="status-bar" id="status-bar"></div>
-    <div class="progress-wrap" id="progress-wrap">
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
+    <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
 
-    <!-- 4 TAB SỰ KIỆN -->
-    <div class="event-tabs-nav">
-      <button class="etab-btn" id="etab-khaimac" onclick="switchEventTab('khaimac')">
-        <span class="etab-icon">🎉</span>KHAI MẠC<span class="etab-count" id="etab-count-khaimac">--</span>
-      </button>
-      <button class="etab-btn" id="etab-start" onclick="switchEventTab('start')">
-        <span class="etab-icon">🏁</span>START<span class="etab-count" id="etab-count-start">--</span>
-      </button>
-      <button class="etab-btn" id="etab-finish" onclick="switchEventTab('finish')">
-        <span class="etab-icon">🏆</span>FINISH<span class="etab-count" id="etab-count-finish">--</span>
-      </button>
-      <button class="etab-btn" id="etab-family" onclick="switchEventTab('family')">
-        <span class="etab-icon">👨‍👩‍👧</span>GIA ĐÌNH<span class="etab-count" id="etab-count-family">--</span>
-      </button>
-    </div>
+    <!-- NOTICE BANNER — hidden -->
+    <div class="notice-banner" style="display:none;"></div>
   </div>
-</div>
-
-<!-- EVENT TABS CONTENT -->
-<div class="event-tabs-section" id="event-tabs-section">
-  <div id="event-grid-content"></div>
-  <div class="etab-pagination" id="etab-pagination"></div>
 </div>
 
 <!-- VIEWER SECTION -->
@@ -881,115 +375,93 @@
     <div class="viewer-header">
       <div>
         <div id="viewer-bib" class="viewer-bib"></div>
-        <div id="viewer-subtitle" class="viewer-subtitle"></div>
+        <!-- Runner info card shown after BIB search -->
+        <div class="runner-info-card" id="runner-info-card">
+          <div class="runner-info-name" id="runner-info-name"></div>
+          <span class="runner-info-sep"></span>
+          <div class="runner-info-club">
+            <span class="runner-info-club-name" id="runner-info-club"></span>
+          </div>
+        </div>
+        <div id="viewer-subtitle" class="viewer-subtitle" style="margin-top:8px;"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
-      <button onclick="clearResults()" style="
-        padding:9px 16px;background:var(--surface2);border:1px solid var(--border);
-        border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;
-        transition:all 0.2s;white-space:nowrap;flex-shrink:0;
-      " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-         onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
-        ← Tất cả ảnh
-      </button>
+      <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Tất cả ảnh</button>
     </div>
     <div class="result-grid" id="result-grid"></div>
-    <div id="viewer-pagination"></div>
+    <div class="pagination" id="viewer-pagination"></div>
   </div>
 </div>
 
-<!-- LIGHTBOX — click backdrop to close -->
+<!-- ALBUM SECTION -->
+<div id="album-section">
+  <div class="album-header">
+    <div class="album-header-left">
+      <div class="album-title" id="album-title"></div>
+      <div class="album-meta" id="album-meta"></div>
+    </div>
+    <button class="album-back-btn" onclick="closeAlbumTab()">← Trang chủ</button>
+  </div>
+  <div id="album-grid" class="album-grid"></div>
+  <div class="pagination" id="album-pagination"></div>
+</div>
+
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="handleLightboxBackdropClick(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
-
   <div class="lb-main" onclick="event.stopPropagation()">
     <button class="lb-nav" id="lb-prev" onclick="lbNav(-1)">‹</button>
     <div style="position:relative;">
       <div class="lb-spinner" id="lb-spinner">Đang tải ảnh...</div>
-      <img class="lb-img hidden" id="lb-img" src="" alt=""
-           onload="onLbImgLoad()" onerror="onLbImgError()">
+      <img class="lb-img hidden" id="lb-img" src="" alt="" onload="onLbImgLoad()" onerror="onLbImgError()">
     </div>
     <button class="lb-nav" id="lb-next" onclick="lbNav(1)">›</button>
   </div>
-
   <div class="lb-info" onclick="event.stopPropagation()">
     <div class="lb-bib-label" id="lb-bib-label"></div>
+    <!-- Runner name + club in lightbox -->
+    <div class="lb-runner-block" id="lb-runner-block">
+      <div class="lb-runner-name" id="lb-runner-name"></div>
+      <span class="lb-runner-sep"></span>
+      <div class="lb-runner-club" id="lb-runner-club"></div>
+    </div>
     <div class="lb-counter" id="lb-counter"></div>
     <a class="lb-folder-btn" id="lb-folder-btn" href="#" target="_blank">📁 Mở thư mục Google Drive</a>
   </div>
-
   <div class="lb-thumbs" id="lb-thumbs" onclick="event.stopPropagation()"></div>
-</div>
-
-<!-- KHOẢNH KHẮC SLIDESHOW -->
-<div class="kk-slideshow-wrap" id="kk-slideshow-wrap" style="display:none">
-  <div class="kk-header">
-    <span class="kk-label">✨ KHOẢNH KHẮC</span>
-  </div>
-  <div class="kk-stage" id="kk-stage">
-    <button class="kk-nav kk-prev" id="kk-prev" onclick="kkNav(-1)">&#8249;</button>
-    <div class="kk-frame" id="kk-frame">
-      <img class="kk-img active" id="kk-img-a" src="" alt="">
-      <img class="kk-img"       id="kk-img-b" src="" alt="">
-      <div class="kk-dots" id="kk-dots"></div>
-    </div>
-    <button class="kk-nav kk-next" id="kk-next" onclick="kkNav(1)">&#8250;</button>
-  </div>
-  <div class="kk-counter" id="kk-counter"></div>
-</div>
-
-<!-- DIVIDER: tách slideshow với lưới ảnh trang chủ -->
-<div style="max-width:1100px;margin:48px auto 0;padding:0 24px;">
-  <div style="display:flex;align-items:center;gap:16px;">
-    <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border) 30%,var(--border) 70%,transparent);"></div>
-    <div style="font-family:var(--font-display);font-size:12px;letter-spacing:3px;color:var(--muted);white-space:nowrap;padding:6px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);">📸 TẤT CẢ ẢNH</div>
-    <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border) 30%,var(--border) 70%,transparent);"></div>
-  </div>
 </div>
 
 <!-- BROWSE SECTION -->
 <div class="section" id="browse-section">
-  <div class="section-title">
-    ẢNH MỚI NHẤT
-    <span class="count-badge" id="total-count">--</span>
-  </div>
+  <div class="section-title">ẢNH MỚI NHẤT <span class="count-badge" id="total-count">--</span></div>
   <div class="photo-grid" id="main-grid"></div>
   <div class="pagination" id="pagination"></div>
 </div>
 
-<!-- FOOTER -->
-<footer style="
-  border-top: 1px solid var(--border);
-  margin-top: 60px;
-  padding: 40px 24px 32px;
-  text-align: center;
-  background: var(--surface);
-">
-  <div style="
-    font-family: var(--font-display);
-    font-size: clamp(16px,3.5vw,24px);
-    letter-spacing: 3px;
-    color: var(--accent);
-    margin-bottom: 6px;
-  ">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
-  <div style="
-    font-family: var(--font-display);
-    font-size: clamp(13px,2.5vw,18px);
-    letter-spacing: 2px;
-    color: var(--accent2);
-    margin-bottom: 20px;
-  ">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
-  <a href="https://www.facebook.com/thuongcatrunners" target="_blank" style="
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--muted);
-    text-decoration: none;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.2s;
-  " onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
+<!-- FACEBOOK COMMENTS -->
+<div style="max-width:800px;margin:0 auto 60px;padding:0 24px;">
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+    💬 BÌNH LUẬN
+    <span style="flex:1;height:1px;background:var(--border);display:block;"></span>
+  </div>
+  <iframe
+    src="https://www.facebook.com/plugins/comments.php?href=https%3A%2F%2Ftcr-challenge.github.io%2Fphuchoa2026%2F&posts=10&width=800&colorscheme=dark&locale=vi_VN"
+    width="100%"
+    height="500"
+    style="border:none;overflow:hidden;border-radius:10px;background:#13131a;"
+    scrolling="no"
+    frameborder="0"
+    allowfullscreen="true"
+    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+  </iframe>
+</div>
+
+<footer style="border-top:1px solid var(--border);margin-top:60px;padding:40px 24px 32px;text-align:center;background:var(--surface);">
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:800;font-size:clamp(14px,3vw,20px);letter-spacing:2px;color:var(--accent);margin-bottom:6px;">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:clamp(11px,2vw,15px);letter-spacing:1.5px;color:var(--accent2);margin-bottom:20px;">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
+  <a href="https://www.facebook.com/thuongcatrunners" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-family:var(--font-body);font-size:14px;font-weight:500;transition:color 0.2s;" onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     THUONG CAT RUNNERS - TCR
   </a>
@@ -997,166 +469,98 @@
 </footer>
 
 <div class="stats-widget" id="stats-widget">
-  <div class="online-pill" title="Đang xem trang lúc này">
-    <span class="online-dot"></span>
-    <span class="online-count" id="online-count">--</span>
-    <span>đang online</span>
+  <div class="online-pill" id="online-pill" title="Đang xem trang lúc này">
+    <span class="online-dot"></span><span class="online-count" id="online-count">--</span><span>đang online</span>
   </div>
-  <div class="visits-pill" title="Tổng lượt truy cập">
-    <span style="font-size:13px">👁</span>
-    <span class="visits-count" id="visits-count">--</span>
-    <span>lượt xem</span>
+  <div class="visits-pill" id="visits-pill" title="Tổng lượt truy cập">
+    <span class="visits-dot">👁</span><span class="visits-count" id="visits-count">--</span><span>lượt xem</span>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
 const CONFIG = {
   jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json',
+  runnersUrl:     'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/runners.json',
   folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',
   prefixes:       ['M', 'F'],
-  // ── Folder ID 4 tab sự kiện — thay bằng ID thật của anh ──
-  eventFolders: {
-    khaimac:    '1pu7BC8aXgU7qlgwEYuquf4i5sSBVXO55',
-    start:      '1ZcA_VHnvXBbYwX05RfjS2EuSffQEx2Fd',
-    finish:     '1BkXxdenAehRpixRjIIhkICAOe738JcAZ',
-    family:     '1oJchsIWAMPUHZ_RK-AbSr73sVYKQSlKQ',
-  },
 };
 
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
-
-let PHOTOS = [];
-// ── BIB index: Map<bibUpper, Photo[]> — tra cứu O(1) thay vì filter O(n) ──
-let BIB_INDEX = new Map();
-// ── Folder index: Map<folderUrl, Photo[]> — cho event tabs O(1) ──
-let FOLDER_INDEX = new Map();
-
+let PHOTOS  = [];
+let RUNNERS = {}; // { "M044": { name: "Nguyễn Văn A", club: "TCR" }, ... }
 let browsePage = 1;
-const PAGE_SIZE = IS_MOBILE ? 12 : 25;
-const VIEWER_PAGE_SIZE = IS_MOBILE ? 10 : 20;
-let viewerList = [];
-let viewerIndex = 0;
-let viewerPage = 1;
+const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
+
 let viewerAllList = [];
+let viewerPage    = 1;
+const VIEWER_PAGE_SIZE = 50;
+let viewerIndex   = 0;
 
-// ── localStorage cache key ──
-const CACHE_KEY   = 'photos_cache_v2';
-const CACHE_TS_KEY = 'photos_cache_ts_v2';
-const CACHE_TTL   = 5 * 60 * 1000; // 5 phút — tránh fetch lại khi F5
+document.addEventListener('DOMContentLoaded', () => { fetchAll(); });
 
-document.addEventListener('DOMContentLoaded', () => {
-  fetchPhotos();
-});
-
-function buildIndexes(photos) {
-  BIB_INDEX.clear();
-  FOLDER_INDEX.clear();
-  for (const p of photos) {
-    // BIB index
-    const bib = (p.bib || '').toUpperCase();
-    if (bib) {
-      if (!BIB_INDEX.has(bib)) BIB_INDEX.set(bib, []);
-      BIB_INDEX.get(bib).push(p);
-    }
-    // Folder index
-    const furl = p.folderUrl || '';
-    if (furl) {
-      if (!FOLDER_INDEX.has(furl)) FOLDER_INDEX.set(furl, []);
-      FOLDER_INDEX.get(furl).push(p);
-    }
-  }
-}
-
-async function fetchPhotos() {
-  if (!CONFIG.jsonUrl) { loadDemoData(); return; }
-
-  // ── Thử dùng cache localStorage trước ──
+async function fetchAll() {
+  document.getElementById('lychee-loading').classList.add('show');
+  showProgress(15);
   try {
-    const ts = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0');
-    if (Date.now() - ts < CACHE_TTL) {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        PHOTOS = JSON.parse(cached);
-        buildIndexes(PHOTOS);
-        document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
-        setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh (cache)`, 'success');
-        setTimeout(() => setStatus('', ''), 1500);
-        browsePage = 1;
-        renderBrowseGrid();
-        updateEventBadges();
-        initKkSlideshow();
-        // Refresh ngầm
-        _fetchAndCache(true);
-        return;
-      }
+    const [photosRes, runnersRes] = await Promise.all([
+      fetch(CONFIG.jsonUrl    + '?t=' + Date.now()),
+      CONFIG.runnersUrl ? fetch(CONFIG.runnersUrl + '?t=' + Date.now()).catch(() => null) : Promise.resolve(null)
+    ]);
+    if (!photosRes.ok) throw new Error('HTTP ' + photosRes.status);
+    PHOTOS = await photosRes.json();
+    showProgress(80);
+    // Runners — optional, không crash nếu file chưa có
+    if (runnersRes && runnersRes.ok) {
+      RUNNERS = await runnersRes.json();
     }
-  } catch(_) {}
-
-  setStatus('Đang tải danh sách ảnh...', 'loading');
-  showProgress(10);
-  await _fetchAndCache(false);
-}
-
-async function _fetchAndCache(silent) {
-  try {
-    // Thêm cache-busting chỉ khi không phải silent refresh
-    const url = CONFIG.jsonUrl + (silent ? '' : '?t=' + Date.now());
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-
-    // ── Stream + parse theo chunk để không block UI với 20k entries ──
-    const text = await res.text();
-    if (!silent) showProgress(80);
-
-    // Parse trên microtask để tránh freeze
-    await new Promise(r => setTimeout(r, 0));
-    const data = JSON.parse(text);
-    if (!silent) showProgress(100);
-
-    PHOTOS = data;
-    buildIndexes(PHOTOS);
-
-    // Lưu vào localStorage (nếu < 8MB)
-    try {
-      if (text.length < 8_000_000) {
-        localStorage.setItem(CACHE_KEY, text);
-        localStorage.setItem(CACHE_TS_KEY, String(Date.now()));
-      }
-    } catch(_) {}
-
-    if (!silent) {
-      document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
-      setStatus(`Đã tải ${PHOTOS.length.toLocaleString()} ảnh`, 'success');
-      setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
-      browsePage = 1;
-      renderBrowseGrid();
-      updateEventBadges();
-      initKkSlideshow();
-    } else {
-      // silent refresh xong → cập nhật count nếu có thay đổi
-      document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
-    }
+    showProgress(100);
+    document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
+    document.getElementById('lychee-loading').classList.remove('show');
+    setStatus('Đã tải ' + PHOTOS.length.toLocaleString() + ' ảnh', 'success');
+    setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
+    browsePage = 1;
+    renderBrowseGrid();
+    updateAlbumTabCounts();
   } catch(e) {
-    if (!silent) {
-      setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
-      hideProgress();
-      loadDemoData();
-    }
+    document.getElementById('lychee-loading').classList.remove('show');
+    setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
+    hideProgress();
+    loadDemoData();
   }
 }
 
 function loadDemoData() {
-  PHOTOS = Array.from({length: 48}, (_, i) => {
+  PHOTOS = Array.from({length: 148}, (_, i) => {
     const num = String(i + 1).padStart(3, '0');
     const prefix = i % 3 === 0 ? 'F' : 'M';
     const bib = prefix + num;
-    return { id: 'demo_' + i, bib, thumb: `https://picsum.photos/seed/${bib}/300/200`, full: `https://picsum.photos/seed/${bib}/900/600`, folderUrl: '', drive: 1 };
+    const tabs = ['khai-mac', 'start-finish', 'khoanh-khac'];
+    return { id: 'demo_' + i, bib, thumb: 'https://picsum.photos/seed/' + bib + '/300/200', full: 'https://picsum.photos/seed/' + bib + '/900/600', folderUrl: '', drive: 1, tab: tabs[i % 3] };
   });
+  // Demo runners data
+  RUNNERS = { 'M001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
   renderBrowseGrid();
+  updateAlbumTabCounts();
+}
+
+/* ── RUNNER LOOKUP ──
+   BIB trong ảnh dạng "M044" hoặc "F044"
+   Key trong runners.json cũng dạng "M044" / "F044" / "044"
+   Hàm này thử cả 3 dạng để tìm */
+function lookupRunner(bib) {
+  if (!bib || !Object.keys(RUNNERS).length) return null;
+  const b = bib.toString().toUpperCase().trim();
+  if (RUNNERS[b]) return RUNNERS[b];
+  // thử không prefix
+  const digits = b.replace(/^[MF]/, '');
+  if (RUNNERS[digits]) return RUNNERS[digits];
+  // thử prefix ngược
+  const alt = b.startsWith('M') ? 'F' + digits : b.startsWith('F') ? 'M' + digits : null;
+  if (alt && RUNNERS[alt]) return RUNNERS[alt];
+  return null;
 }
 
 function searchByBib() {
@@ -1164,156 +568,97 @@ function searchByBib() {
   if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
   const digits = raw.replace(/[^0-9]/g, '');
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
-
-  const last3 = digits.slice(-3).padStart(3, '0');
+  const last3  = digits.slice(-3).padStart(3, '0');
   const allBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
-
-  // ── O(1) lookup thay vì O(n) filter ──
-  const matches = allBibs.flatMap(bib => BIB_INDEX.get(bib) || []);
-
-  if (matches.length === 0) {
-    setStatus('', '');
-    showViewer([], null, allBibs.join(' / '));
-    return;
-  }
-
-  setStatus(`✓ Tìm thấy ${matches.length} ảnh`, 'success');
+  setStatus('Đang tìm BIB ' + allBibs.join(' / ') + '...', 'loading');
+  const matches = PHOTOS.filter(p => { const pb = p.bib.toUpperCase(); return allBibs.some(bib => pb === bib); });
+  if (matches.length === 0) { setStatus('', ''); showViewer([], allBibs.join(' / '), last3); return; }
+  setStatus('✓ Tìm thấy ' + matches.length + ' ảnh', 'success');
   setTimeout(() => setStatus('', ''), 2500);
-  showViewer(matches, 0, allBibs.join(' / '));
+  showViewer(matches, allBibs.join(' / '), last3);
 }
 
-function showViewer(list, startIdx, label) {
+function showViewer(list, label, digits) {
   viewerAllList = list;
-  viewerPage = 1;
-  viewerIndex = startIdx !== null ? startIdx : 0;
-
+  viewerPage    = 1;
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
-  document.getElementById('browse-section').style.display = 'none';
-
+  document.getElementById('browse-section').style.display  = 'none';
+  document.getElementById('album-section').style.display   = 'none';
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
+
+  // --- Runner info card ---
+  const card     = document.getElementById('runner-info-card');
+  const nameEl   = document.getElementById('runner-info-name');
+  const clubEl   = document.getElementById('runner-info-club');
+  // Thử tìm theo M+digits hoặc F+digits
+  const runnerM = lookupRunner('M' + (digits || '').padStart(3,'0'));
+  const runnerF = lookupRunner('F' + (digits || '').padStart(3,'0'));
+  const runner  = runnerM || runnerF;
+  if (runner && (runner.name || runner.club)) {
+    nameEl.textContent = runner.name || '';
+    clubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
+    card.classList.add('visible');
+  } else {
+    card.classList.remove('visible');
+  }
 
   if (list.length === 0) {
     document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
-    document.getElementById('result-grid').innerHTML = `
-      <div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">
-        BIB <strong style="color:var(--accent)">${label}</strong> chưa có ảnh trong hệ thống
-      </div>`;
+    document.getElementById('result-grid').innerHTML = '<div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">BIB <strong style="color:var(--accent)">' + label + '</strong> chưa có ảnh trong hệ thống</div>';
     document.getElementById('viewer-folder-links').innerHTML = '';
-    document.getElementById('viewer-pagination').innerHTML = '';
+    document.getElementById('viewer-pagination').innerHTML  = '';
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
-
   const seen = new Set();
-  const linksHtml = list
-    .filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
-    .slice(0, 4)
-    .map(p => `<a class="folder-link-btn" href="${p.folderUrl}" target="_blank">📁 Thư mục ${p.bib}</a>`)
-    .join('');
+  const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
+    .slice(0, 4).map(p => '<a class="folder-link-btn" href="' + p.folderUrl + '" target="_blank">📁 TẢI TẤT CẢ ẢNH ' + p.bib + '</a>').join('');
   document.getElementById('viewer-folder-links').innerHTML = linksHtml;
-
   renderViewerPage();
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderViewerPage() {
-  const list = viewerAllList;
-  const total = list.length;
+  const total      = viewerAllList.length;
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
-  const start = (viewerPage - 1) * VIEWER_PAGE_SIZE;
-  const pageItems = list.slice(start, start + VIEWER_PAGE_SIZE);
-
+  const start      = (viewerPage - 1) * VIEWER_PAGE_SIZE;
+  const pageItems  = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
   document.getElementById('viewer-subtitle').textContent =
-    total + ' ảnh — click để xem lớn' + (totalPages > 1 ? ` (trang ${viewerPage}/${totalPages})` : '');
-
-  viewerList = pageItems;
-
-  buildResultGrid(pageItems, start);
+    total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
+  const grid = document.getElementById('result-grid');
+  grid.innerHTML = pageItems.map((photo, i) =>
+    '<div class="result-card" onclick="openLightboxViewer(' + (start + i) + ')" title="Ảnh ' + (start+i+1) + '">' +
+    '<img src="' + photo.thumb + '" alt="" loading="lazy" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+    (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '') + '</div>'
+  ).join('');
   renderViewerPagination(total);
 }
 
 function renderViewerPagination(total) {
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
-  const pag = document.getElementById('viewer-pagination');
-  if (totalPages <= 1) { pag.innerHTML = ''; return; }
-
-  let html = `<div class="pagination" style="margin-top:28px;">`;
-  html += `<button class="page-btn" ${viewerPage===1?'disabled':''} onclick="goViewerPage(${viewerPage-1})">‹</button>`;
-  getPaginationRange(viewerPage, totalPages).forEach(p => {
-    if (p==='...') html += `<button class="page-btn" disabled>…</button>`;
-    else html += `<button class="page-btn ${p===viewerPage?'active':''}" onclick="goViewerPage(${p})">${p}</button>`;
-  });
-  html += `<button class="page-btn" ${viewerPage===totalPages?'disabled':''} onclick="goViewerPage(${viewerPage+1})">›</button>`;
-  html += `</div>`;
-  pag.innerHTML = html;
+  const el = document.getElementById('viewer-pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  el.innerHTML = buildPaginationHTML(viewerPage, totalPages, 'goViewerPage');
 }
 
 function goViewerPage(p) {
-  viewerPage = p;
-  viewerIndex = 0;
-  renderViewerPage();
+  viewerPage = p; renderViewerPage();
   document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-/* ── Shared IntersectionObserver — 1 instance cho toàn trang ── */
-let _gridObserver = null;
-function getGridObserver() {
-  if (_gridObserver) return _gridObserver;
-  _gridObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const card = entry.target;
-      if (card.dataset.loaded) return;
-      card.dataset.loaded = '1';
-      const photo = card._photo;
-      if (!photo) return;
-      card.classList.remove('skeleton');
-      const img = document.createElement('img');
-      img.src = photo.thumb;
-      img.alt = 'bib ' + photo.bib;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.onerror = function() { this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'; };
-      const tag = document.createElement('div');
-      tag.className = 'bib-tag';
-      tag.textContent = photo.bib;
-      card.appendChild(img);
-      card.appendChild(tag);
-      _gridObserver.unobserve(card);
-    });
-  }, { rootMargin: '200px' });
-  return _gridObserver;
+function jumpViewerPage() {
+  const input = document.getElementById('viewer-jump-input');
+  const totalPages = Math.ceil(viewerAllList.length / VIEWER_PAGE_SIZE);
+  const p = parseInt(input.value);
+  if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
+  input.value = ''; goViewerPage(p);
 }
 
-function _buildCardGrid(containerEl, list, onClickFn) {
-  const observer = getGridObserver();
-  const frag = document.createDocumentFragment();
-  for (let i = 0; i < list.length; i++) {
-    const card = document.createElement('div');
-    card.className = containerEl.id === 'result-grid' ? 'result-card skeleton' : 'photo-card skeleton';
-    card._photo = list[i];
-    const ci = i;
-    card.addEventListener('click', () => onClickFn(ci));
-    frag.appendChild(card);
-    observer.observe(card);
-  }
-  containerEl.innerHTML = '';
-  containerEl.appendChild(frag);
-}
-
-function buildResultGrid(list, globalOffset) {
-  const grid = document.getElementById('result-grid');
-  _buildCardGrid(grid, list, (i) => openLightbox(i));
-}
-
-/* ---- LIGHTBOX ---- */
-function openLightbox(idx) {
-  viewerIndex = idx;
+function openLightboxViewer(globalIdx) {
+  viewerIndex = globalIdx;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderLightboxImage();
-  buildLbThumbs();
+  renderLightboxImage(); buildLbThumbs();
   document.addEventListener('keydown', lbKeyHandler);
 }
 
@@ -1322,428 +667,251 @@ function closeLightbox() {
   document.body.style.overflow = '';
   document.removeEventListener('keydown', lbKeyHandler);
 }
-
-/* Close when clicking the dark backdrop (not on image/info/thumbs) */
-function handleLightboxBackdropClick(e) {
-  if (e.target === document.getElementById('lightbox')) {
-    closeLightbox();
-  }
-}
-
+function handleLightboxBackdropClick(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
 function lbNav(dir) {
-  viewerIndex = (viewerIndex + dir + viewerList.length) % viewerList.length;
-  renderLightboxImage();
-  syncLbThumbs();
+  viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length;
+  renderLightboxImage(); syncLbThumbs();
 }
 
 function renderLightboxImage() {
-  const photo = viewerList[viewerIndex];
+  const list  = viewerAllList.length ? viewerAllList : PHOTOS;
+  const photo = list[viewerIndex];
   if (!photo) return;
-
-  const img = document.getElementById('lb-img');
+  const img     = document.getElementById('lb-img');
   const spinner = document.getElementById('lb-spinner');
-
-  img.classList.add('hidden');
-  spinner.style.display = 'flex';
-  spinner.textContent = 'Đang tải ảnh...';
+  img.classList.add('hidden'); spinner.style.display = 'flex'; spinner.textContent = 'Đang tải ảnh...';
 
   let displayUrl = photo.thumb;
-  if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) {
-    displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
-  } else if (photo.full && !photo.full.includes('export=view')) {
-    displayUrl = photo.full;
-  }
+  if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
+  else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
 
-  document.getElementById('lb-bib-label').textContent = 'BIB ' + photo.bib;
-  document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + viewerList.length;
+  // BIB label
+  const bibLabel = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
+  document.getElementById('lb-bib-label').textContent = bibLabel;
 
-  const folderBtn = document.getElementById('lb-folder-btn');
-  if (photo.folderUrl) {
-    folderBtn.href = photo.folderUrl;
-    folderBtn.style.display = '';
+  // Runner info in lightbox
+  const runnerBlock = document.getElementById('lb-runner-block');
+  const runnerNameEl = document.getElementById('lb-runner-name');
+  const runnerClubEl = document.getElementById('lb-runner-club');
+  const runner = photo.bib ? lookupRunner(photo.bib) : null;
+  if (runner && (runner.name || runner.club)) {
+    runnerNameEl.textContent = runner.name || '';
+    runnerClubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
+    runnerBlock.classList.add('visible');
   } else {
-    folderBtn.style.display = 'none';
+    runnerBlock.classList.remove('visible');
   }
 
-  // ── Preload ảnh kế tiếp & trước để chuyển ảnh không lag ──
-  [viewerIndex + 1, viewerIndex - 1].forEach(ni => {
-    if (ni < 0 || ni >= viewerList.length) return;
-    const p = viewerList[ni];
-    let url = p.thumb;
-    if (url && url.includes('drive.google.com/thumbnail')) url = url.replace(/sz=w\d+/, 'sz=w1200');
-    const pre = new Image();
-    pre.src = url;
-  });
+  document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + list.length;
+  const folderBtn = document.getElementById('lb-folder-btn');
+  if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; }
+  else { folderBtn.style.display = 'none'; }
 }
 
-function onLbImgLoad() {
-  document.getElementById('lb-img').classList.remove('hidden');
-  document.getElementById('lb-spinner').style.display = 'none';
-}
-function onLbImgError() {
-  document.getElementById('lb-spinner').textContent = 'Không thể tải ảnh này';
-}
+function onLbImgLoad()  { document.getElementById('lb-img').classList.remove('hidden'); document.getElementById('lb-spinner').style.display = 'none'; }
+function onLbImgError() { document.getElementById('lb-spinner').textContent = 'Không thể tải ảnh này'; }
 
 function buildLbThumbs() {
+  const list  = viewerAllList.length ? viewerAllList : PHOTOS;
   const strip = document.getElementById('lb-thumbs');
-  strip.innerHTML = viewerList.map((photo, i) => `
-    <div class="lb-thumb ${i === viewerIndex ? 'active' : ''}" onclick="lbGoTo(${i})">
-      <img src="${photo.thumb}" alt="" loading="lazy"
-           onerror="this.src='https://placehold.co/72x50/1c1c27/7070a0?text=?'">
-    </div>
-  `).join('');
+  strip.innerHTML = list.map((photo, i) =>
+    '<div class="lb-thumb ' + (i === viewerIndex ? 'active' : '') + '" onclick="lbGoTo(' + i + ')">' +
+    '<img src="' + photo.thumb + '" alt="" loading="lazy" onerror="this.src=\'https://placehold.co/72x50/1c1c27/7070a0?text=?\'"></div>'
+  ).join('');
   syncLbThumbs();
 }
-
 function syncLbThumbs() {
   const thumbs = document.querySelectorAll('.lb-thumb');
   thumbs.forEach((el, i) => el.classList.toggle('active', i === viewerIndex));
   const active = thumbs[viewerIndex];
   if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 }
-
-function lbGoTo(idx) {
-  viewerIndex = idx;
-  renderLightboxImage();
-  syncLbThumbs();
-}
-
-function lbKeyHandler(e) {
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') lbNav(-1);
-  if (e.key === 'ArrowRight') lbNav(1);
-}
+function lbGoTo(idx) { viewerIndex = idx; renderLightboxImage(); syncLbThumbs(); }
+function lbKeyHandler(e) { if (e.key==='Escape') closeLightbox(); if (e.key==='ArrowLeft') lbNav(-1); if (e.key==='ArrowRight') lbNav(1); }
 
 function clearResults() {
   document.getElementById('viewer-section').style.display = 'none';
-  // Chỉ hiện lưới trang chủ nếu không có tab nào đang active
-  document.getElementById('browse-section').style.display = activeTab ? 'none' : '';
+  document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
+  document.getElementById('runner-info-card').classList.remove('visible');
+  viewerAllList = [];
   setStatus('', '');
-  const scrollTarget = activeTab
-    ? document.getElementById('event-tabs-section')
-    : document.getElementById('browse-section');
-  scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-/* ---- BROWSE GRID ---- */
 function renderBrowseGrid() {
-  const grid = document.getElementById('main-grid');
+  const grid  = document.getElementById('main-grid');
   const total = PHOTOS.length;
-  const start = (browsePage - 1) * PAGE_SIZE;
-  const page  = PHOTOS.slice(start, start + PAGE_SIZE);
-
-  if (total === 0) {
-    grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>';
-    document.getElementById('pagination').innerHTML = '';
-    return;
-  }
-
-  _buildCardGrid(grid, page, (i) => {
-    viewerList = page;
-    openLightbox(i);
-  });
-
-  renderPagination(total);
+  const start = (browsePage - 1) * BROWSE_PAGE_SIZE;
+  const page  = PHOTOS.slice(start, start + BROWSE_PAGE_SIZE);
+  if (total === 0) { grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>'; document.getElementById('pagination').innerHTML = ''; return; }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      if (card.dataset.loaded) return;
+      card.dataset.loaded = '1';
+      const photo = page[parseInt(card.dataset.idx)];
+      if (!photo) return;
+      card.classList.remove('skeleton');
+      card.innerHTML = '<img src="' + photo.thumb + '" alt="" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+        (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
+      card.onclick = () => {
+        viewerAllList = PHOTOS;
+        viewerIndex   = start + parseInt(card.dataset.idx);
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        renderLightboxImage(); buildLbThumbs();
+        document.addEventListener('keydown', lbKeyHandler);
+      };
+      observer.unobserve(card);
+    });
+  }, { rootMargin: '120px' });
+  grid.innerHTML = page.map((_, i) => '<div class="photo-card skeleton" data-idx="' + i + '"></div>').join('');
+  grid.querySelectorAll('.photo-card').forEach(card => observer.observe(card));
+  renderBrowsePagination(total);
 }
 
-function renderPagination(total) {
-  const totalPages = Math.ceil(total / PAGE_SIZE);
-  if (totalPages <= 1) { document.getElementById('pagination').innerHTML = ''; return; }
-
-  let html = `<button class="page-btn" ${browsePage===1?'disabled':''} onclick="goPage(${browsePage-1})">‹</button>`;
-  const range = getPaginationRange(browsePage, totalPages);
-  range.forEach(p => {
-    if (p === '...') html += `<button class="page-btn" disabled>…</button>`;
-    else html += `<button class="page-btn ${p===browsePage?'active':''}" onclick="goPage(${p})">${p}</button>`;
-  });
-  html += `<button class="page-btn" ${browsePage===totalPages?'disabled':''} onclick="goPage(${browsePage+1})">›</button>`;
-
-  // Page jump input
-  html += `<span class="page-jump">
-    <input class="page-jump-input" id="page-jump-input" type="number" min="1" max="${totalPages}"
-           placeholder="${browsePage}" title="Nhập số trang"
-           onkeydown="if(event.key==='Enter') jumpToPage(${totalPages})">
-    <button class="page-jump-btn" onclick="jumpToPage(${totalPages})">Đến trang</button>
-  </span>`;
-
-  document.getElementById('pagination').innerHTML = html;
+function renderBrowsePagination(total) {
+  const totalPages = Math.ceil(total / BROWSE_PAGE_SIZE);
+  const el = document.getElementById('pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  el.innerHTML = buildPaginationHTML(browsePage, totalPages, 'goBrowsePage');
+}
+function goBrowsePage(p) {
+  browsePage = p; renderBrowseGrid();
+  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function jumpBrowsePage() {
+  const input = document.getElementById('browse-jump-input');
+  const totalPages = Math.ceil(PHOTOS.length / BROWSE_PAGE_SIZE);
+  const p = parseInt(input.value);
+  if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
+  input.value = ''; goBrowsePage(p);
 }
 
+function buildPaginationHTML(cur, total, gofn) {
+  const jumpId = gofn === 'goBrowsePage' ? 'browse-jump-input' : (gofn === 'goAlbumPage' ? 'album-jump-input' : 'viewer-jump-input');
+  const jumpFn = gofn === 'goBrowsePage' ? 'jumpBrowsePage' : (gofn === 'goAlbumPage' ? 'jumpAlbumPage' : 'jumpViewerPage');
+  let html = '<button class="page-btn" ' + (cur===1?'disabled':'onclick="'+gofn+'('+(cur-1)+')"') + '>‹</button>';
+  getPaginationRange(cur, total).forEach(p => {
+    if (p === '...') html += '<button class="page-btn" disabled>…</button>';
+    else html += '<button class="page-btn ' + (p===cur?'active':'') + '" onclick="' + gofn + '(' + p + ')">' + p + '</button>';
+  });
+  html += '<button class="page-btn" ' + (cur===total?'disabled':'onclick="'+gofn+'('+(cur+1)+')"') + '>›</button>';
+  html += '<div class="page-divider"></div><div class="page-jump">';
+  html += '<span class="page-jump-label">Đến trang</span>';
+  html += '<input class="page-jump-input" id="' + jumpId + '" type="number" min="1" max="' + total + '" placeholder="' + cur + '" onkeydown="if(event.key===\'Enter\') ' + jumpFn + '()">';
+  html += '<button class="page-jump-btn" onclick="' + jumpFn + '()">Đi ›</button></div>';
+  return html;
+}
 function getPaginationRange(cur, total) {
   if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
-  if (cur <= 4) return [1,2,3,4,5,'...',total];
+  if (cur <= 4)   return [1,2,3,4,5,'...',total];
   if (cur >= total-3) return [1,'...',total-4,total-3,total-2,total-1,total];
   return [1,'...',cur-1,cur,cur+1,'...',total];
 }
 
-function goPage(p) {
-  browsePage = p;
-  renderBrowseGrid();
-  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function setStatus(msg, type) { const el = document.getElementById('status-bar'); el.textContent = msg; el.className = 'status-bar' + (type ? ' ' + type : ''); }
+function showProgress(pct) { document.getElementById('progress-wrap').classList.add('active'); document.getElementById('progress-fill').style.width = pct + '%'; }
+function hideProgress()    { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
+function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
-function jumpToPage(totalPages) {
-  const input = document.getElementById('page-jump-input');
-  if (!input) return;
-  const p = parseInt(input.value);
-  if (!p || p < 1 || p > totalPages) {
-    input.style.borderColor = '#f87171';
-    setTimeout(() => { input.style.borderColor = ''; }, 1200);
-    return;
-  }
-  goPage(p);
-}
+/* ══ ALBUM TABS ══ */
+const ALBUM_DEFS = [
+  { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
+  { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
+  { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
+  { key: 'btc',          label: 'BAN TỔ CHỨC',    icon: '🏅' },
+  { key: 'non-bib',      label: 'NO BIB',         icon: '🙌' },
+];
+const ALBUM_PAGE_SIZE = 50;
+let activeAlbumKey   = null;
+let albumCurrentList = [];
+let albumPage        = 1;
 
-/* ---- UTILITIES ---- */
-function setStatus(msg, type) {
-  const el = document.getElementById('status-bar');
-  el.textContent = msg;
-  el.className = 'status-bar' + (type ? ' ' + type : '');
-}
-function showProgress(pct) {
-  document.getElementById('progress-wrap').classList.add('active');
-  document.getElementById('progress-fill').style.width = pct + '%';
-}
-function hideProgress() {
-  document.getElementById('progress-wrap').classList.remove('active');
-  document.getElementById('progress-fill').style.width = '0%';
-}
-function showToast(msg, type) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type ? ' ' + type : '');
-  setTimeout(() => t.className = 'toast', 3000);
-}
-
-/* ---- EVENT TABS ---- */
-const ETAB_PAGE_SIZE = IS_MOBILE ? 12 : 24;
-const etabCache = {};
-let activeTab   = null;
-let etabPage    = 1;
-const ETAB_META = {
-  khaimac: 'KHAI MẠC', start: 'START', finish: 'FINISH', family: 'GIA ĐÌNH'
-};
-
-function updateEventBadges() {
-  Object.keys(CONFIG.eventFolders).forEach(key => {
-    const fid = CONFIG.eventFolders[key];
-    if (!fid || fid.startsWith('FOLDER_ID')) return;
-    const folderUrl = `https://drive.google.com/drive/folders/${fid}`;
-    // O(1) lookup
-    const photos = FOLDER_INDEX.get(folderUrl) || [];
-    if (photos.length > 0) {
-      etabCache[key] = photos;
-      document.getElementById('etab-count-' + key).textContent = photos.length.toLocaleString();
-    }
+function updateAlbumTabCounts() {
+  ALBUM_DEFS.forEach(def => {
+    const count = PHOTOS.filter(p => p.tab === def.key).length;
+    const el = document.getElementById('tc-' + def.key);
+    if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
   });
 }
-
-function switchEventTab(key) {
-  if (activeTab === key) {
-    activeTab = null;
-    document.querySelectorAll('.etab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('event-grid-content').innerHTML = '';
-    document.getElementById('etab-pagination').innerHTML = '';
-    // Hiện lại lưới trang chủ khi không có tab nào được chọn
-    document.getElementById('browse-section').style.display = '';
-    return;
-  }
-  activeTab = key; etabPage = 1;
-  document.querySelectorAll('.etab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('etab-' + key).classList.add('active');
-  // Ẩn lưới trang chủ khi có tab được chọn
-  document.getElementById('browse-section').style.display = 'none';
-
-  const fid = CONFIG.eventFolders[key];
-  if (!fid || fid.startsWith('FOLDER_ID')) {
-    document.getElementById('event-grid-content').innerHTML =
-      `<div class="etab-status">⚙️ Chưa cấu hình folder ID cho <strong>${ETAB_META[key]}</strong>.</div>`;
-    document.getElementById('etab-pagination').innerHTML = '';
-    document.getElementById('event-tabs-section').scrollIntoView({behavior:'smooth',block:'start'});
-    return;
-  }
-  const photos = etabCache[key];
-  if (!photos || photos.length === 0) {
-    document.getElementById('event-grid-content').innerHTML =
-      `<div class="etab-status">Chưa có ảnh — thêm folder ID vào <code>generate_index.py</code> và chạy lại.</div>`;
-    document.getElementById('etab-pagination').innerHTML = '';
-    return;
-  }
-  renderEventGrid(key);
-  document.getElementById('event-tabs-section').scrollIntoView({behavior:'smooth',block:'start'});
+function openAlbumTab(key) {
+  ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.toggle('active', def.key === key); });
+  activeAlbumKey   = key;
+  albumCurrentList = PHOTOS.filter(p => p.tab === key);
+  albumPage = 1;
+  const def = ALBUM_DEFS.find(d => d.key === key);
+  document.getElementById('browse-section').style.display  = 'none';
+  document.getElementById('viewer-section').style.display  = 'none';
+  document.getElementById('album-section').style.display   = 'block';
+  document.getElementById('album-title').textContent = def ? def.icon + ' ' + def.label : key.toUpperCase();
+  renderAlbumPage();
+  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-function renderEventGrid(key) {
-  const photos = etabCache[key] || [];
-  const total  = photos.length;
-  const start  = (etabPage - 1) * ETAB_PAGE_SIZE;
-  const page   = photos.slice(start, start + ETAB_PAGE_SIZE);
-  const totalP = Math.ceil(total / ETAB_PAGE_SIZE);
-
-  const grid = document.createElement('div');
-  grid.className = 'event-grid';
-  grid.innerHTML = page.map((photo, i) => `
-    <div class="photo-card" onclick="openEventLightbox('${key}',${start+i})">
-      <img src="${photo.thumb}" alt="" loading="lazy"
-           onerror="this.src='https://placehold.co/300x200/1c1c27/7070a0?text=?'">
-      <div class="bib-tag">${photo.bib}</div>
-    </div>`).join('');
-
-  document.getElementById('event-grid-content').innerHTML = '';
-  document.getElementById('event-grid-content').appendChild(grid);
-
-  if (totalP > 1) {
-    let html = `<button class="page-btn" ${etabPage===1?'disabled':''} onclick="goEtabPage('${key}',${etabPage-1})">‹</button>`;
-    getPaginationRange(etabPage, totalP).forEach(p => {
-      if (p==='...') html += `<button class="page-btn" disabled>…</button>`;
-      else html += `<button class="page-btn ${p===etabPage?'active':''}" onclick="goEtabPage('${key}',${p})">${p}</button>`;
-    });
-    html += `<button class="page-btn" ${etabPage===totalP?'disabled':''} onclick="goEtabPage('${key}',${etabPage+1})">›</button>`;
-    document.getElementById('etab-pagination').innerHTML = html;
-  } else {
-    document.getElementById('etab-pagination').innerHTML = '';
+function closeAlbumTab() {
+  ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.remove('active'); });
+  activeAlbumKey = null; albumCurrentList = [];
+  document.getElementById('album-section').style.display  = 'none';
+  document.getElementById('browse-section').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function renderAlbumPage() {
+  const total      = albumCurrentList.length;
+  const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE) || 1;
+  const start      = (albumPage - 1) * ALBUM_PAGE_SIZE;
+  const pageItems  = albumCurrentList.slice(start, start + ALBUM_PAGE_SIZE);
+  document.getElementById('album-meta').textContent = total.toLocaleString() + ' ảnh — Trang ' + albumPage + '/' + totalPages + ' — click để xem lớn';
+  const grid = document.getElementById('album-grid');
+  if (total === 0) {
+    grid.innerHTML = '<div style="color:var(--muted);padding:60px 0;font-size:14px;grid-column:1/-1;text-align:center;">Album này chưa có ảnh. Ảnh sẽ sớm được cập nhật!</div>';
+    document.getElementById('album-pagination').innerHTML = ''; return;
   }
+  grid.innerHTML = pageItems.map((photo, i) =>
+    '<div class="album-card" onclick="openLightboxAlbum(' + (start + i) + ')">' +
+    '<img src="' + photo.thumb + '" alt="" loading="lazy" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
+    (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '') + '</div>'
+  ).join('');
+  renderAlbumPagination(total);
 }
-
-function goEtabPage(key, p) {
-  etabPage = p;
-  renderEventGrid(key);
-  document.getElementById('event-tabs-section').scrollIntoView({behavior:'smooth',block:'start'});
+function renderAlbumPagination(total) {
+  const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE);
+  const el = document.getElementById('album-pagination');
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  el.innerHTML = buildPaginationHTML(albumPage, totalPages, 'goAlbumPage');
 }
-
-function openEventLightbox(key, idx) {
-  viewerList = etabCache[key] || [];
-  viewerIndex = idx;
+function goAlbumPage(p) {
+  albumPage = p; renderAlbumPage();
+  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function jumpAlbumPage() {
+  const input = document.getElementById('album-jump-input');
+  const totalPages = Math.ceil(albumCurrentList.length / ALBUM_PAGE_SIZE);
+  const p = parseInt(input.value);
+  if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
+  input.value = ''; goAlbumPage(p);
+}
+function openLightboxAlbum(globalIdx) {
+  viewerAllList = albumCurrentList;
+  viewerIndex   = globalIdx;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
-  renderLightboxImage();
-  buildLbThumbs();
+  renderLightboxImage(); buildLbThumbs();
   document.addEventListener('keydown', lbKeyHandler);
 }
 
-/* ---- KHOẢNH KHẮC SLIDESHOW ---- */
-let kkPhotos   = [];
-let kkIndex    = 0;
-let kkTimer    = null;
-let kkActiveEl = 'a'; // 'a' or 'b' — ping-pong between two img tags
-
-const KK_INTERVAL = 4000; // ms giữa các ảnh
-
-// Cấu hình repo GitHub chứa ảnh khoảnh khắc
-const KK_GITHUB = {
-  owner:  'tcr-challenge',   // tên tài khoản GitHub
-  repo:   'phuchoa2026',     // tên repo
-  branch: 'main',            // nhánh
-  folder: 'images',          // thư mục chứa ảnh trong repo
-};
-
-async function initKkSlideshow() {
-  // Lấy danh sách file từ GitHub Contents API
-  const apiUrl = `https://api.github.com/repos/${KK_GITHUB.owner}/${KK_GITHUB.repo}/contents/${KK_GITHUB.folder}?ref=${KK_GITHUB.branch}`;
-  let files;
-  try {
-    const res = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    files = await res.json();
-  } catch(e) {
-    console.warn('KK Slideshow: không lấy được danh sách ảnh từ GitHub —', e.message);
-    return;
-  }
-
-  // Lọc chỉ lấy file ảnh
-  const imgExts = /\.(jpe?g|png|gif|webp|avif)$/i;
-  const rawBase = `https://raw.githubusercontent.com/${KK_GITHUB.owner}/${KK_GITHUB.repo}/${KK_GITHUB.branch}/${KK_GITHUB.folder}/`;
-
-  const photos = files
-    .filter(f => f.type === 'file' && imgExts.test(f.name))
-    .map(f => ({
-      thumb: rawBase + encodeURIComponent(f.name),
-      full:  rawBase + encodeURIComponent(f.name),
-      bib:   '',
-      folderUrl: '',
-    }));
-
-  if (photos.length === 0) return;
-
-  kkPhotos = photos;
-  kkIndex  = 0;
-
-  // Hiện slideshow
-  document.getElementById('kk-slideshow-wrap').style.display = '';
-
-  // Build dots (tối đa 10 chấm)
-  const maxDots = Math.min(photos.length, 10);
-  const dotsEl  = document.getElementById('kk-dots');
-  dotsEl.innerHTML = Array.from({length: maxDots}, (_, i) =>
-    `<button class="kk-dot${i===0?' active':''}" onclick="kkGoTo(${i * Math.floor(photos.length / maxDots)})"></button>`
-  ).join('');
-
-  // Load ảnh đầu tiên ngay
-  const imgA = document.getElementById('kk-img-a');
-  imgA.src = photos[0].thumb;
-  imgA.classList.add('active');
-  updateKkCounter();
-
-  // Bắt đầu auto-play
-  kkStartTimer();
-}
-
-function kkStartTimer() {
-  clearInterval(kkTimer);
-  kkTimer = setInterval(() => kkNav(1), KK_INTERVAL);
-}
-
-function kkNav(dir) {
-  if (kkPhotos.length === 0) return;
-  kkGoTo((kkIndex + dir + kkPhotos.length) % kkPhotos.length);
-}
-
-function kkGoTo(idx) {
-  if (idx === kkIndex) { kkStartTimer(); return; }
-  kkIndex = idx;
-
-  const nextEl  = kkActiveEl === 'a' ? 'b' : 'a';
-  const curImg  = document.getElementById('kk-img-' + kkActiveEl);
-  const nextImg = document.getElementById('kk-img-' + nextEl);
-
-  nextImg.src = kkPhotos[idx].thumb;
-  // slight delay so browser has a chance to start loading before fade
-  requestAnimationFrame(() => {
-    nextImg.classList.add('active');
-    setTimeout(() => curImg.classList.remove('active'), 30);
-  });
-
-  kkActiveEl = nextEl;
-  updateKkCounter();
-  updateKkDots();
-  kkStartTimer();
-}
-
-function updateKkCounter() {
-  const el = document.getElementById('kk-counter');
-  if (el) el.textContent = `${kkIndex + 1} / ${kkPhotos.length}`;
-}
-
-function updateKkDots() {
-  const maxDots = Math.min(kkPhotos.length, 10);
-  const dotIdx  = Math.floor(kkIndex / (kkPhotos.length) * maxDots);
-  document.querySelectorAll('.kk-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === dotIdx);
-  });
-}
-
-/* ---- ONLINE COUNTER (Firebase Realtime Database) ---- */
+/* ══ FIREBASE ══ */
 (function () {
   const firebaseConfig = {
-    apiKey:            "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
-    authDomain:        "phuchoatrail2026.firebaseapp.com",
-    databaseURL:       "https://phuchoatrail2026-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId:         "phuchoatrail2026",
-    storageBucket:     "phuchoatrail2026.firebasestorage.app",
+    apiKey: "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
+    authDomain: "phuchoatrail2026.firebaseapp.com",
+    databaseURL: "https://phuchoatrail2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "phuchoatrail2026",
+    storageBucket: "phuchoatrail2026.firebasestorage.app",
     messagingSenderId: "665306842437",
-    appId:             "1:665306842437:web:9ffc0f64e15bb01b542a2c",
+    appId: "1:665306842437:web:9ffc0f64e15bb01b542a2c",
   };
   const s1 = document.createElement('script');
   s1.src = 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js';
@@ -1755,32 +923,31 @@ function updateKkDots() {
   };
   document.head.appendChild(s1);
 })();
-
 function initOnlineCounter(config) {
   try {
     firebase.initializeApp(config);
     const db = firebase.database();
-    const myRef = db.ref('online_users').push();
-    db.ref('.info/connected').on('value', snap => {
-      if (!snap.val()) return;
-      myRef.onDisconnect().remove();
-      myRef.set({ t: Date.now() });
-    });
-    db.ref('online_users').on('value', snap => {
-      const el = document.getElementById('online-count');
-      if (el) el.textContent = snap.numChildren();
-    });
-    db.ref('total_visits').transaction(cur => (cur || 0) + 1);
-    db.ref('total_visits').on('value', snap => {
-      const el = document.getElementById('visits-count');
-      if (el) el.textContent = (snap.val() || 0).toLocaleString('vi-VN');
-    });
-  } catch(e) {
+    const connRef = db.ref('.info/connected');
+    const onlineRef = db.ref('online_users');
+    const visitsRef = db.ref('total_visits');
+    const myRef = onlineRef.push();
+    connRef.on('value', snap => { if (!snap.val()) return; myRef.onDisconnect().remove(); myRef.set({ t: Date.now() }); });
+    onlineRef.on('value', snap => { const el = document.getElementById('online-count'); if (el) el.textContent = snap.numChildren(); });
+    visitsRef.transaction(cur => (cur || 0) + 1);
+    visitsRef.on('value', snap => { const total = snap.val() || 0; const el = document.getElementById('visits-count'); if (el) el.textContent = total.toLocaleString('vi-VN'); });
+  } catch (e) {
     console.warn('Firebase error:', e);
     const w = document.getElementById('stats-widget');
     if (w) w.style.display = 'none';
   }
 }
+/* ══ FACEBOOK SDK (không cần App ID) ══ */
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0';
+  s.async = true; s.defer = true; s.crossOrigin = 'anonymous';
+  d.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
