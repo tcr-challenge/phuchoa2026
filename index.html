@@ -6,35 +6,35 @@
   <title>Tìm Ảnh — Phúc Hoà City Trail 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c27; --border: #2a2a3d;
       --accent: #f7c948; --accent2: #ff6b35; --text: #f0f0f5; --muted: #7070a0;
       --success: #4ade80; --radius: 12px; --thumb-w: 180px; --thumb-ratio: 3/2;
-      --font-display: 'Bebas Neue', Impact, sans-serif;
-      --font-body: 'Outfit', 'Segoe UI', sans-serif;
+      --font-display: 'Montserrat', 'Segoe UI', sans-serif;
+      --font-body: 'Open Sans', 'Segoe UI', Roboto, sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: center; }
-    .logo { font-family: var(--font-display); font-size: 22px; letter-spacing: 3px; color: var(--accent); text-decoration: none; text-align: center; }
+    .logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-decoration: none; text-align: center; }
     .logo span { color: var(--accent2); }
     .hero { padding: 56px 24px 36px; text-align: center; position: relative; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%); pointer-events: none; }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(44px, 9vw, 90px); letter-spacing: 5px; line-height: 0.92; margin-bottom: 16px; }
+    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 7vw, 64px); letter-spacing: 2px; line-height: 1.05; margin-bottom: 16px; }
     .hero h1 em { font-style: normal; color: var(--accent); }
     .hero p { color: var(--muted); font-family: var(--font-body); font-size: 15px; font-weight: 400; max-width: 460px; margin: 0 auto 36px; line-height: 1.65; }
     .search-container { max-width: 700px; margin: 0 auto; position: relative; z-index: 10; }
     .bib-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 16px; }
     .mf-labels { display: flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 0 6px; }
-    .mf-m { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
+    .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
     .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
-    .mf-f { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
-    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-size: 32px; letter-spacing: 6px; outline: none; transition: border-color 0.2s; min-width: 0; }
-    .bib-input::placeholder { color: var(--border); font-size: 24px; letter-spacing: 4px; }
+    .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
+    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: 4px; outline: none; transition: border-color 0.2s; min-width: 0; }
+    .bib-input::placeholder { color: var(--border); font-size: 20px; letter-spacing: 3px; }
     .bib-input:focus { border-color: var(--accent); }
-    .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-size: 19px; letter-spacing: 2px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
     .status-bar { max-width: 700px; margin: 10px auto 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; min-height: 20px; letter-spacing: 0.2px; }
@@ -51,50 +51,144 @@
     /* VIEWER */
     #viewer-section { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
     .viewer-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .viewer-bib { font-family: var(--font-display); font-size: 40px; letter-spacing: 5px; color: var(--accent); line-height: 1; }
+    .viewer-bib { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: 3px; color: var(--accent); line-height: 1; }
     .viewer-subtitle { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 5px; letter-spacing: 0.2px; }
+
+    /* RUNNER INFO CARD — hiển thị dưới viewer-bib khi search */
+    .runner-info-card {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 16px;
+      background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%);
+      border: 1px solid rgba(247,201,72,0.3);
+      border-radius: 10px;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .runner-info-card.visible { display: inline-flex; }
+    .runner-info-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      padding-right: 14px;
+    }
+    .runner-info-sep {
+      width: 1px;
+      align-self: stretch;
+      background: rgba(247,201,72,0.3);
+      flex-shrink: 0;
+      margin: 0 14px 0 0;
+    }
+    .runner-info-club {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .runner-info-club-label {
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .runner-info-club-name {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .folder-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
     .result-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .result-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .result-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-size: 13px; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; }
+    .result-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
 
     /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.93); backdrop-filter: blur(14px); align-items: center; justify-content: center; flex-direction: column; padding: 16px; cursor: pointer; }
     .lightbox.open { display: flex; }
     .lb-close { position: absolute; top: 18px; right: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
     .lb-close:hover { background: var(--accent); color: #0a0a0f; border-color: var(--accent); }
-    .lb-main { position: relative; display: flex; align-items: center; justify-content: center; max-width: 92vw; max-height: 78vh; flex: 1; cursor: default; }
-    .lb-img { max-width: 88vw; max-height: 76vh; border-radius: 10px; object-fit: contain; display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.6); transition: opacity 0.2s; cursor: default; }
+    .lb-main { position: relative; display: flex; align-items: center; justify-content: center; max-width: 92vw; max-height: 72vh; flex: 1; cursor: default; }
+    .lb-img { max-width: 88vw; max-height: 70vh; border-radius: 10px; object-fit: contain; display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.6); transition: opacity 0.2s; cursor: default; }
     .lb-img.hidden { opacity: 0; }
     .lb-spinner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
     .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,15,0.75); border: 1px solid var(--border); color: var(--text); width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; backdrop-filter: blur(6px); z-index: 5; }
     .lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
     #lb-prev { left: -64px; } #lb-next { right: -64px; }
-    .lb-info { margin-top: 14px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: default; }
-    .lb-bib-label { font-family: var(--font-display); font-size: 30px; letter-spacing: 4px; color: var(--accent); }
+
+    /* RUNNER CARD IN LIGHTBOX */
+    .lb-info { margin-top: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
+    .lb-bib-label { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 3px; color: var(--accent); }
+
+    /* Runner name+club block inside lightbox */
+    .lb-runner-block {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07));
+      border: 1px solid rgba(247,201,72,0.25);
+      border-radius: 10px;
+      width: fit-content;
+    }
+    .lb-runner-block.visible { display: inline-flex; }
+    .lb-runner-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      padding-right: 14px;
+    }
+    .lb-runner-sep {
+      width: 1px;
+      align-self: stretch;
+      background: rgba(247,201,72,0.3);
+      flex-shrink: 0;
+      margin: 0 14px 0 0;
+    }
+    .lb-runner-club {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
     .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
     .lb-folder-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .lb-thumbs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 2px; max-width: 88vw; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) transparent; margin-top: 10px; cursor: default; }
+    .lb-thumbs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 2px; max-width: 88vw; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) transparent; margin-top: 6px; cursor: default; }
     .lb-thumbs::-webkit-scrollbar { height: 3px; }
     .lb-thumb { flex-shrink: 0; width: 72px; height: 50px; border-radius: 5px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.16s; background: var(--surface2); }
     .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .lb-thumb:hover { border-color: var(--muted); } .lb-thumb.active { border-color: var(--accent); }
-    @media (max-width: 680px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-img { max-height: 55vh; } }
+    @media (max-width: 680px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-img { max-height: 50vh; } }
 
     /* SECTIONS */
     .section { padding: 36px 24px; max-width: 1100px; margin: 0 auto; }
-    .section-title { font-family: var(--font-display); font-size: 18px; letter-spacing: 3px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .section-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
     .count-badge { background: var(--surface2); border: 1px solid var(--border); padding: 2px 10px; border-radius: 20px; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent); }
     .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
     .photo-card { position: relative; aspect-ratio: 3/2; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .photo-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .photo-card img { width: 100%; height: 100%; object-fit: cover; }
-    .photo-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-size: 13px; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; }
+    .photo-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
     .skeleton { background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { to { background-position: -200% 0; } }
 
@@ -106,7 +200,7 @@
     .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .page-jump { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .page-jump-label { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; }
-    .page-jump-input { width: 52px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; text-align: center; outline: none; transition: border-color 0.2s; }
+    .page-jump-input { width: 52px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; text-align: center; outline: none; transition: border-color 0.2s; }
     .page-jump-input:focus { border-color: var(--accent); }
     .page-jump-input::-webkit-inner-spin-button, .page-jump-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     .page-jump-btn { height: 38px; padding: 0 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.3px; }
@@ -126,12 +220,12 @@
     .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
     .visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
-    .online-count { font-family: var(--font-display); font-size: 15px; letter-spacing: 1px; color: var(--success); }
-    .visits-count { font-family: var(--font-display); font-size: 15px; letter-spacing: 1px; color: var(--accent); }
+    .online-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
+    .visits-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
 
     /* ALBUM TABS */
-    .album-tabs-wrap { max-width: 700px; margin: 18px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-size: 15px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
+    .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
     .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
     .album-tab-btn:hover { border-color: var(--accent); color: var(--text); }
     .album-tab-btn:hover::before { opacity: 1; }
@@ -143,7 +237,7 @@
     #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
     .album-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
     .album-header-left { display: flex; flex-direction: column; gap: 4px; }
-    .album-title { font-family: var(--font-display); font-size: 32px; letter-spacing: 4px; color: var(--accent); line-height: 1; }
+    .album-title { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
     .album-meta { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 400; }
     .album-back-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .album-back-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -151,24 +245,83 @@
     .album-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .album-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .album-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .album-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-size: 13px; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; }
+    .album-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
 
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
-      .viewer-bib { font-size: 30px; }
+      .viewer-bib { font-size: 24px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-      .bib-input { font-size: 24px; letter-spacing: 4px; }
-      .search-btn { padding: 15px 14px; font-size: 16px; }
+      .bib-input { font-size: 20px; letter-spacing: 3px; }
+      .search-btn { padding: 15px 14px; font-size: 13px; }
       .bib-row { flex-wrap: nowrap; }
-      .mf-m, .mf-f { font-size: 24px; }
+      .mf-m, .mf-f { font-size: 18px; }
       .page-jump-label { display: none; }
       .album-tabs-wrap { gap: 6px; padding: 0 8px; }
-      .album-tab-btn { padding: 8px 12px; font-size: 13px; }
-      .album-title { font-size: 24px; }
+      .album-tab-btn { padding: 8px 12px; font-size: 11px; }
+      .album-title { font-size: 20px; }
+      .lb-runner-name { font-size: 14px; }
+    }
+    /* LYCHEE LOADING OVERLAY */
+    .lychee-loading {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10,10,15,0.88);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .lychee-loading.show { display: flex; }
+    .lychee-bounce {
+      font-size: 64px;
+      animation: lychee-jump 0.7s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+      filter: drop-shadow(0 8px 18px rgba(247,100,80,0.5));
+      line-height: 1;
+    }
+    @keyframes lychee-jump {
+      0%   { transform: translateY(0)   rotate(-8deg) scale(1);    }
+      40%  { transform: translateY(-28px) rotate(6deg) scale(1.08); }
+      70%  { transform: translateY(-42px) rotate(-4deg) scale(1.12); }
+      100% { transform: translateY(-20px) rotate(8deg) scale(1.05); }
+    }
+    .lychee-shadow {
+      width: 36px; height: 10px;
+      background: rgba(247,100,80,0.22);
+      border-radius: 50%;
+      animation: lychee-shadow 0.7s ease-in-out infinite alternate;
+      margin-top: -8px;
+    }
+    @keyframes lychee-shadow {
+      0%   { transform: scaleX(1);   opacity: 0.6; }
+      100% { transform: scaleX(0.5); opacity: 0.2; }
+    }
+    .lychee-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.3px;
+      margin-top: 4px;
+    }
+    .lychee-text em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
+
+<!-- LYCHEE LOADING -->
+<div class="lychee-loading" id="lychee-loading">
+  <div class="lychee-bounce">🍒</div>
+  <div class="lychee-shadow"></div>
+  <div class="lychee-text"><em>Vải đang được trẩy,</em> bạn chờ tôi chút nha 🌿</div>
+</div>
 
 <header>
   <a class="logo" href="#">TÌM ẢNH — <span>PHÚC HOÀ CITY TRAIL 2026</span></a>
@@ -188,10 +341,7 @@
              onkeydown="if(event.key==='Enter') searchByBib()">
       <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
-    <div class="status-bar" id="status-bar"></div>
-    <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
-
-    <!-- ALBUM TABS -->
+    <!-- ALBUM TABS — right below search -->
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
         <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span>
@@ -202,37 +352,19 @@
       <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
         <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span>
       </button>
+      <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-non-bib"      onclick="openAlbumTab('non-bib')">
+        <span class="tab-icon">🙌</span> NO BIB <span class="tab-count" id="tc-non-bib">...</span>
+      </button>
     </div>
 
+    <div class="status-bar" id="status-bar"></div>
+    <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+
     <!-- NOTICE BANNER — hidden -->
-    <div class="notice-banner" style="display:none;">
-      <div class="notice-inner">
-        <span class="notice-lychee">🍒</span>
-        <div class="notice-slot" id="notice-slot">
-          <div class="notice-msg notice-text active">
-            <strong>VẪN CÒN RẤT NHIỀU ẢNH CHƯA UP LÊN</strong>
-            Các bác đừng rời xa em nha!
-          </div>
-          <div class="notice-msg notice-text">
-            <strong>PHÚC HÒA CITY TRAIL 2026</strong>
-            Đón Mùa Vải Sớm 🍒
-          </div>
-          <div class="notice-msg notice-text">
-            <strong>CỘNG ĐỒNG CHẠY BỘ RUN4SELF</strong>
-            Chinh Phục Hồ Tây 🏃
-          </div>
-          <div class="notice-msg notice-text">
-            <strong>Special thanks to Mr. Dẻo and Team CPHT</strong>
-            TCR 💛
-          </div>
-          <div class="notice-msg notice-text">
-            <strong>CHẠY VÌ MÌNH NHƯNG KHÔNG BAO GIỜ LÀ MỘT MÌNH</strong>
-            by Mr. Dẻo
-          </div>
-        </div>
-        <span class="notice-lychee">🍒</span>
-      </div>
-    </div>
+    <div class="notice-banner" style="display:none;"></div>
   </div>
 </div>
 
@@ -242,7 +374,15 @@
     <div class="viewer-header">
       <div>
         <div id="viewer-bib" class="viewer-bib"></div>
-        <div id="viewer-subtitle" class="viewer-subtitle"></div>
+        <!-- Runner info card shown after BIB search -->
+        <div class="runner-info-card" id="runner-info-card">
+          <div class="runner-info-name" id="runner-info-name"></div>
+          <span class="runner-info-sep"></span>
+          <div class="runner-info-club">
+            <span class="runner-info-club-name" id="runner-info-club"></span>
+          </div>
+        </div>
+        <div id="viewer-subtitle" class="viewer-subtitle" style="margin-top:8px;"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
       <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
@@ -280,6 +420,12 @@
   </div>
   <div class="lb-info" onclick="event.stopPropagation()">
     <div class="lb-bib-label" id="lb-bib-label"></div>
+    <!-- Runner name + club in lightbox -->
+    <div class="lb-runner-block" id="lb-runner-block">
+      <div class="lb-runner-name" id="lb-runner-name"></div>
+      <span class="lb-runner-sep"></span>
+      <div class="lb-runner-club" id="lb-runner-club"></div>
+    </div>
     <div class="lb-counter" id="lb-counter"></div>
     <a class="lb-folder-btn" id="lb-folder-btn" href="#" target="_blank">📁 Mở thư mục Google Drive</a>
   </div>
@@ -294,8 +440,8 @@
 </div>
 
 <footer style="border-top:1px solid var(--border);margin-top:60px;padding:40px 24px 32px;text-align:center;background:var(--surface);">
-  <div style="font-family:var(--font-display);font-size:clamp(16px,3.5vw,24px);letter-spacing:3px;color:var(--accent);margin-bottom:6px;">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
-  <div style="font-family:var(--font-display);font-size:clamp(13px,2.5vw,18px);letter-spacing:2px;color:var(--accent2);margin-bottom:20px;">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:800;font-size:clamp(14px,3vw,20px);letter-spacing:2px;color:var(--accent);margin-bottom:6px;">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:clamp(11px,2vw,15px);letter-spacing:1.5px;color:var(--accent2);margin-bottom:20px;">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
   <a href="https://www.facebook.com/thuongcatrunners" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-family:var(--font-body);font-size:14px;font-weight:500;transition:color 0.2s;" onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     THUONG CAT RUNNERS - TCR
@@ -316,38 +462,49 @@
 <script>
 const CONFIG = {
   jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json',
+  runnersUrl:     'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/runners.json',
   folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',
   prefixes:       ['M', 'F'],
 };
 
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
-let PHOTOS = [];
+let PHOTOS  = [];
+let RUNNERS = {}; // { "M044": { name: "Nguyễn Văn A", club: "TCR" }, ... }
 let browsePage = 1;
 const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
 
 let viewerAllList = [];
-let viewerPage = 1;
+let viewerPage    = 1;
 const VIEWER_PAGE_SIZE = 50;
-let viewerIndex = 0;
+let viewerIndex   = 0;
 
-document.addEventListener('DOMContentLoaded', () => { fetchPhotos(); });
+document.addEventListener('DOMContentLoaded', () => { fetchAll(); });
 
-async function fetchPhotos() {
-  if (!CONFIG.jsonUrl) { loadDemoData(); return; }
-  setStatus('Đang tải danh sách ảnh...', 'loading');
-  showProgress(20);
+async function fetchAll() {
+  document.getElementById('lychee-loading').classList.add('show');
+  showProgress(15);
   try {
-    const res = await fetch(CONFIG.jsonUrl + '?t=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    PHOTOS = await res.json();
+    const [photosRes, runnersRes] = await Promise.all([
+      fetch(CONFIG.jsonUrl    + '?t=' + Date.now()),
+      CONFIG.runnersUrl ? fetch(CONFIG.runnersUrl + '?t=' + Date.now()).catch(() => null) : Promise.resolve(null)
+    ]);
+    if (!photosRes.ok) throw new Error('HTTP ' + photosRes.status);
+    PHOTOS = await photosRes.json();
+    showProgress(80);
+    // Runners — optional, không crash nếu file chưa có
+    if (runnersRes && runnersRes.ok) {
+      RUNNERS = await runnersRes.json();
+    }
     showProgress(100);
     document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
+    document.getElementById('lychee-loading').classList.remove('show');
     setStatus('Đã tải ' + PHOTOS.length.toLocaleString() + ' ảnh', 'success');
     setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
     browsePage = 1;
     renderBrowseGrid();
     updateAlbumTabCounts();
   } catch(e) {
+    document.getElementById('lychee-loading').classList.remove('show');
     setStatus('Lỗi tải dữ liệu: ' + e.message, 'error');
     hideProgress();
     loadDemoData();
@@ -360,18 +517,31 @@ function loadDemoData() {
     const prefix = i % 3 === 0 ? 'F' : 'M';
     const bib = prefix + num;
     const tabs = ['khai-mac', 'start-finish', 'khoanh-khac'];
-    return {
-      id: 'demo_' + i, bib,
-      thumb: 'https://picsum.photos/seed/' + bib + '/300/200',
-      full:  'https://picsum.photos/seed/' + bib + '/900/600',
-      folderUrl: '', drive: 1,
-      tab: tabs[i % 3]
-    };
+    return { id: 'demo_' + i, bib, thumb: 'https://picsum.photos/seed/' + bib + '/300/200', full: 'https://picsum.photos/seed/' + bib + '/900/600', folderUrl: '', drive: 1, tab: tabs[i % 3] };
   });
+  // Demo runners data
+  RUNNERS = { 'M001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
   renderBrowseGrid();
   updateAlbumTabCounts();
+}
+
+/* ── RUNNER LOOKUP ──
+   BIB trong ảnh dạng "M044" hoặc "F044"
+   Key trong runners.json cũng dạng "M044" / "F044" / "044"
+   Hàm này thử cả 3 dạng để tìm */
+function lookupRunner(bib) {
+  if (!bib || !Object.keys(RUNNERS).length) return null;
+  const b = bib.toString().toUpperCase().trim();
+  if (RUNNERS[b]) return RUNNERS[b];
+  // thử không prefix
+  const digits = b.replace(/^[MF]/, '');
+  if (RUNNERS[digits]) return RUNNERS[digits];
+  // thử prefix ngược
+  const alt = b.startsWith('M') ? 'F' + digits : b.startsWith('F') ? 'M' + digits : null;
+  if (alt && RUNNERS[alt]) return RUNNERS[alt];
+  return null;
 }
 
 function searchByBib() {
@@ -379,29 +549,46 @@ function searchByBib() {
   if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
   const digits = raw.replace(/[^0-9]/g, '');
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
-  const last3 = digits.slice(-3).padStart(3, '0');
+  const last3  = digits.slice(-3).padStart(3, '0');
   const allBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
   setStatus('Đang tìm BIB ' + allBibs.join(' / ') + '...', 'loading');
   const matches = PHOTOS.filter(p => { const pb = p.bib.toUpperCase(); return allBibs.some(bib => pb === bib); });
-  if (matches.length === 0) { setStatus('', ''); showViewer([], allBibs.join(' / ')); return; }
+  if (matches.length === 0) { setStatus('', ''); showViewer([], allBibs.join(' / '), last3); return; }
   setStatus('✓ Tìm thấy ' + matches.length + ' ảnh', 'success');
   setTimeout(() => setStatus('', ''), 2500);
-  showViewer(matches, allBibs.join(' / '));
+  showViewer(matches, allBibs.join(' / '), last3);
 }
 
-function showViewer(list, label) {
+function showViewer(list, label, digits) {
   viewerAllList = list;
-  viewerPage = 1;
+  viewerPage    = 1;
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
-  document.getElementById('browse-section').style.display = 'none';
-  document.getElementById('album-section').style.display = 'none';
+  document.getElementById('browse-section').style.display  = 'none';
+  document.getElementById('album-section').style.display   = 'none';
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
+
+  // --- Runner info card ---
+  const card     = document.getElementById('runner-info-card');
+  const nameEl   = document.getElementById('runner-info-name');
+  const clubEl   = document.getElementById('runner-info-club');
+  // Thử tìm theo M+digits hoặc F+digits
+  const runnerM = lookupRunner('M' + (digits || '').padStart(3,'0'));
+  const runnerF = lookupRunner('F' + (digits || '').padStart(3,'0'));
+  const runner  = runnerM || runnerF;
+  if (runner && (runner.name || runner.club)) {
+    nameEl.textContent = runner.name || '';
+    clubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
+    card.classList.add('visible');
+  } else {
+    card.classList.remove('visible');
+  }
+
   if (list.length === 0) {
     document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
     document.getElementById('result-grid').innerHTML = '<div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">BIB <strong style="color:var(--accent)">' + label + '</strong> chưa có ảnh trong hệ thống</div>';
     document.getElementById('viewer-folder-links').innerHTML = '';
-    document.getElementById('viewer-pagination').innerHTML = '';
+    document.getElementById('viewer-pagination').innerHTML  = '';
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
@@ -414,10 +601,10 @@ function showViewer(list, label) {
 }
 
 function renderViewerPage() {
-  const total = viewerAllList.length;
+  const total      = viewerAllList.length;
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
-  const start = (viewerPage - 1) * VIEWER_PAGE_SIZE;
-  const pageItems = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
+  const start      = (viewerPage - 1) * VIEWER_PAGE_SIZE;
+  const pageItems  = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
   document.getElementById('viewer-subtitle').textContent =
     total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
   const grid = document.getElementById('result-grid');
@@ -440,7 +627,6 @@ function goViewerPage(p) {
   viewerPage = p; renderViewerPage();
   document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 function jumpViewerPage() {
   const input = document.getElementById('viewer-jump-input');
   const totalPages = Math.ceil(viewerAllList.length / VIEWER_PAGE_SIZE);
@@ -467,26 +653,48 @@ function lbNav(dir) {
   viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length;
   renderLightboxImage(); syncLbThumbs();
 }
+
 function renderLightboxImage() {
-  const list = viewerAllList.length ? viewerAllList : PHOTOS;
+  const list  = viewerAllList.length ? viewerAllList : PHOTOS;
   const photo = list[viewerIndex];
   if (!photo) return;
-  const img = document.getElementById('lb-img');
+  const img     = document.getElementById('lb-img');
   const spinner = document.getElementById('lb-spinner');
   img.classList.add('hidden'); spinner.style.display = 'flex'; spinner.textContent = 'Đang tải ảnh...';
+
   let displayUrl = photo.thumb;
   if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
   else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
-  document.getElementById('lb-bib-label').textContent = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
+
+  // BIB label
+  const bibLabel = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
+  document.getElementById('lb-bib-label').textContent = bibLabel;
+
+  // Runner info in lightbox
+  const runnerBlock = document.getElementById('lb-runner-block');
+  const runnerNameEl = document.getElementById('lb-runner-name');
+  const runnerClubEl = document.getElementById('lb-runner-club');
+  const runner = photo.bib ? lookupRunner(photo.bib) : null;
+  if (runner && (runner.name || runner.club)) {
+    runnerNameEl.textContent = runner.name || '';
+    runnerClubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
+    runnerBlock.classList.add('visible');
+  } else {
+    runnerBlock.classList.remove('visible');
+  }
+
   document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + list.length;
   const folderBtn = document.getElementById('lb-folder-btn');
-  if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; } else { folderBtn.style.display = 'none'; }
+  if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; }
+  else { folderBtn.style.display = 'none'; }
 }
-function onLbImgLoad() { document.getElementById('lb-img').classList.remove('hidden'); document.getElementById('lb-spinner').style.display = 'none'; }
+
+function onLbImgLoad()  { document.getElementById('lb-img').classList.remove('hidden'); document.getElementById('lb-spinner').style.display = 'none'; }
 function onLbImgError() { document.getElementById('lb-spinner').textContent = 'Không thể tải ảnh này'; }
+
 function buildLbThumbs() {
-  const list = viewerAllList.length ? viewerAllList : PHOTOS;
+  const list  = viewerAllList.length ? viewerAllList : PHOTOS;
   const strip = document.getElementById('lb-thumbs');
   strip.innerHTML = list.map((photo, i) =>
     '<div class="lb-thumb ' + (i === viewerIndex ? 'active' : '') + '" onclick="lbGoTo(' + i + ')">' +
@@ -507,16 +715,17 @@ function clearResults() {
   document.getElementById('viewer-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
+  document.getElementById('runner-info-card').classList.remove('visible');
   viewerAllList = [];
   setStatus('', '');
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderBrowseGrid() {
-  const grid = document.getElementById('main-grid');
+  const grid  = document.getElementById('main-grid');
   const total = PHOTOS.length;
   const start = (browsePage - 1) * BROWSE_PAGE_SIZE;
-  const page = PHOTOS.slice(start, start + BROWSE_PAGE_SIZE);
+  const page  = PHOTOS.slice(start, start + BROWSE_PAGE_SIZE);
   if (total === 0) { grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>'; document.getElementById('pagination').innerHTML = ''; return; }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -531,7 +740,7 @@ function renderBrowseGrid() {
         (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
       card.onclick = () => {
         viewerAllList = PHOTOS;
-        viewerIndex = start + parseInt(card.dataset.idx);
+        viewerIndex   = start + parseInt(card.dataset.idx);
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
         renderLightboxImage(); buildLbThumbs();
@@ -551,12 +760,10 @@ function renderBrowsePagination(total) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(browsePage, totalPages, 'goBrowsePage');
 }
-
 function goBrowsePage(p) {
   browsePage = p; renderBrowseGrid();
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 function jumpBrowsePage() {
   const input = document.getElementById('browse-jump-input');
   const totalPages = Math.ceil(PHOTOS.length / BROWSE_PAGE_SIZE);
@@ -580,17 +787,16 @@ function buildPaginationHTML(cur, total, gofn) {
   html += '<button class="page-jump-btn" onclick="' + jumpFn + '()">Đi ›</button></div>';
   return html;
 }
-
 function getPaginationRange(cur, total) {
   if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
-  if (cur <= 4) return [1,2,3,4,5,'...',total];
+  if (cur <= 4)   return [1,2,3,4,5,'...',total];
   if (cur >= total-3) return [1,'...',total-4,total-3,total-2,total-1,total];
   return [1,'...',cur-1,cur,cur+1,'...',total];
 }
 
 function setStatus(msg, type) { const el = document.getElementById('status-bar'); el.textContent = msg; el.className = 'status-bar' + (type ? ' ' + type : ''); }
 function showProgress(pct) { document.getElementById('progress-wrap').classList.add('active'); document.getElementById('progress-fill').style.width = pct + '%'; }
-function hideProgress() { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
+function hideProgress()    { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
 /* ══ ALBUM TABS ══ */
@@ -598,6 +804,8 @@ const ALBUM_DEFS = [
   { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
   { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
+  { key: 'btc',          label: 'BAN TỔ CHỨC',    icon: '🏅' },
+  { key: 'non-bib',      label: 'NO BIB',         icon: '🙌' },
 ];
 const ALBUM_PAGE_SIZE = 50;
 let activeAlbumKey   = null;
@@ -611,13 +819,9 @@ function updateAlbumTabCounts() {
     if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
   });
 }
-
 function openAlbumTab(key) {
-  ALBUM_DEFS.forEach(def => {
-    const btn = document.getElementById('tab-' + def.key);
-    if (btn) btn.classList.toggle('active', def.key === key);
-  });
-  activeAlbumKey = key;
+  ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.toggle('active', def.key === key); });
+  activeAlbumKey   = key;
   albumCurrentList = PHOTOS.filter(p => p.tab === key);
   albumPage = 1;
   const def = ALBUM_DEFS.find(d => d.key === key);
@@ -628,30 +832,23 @@ function openAlbumTab(key) {
   renderAlbumPage();
   document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 function closeAlbumTab() {
-  ALBUM_DEFS.forEach(def => {
-    const btn = document.getElementById('tab-' + def.key);
-    if (btn) btn.classList.remove('active');
-  });
+  ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.remove('active'); });
   activeAlbumKey = null; albumCurrentList = [];
   document.getElementById('album-section').style.display  = 'none';
   document.getElementById('browse-section').style.display = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function renderAlbumPage() {
   const total      = albumCurrentList.length;
   const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE) || 1;
   const start      = (albumPage - 1) * ALBUM_PAGE_SIZE;
   const pageItems  = albumCurrentList.slice(start, start + ALBUM_PAGE_SIZE);
-  document.getElementById('album-meta').textContent =
-    total.toLocaleString() + ' ảnh — Trang ' + albumPage + '/' + totalPages + ' — click để xem lớn';
+  document.getElementById('album-meta').textContent = total.toLocaleString() + ' ảnh — Trang ' + albumPage + '/' + totalPages + ' — click để xem lớn';
   const grid = document.getElementById('album-grid');
   if (total === 0) {
     grid.innerHTML = '<div style="color:var(--muted);padding:60px 0;font-size:14px;grid-column:1/-1;text-align:center;">Album này chưa có ảnh. Ảnh sẽ sớm được cập nhật!</div>';
-    document.getElementById('album-pagination').innerHTML = '';
-    return;
+    document.getElementById('album-pagination').innerHTML = ''; return;
   }
   grid.innerHTML = pageItems.map((photo, i) =>
     '<div class="album-card" onclick="openLightboxAlbum(' + (start + i) + ')">' +
@@ -660,27 +857,23 @@ function renderAlbumPage() {
   ).join('');
   renderAlbumPagination(total);
 }
-
 function renderAlbumPagination(total) {
   const totalPages = Math.ceil(total / ALBUM_PAGE_SIZE);
   const el = document.getElementById('album-pagination');
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(albumPage, totalPages, 'goAlbumPage');
 }
-
 function goAlbumPage(p) {
   albumPage = p; renderAlbumPage();
   document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 function jumpAlbumPage() {
-  const input      = document.getElementById('album-jump-input');
+  const input = document.getElementById('album-jump-input');
   const totalPages = Math.ceil(albumCurrentList.length / ALBUM_PAGE_SIZE);
-  const p          = parseInt(input.value);
+  const p = parseInt(input.value);
   if (!p || p < 1 || p > totalPages) { showToast('Trang không hợp lệ (1–' + totalPages + ')', 'error'); return; }
   input.value = ''; goAlbumPage(p);
 }
-
 function openLightboxAlbum(globalIdx) {
   viewerAllList = albumCurrentList;
   viewerIndex   = globalIdx;
@@ -711,7 +904,6 @@ function openLightboxAlbum(globalIdx) {
   };
   document.head.appendChild(s1);
 })();
-
 function initOnlineCounter(config) {
   try {
     firebase.initializeApp(config);
