@@ -212,34 +212,30 @@
     /* HEART PILL */
     .heart-pill { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; white-space: nowrap; user-select: none; }
     .heart-pill:hover { border-color: #f87171; }
-    /* Heart icon wrapper — holds the icon + ripple rings */
     .heart-icon-wrap { position: relative; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .heart-icon { font-size: 22px; line-height: 1; display: block; animation: heartPulse 2s ease-in-out infinite; transform-origin: center; }
-    .heart-icon.loved { animation: heartPulseLoved 1.6s ease-in-out infinite; }
     @keyframes heartPulse {
       0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.14); }
+      40%       { transform: scale(1.18); }
+      70%       { transform: scale(1.06); }
     }
-    @keyframes heartPulseLoved {
-      0%, 100% { transform: scale(1); }
-      30%       { transform: scale(1.22); }
-      60%       { transform: scale(1.08); }
-    }
-    /* Ripple rings */
     .heart-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(248,113,113,0); pointer-events: none; }
-    .heart-icon-wrap.loved .heart-ring-1 { animation: ringOut 2s ease-out 0s infinite; }
-    .heart-icon-wrap.loved .heart-ring-2 { animation: ringOut 2s ease-out 0.65s infinite; }
+    .heart-ring-1 { animation: ringOut 2s ease-out 0s infinite; }
+    .heart-ring-2 { animation: ringOut 2s ease-out 0.65s infinite; }
     @keyframes ringOut {
       0%   { transform: scale(0.6); border-color: rgba(248,113,113,0.7); }
       100% { transform: scale(2.4); border-color: rgba(248,113,113,0); }
     }
-    /* Beat on click */
-    .heart-pill.beat .heart-icon { animation: heartBeat 0.4s ease-out forwards; }
-    @keyframes heartBeat { 0% { transform: scale(1); } 30% { transform: scale(1.45); } 65% { transform: scale(1.2); } 100% { transform: scale(1); } }
-    .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--muted); transition: color 0.3s; }
-    .heart-count.active { color: #f87171; }
-    .float-heart { position: fixed; font-size: 22px; pointer-events: none; z-index: 4000; animation: floatUp 1.2s ease-out forwards; }
-    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(-10deg); } 40% { opacity: 1; transform: translateY(-44px) scale(1.25) rotate(8deg); } 100% { opacity: 0; transform: translateY(-100px) scale(0.7) rotate(-5deg); } }
+    .heart-pill.beat .heart-icon { animation: heartBeat 0.42s ease-out forwards; }
+    @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.55); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: #f87171; transition: color 0.3s; }
+    .float-heart { position: fixed; pointer-events: none; z-index: 4000; animation: floatUp 1.4s ease-out forwards; font-size: 18px; }
+    @keyframes floatUp {
+      0%   { opacity: 1;   transform: translateY(0)     scale(1)    rotate(var(--r0)); }
+      30%  { opacity: 1;   transform: translateY(-60px)  scale(1.3)  rotate(var(--r1)); }
+      70%  { opacity: 0.7; transform: translateY(-130px) scale(1.1)  rotate(var(--r2)); }
+      100% { opacity: 0;   transform: translateY(-220px) scale(0.6)  rotate(var(--r3)); }
+    }
   </style>
 </head>
 <body>
@@ -384,7 +380,7 @@
     <div class="heart-icon-wrap" id="heart-icon-wrap">
       <span class="heart-ring heart-ring-1"></span>
       <span class="heart-ring heart-ring-2"></span>
-      <span class="heart-icon" id="heart-icon">🤍</span>
+      <span class="heart-icon" id="heart-icon">❤️</span>
     </div>
     <span class="heart-count" id="heart-count">--</span>
     <span>CẢM ƠN</span>
@@ -867,8 +863,8 @@ function initHeartWidget(db) {
   const countEl = document.getElementById('heart-count');
   const heartsRef = db.ref('total_hearts');
 
-  // Always show loved state (heart always red after first click)
-  icon.textContent = '🤍';
+  // Always red heart
+  icon.textContent = '❤️';
 
   function fmtCount(n) {
     if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
@@ -881,15 +877,22 @@ function initHeartWidget(db) {
 
   function spawnFloatingHeart() {
     const rect = pill.getBoundingClientRect();
-    const x = rect.left + rect.width / 2 + (Math.random() - 0.5) * 24;
-    const y = rect.top;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top;
+    const spread = 30;
+    const x = cx + (Math.random() - 0.5) * spread * 2;
     const el = document.createElement('div');
     el.className = 'float-heart';
-    el.textContent = ['❤️', '🧡', '💛', '💗'][Math.floor(Math.random() * 4)];
+    el.textContent = ['❤️', '🧡', '💗', '💕', '💖'][Math.floor(Math.random() * 5)];
     el.style.left = x + 'px';
-    el.style.top  = y + 'px';
+    el.style.top  = cy + 'px';
+    el.style.fontSize = (14 + Math.random() * 14) + 'px';
+    el.style.setProperty('--r0', (Math.random()*20-10) + 'deg');
+    el.style.setProperty('--r1', (Math.random()*30-15) + 'deg');
+    el.style.setProperty('--r2', (Math.random()*20-10) + 'deg');
+    el.style.setProperty('--r3', (Math.random()*30-15) + 'deg');
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1200);
+    setTimeout(() => el.remove(), 1500);
   }
 
   window.toggleHeart = function () {
@@ -903,9 +906,11 @@ function initHeartWidget(db) {
     pill.classList.add('beat');
     pill.addEventListener('animationend', () => pill.classList.remove('beat'), { once: true });
 
-    spawnFloatingHeart();
-    setTimeout(spawnFloatingHeart, 160);
-    setTimeout(spawnFloatingHeart, 320);
+    // Spawn 5-7 hearts flying upward
+    const count = 5 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) {
+      setTimeout(spawnFloatingHeart, i * 90);
+    }
 
     heartsRef.transaction(cur => (cur || 0) + 1, (err, committed, snap) => {
       if (!err && snap) updateUI(snap.val() || 0);
