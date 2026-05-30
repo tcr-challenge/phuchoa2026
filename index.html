@@ -355,8 +355,11 @@
       <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
         <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span>
       </button>
-      <button class="album-tab-btn" id="tab-non-bib"      onclick="openAlbumTab('non-bib')">
-        <span class="tab-icon">🙌</span> NO BIB <span class="tab-count" id="tc-non-bib">...</span>
+      <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
+        <span class="tab-icon">🙌</span> NO BIB <span class="tab-count" id="tc-tong-hop">...</span>
+      </button>
+      <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
+        <span class="tab-icon">🙌</span> FLYCAM <span class="tab-count" id="tc-flycam">...</span>
       </button>
     </div>
 
@@ -805,7 +808,9 @@ const ALBUM_DEFS = [
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
   { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
   { key: 'btc',          label: 'BAN TỔ CHỨC',    icon: '🏅' },
-  { key: 'non-bib',      label: 'NO BIB',         icon: '🙌' },
+  { key: 'tong-hop',      label: 'TỔNG HỢP',         icon: '🙌' },
+  { key: 'flycam',      label: 'FLYCAM',         icon: '🚁' },
+
 ];
 const ALBUM_PAGE_SIZE = 50;
 let activeAlbumKey   = null;
