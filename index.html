@@ -147,15 +147,129 @@
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    /* STATS */
-    .stats-widget { position: fixed; bottom: 24px; left: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 6px; user-select: none; }
-    .online-pill, .visits-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; cursor: default; white-space: nowrap; }
-    .online-pill:hover { border-color: var(--success); } .visits-pill:hover { border-color: var(--accent); }
-    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
-    .visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
-    .online-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
-    .visits-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
+    /* ══════════════════════════════════════════
+       STATS WIDGET — Desktop: cột dọc góc trái
+       ══════════════════════════════════════════ */
+    .stats-widget {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .online-pill,
+    .visits-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(19,19,26,0.92);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .online-pill:hover { border-color: var(--success); }
+    .visits-pill:hover { border-color: var(--accent); }
+
+    .online-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .visits-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+    .online-count  { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
+    .visits-count  { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
+
+    /* ══════════════════════════════════════════
+       STATS WIDGET — Mobile ≤ 600px:
+       Thanh ngang cố định đáy, 3 pill 1 hàng
+       Loại trừ iPad (> 600px) & Fold mở (> 600px)
+       ══════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      /* Đẩy nội dung trang lên để thanh pill không che footer */
+      body {
+        padding-bottom: calc(58px + env(safe-area-inset-bottom));
+      }
+
+      /* Toast không bị che bởi stats bar */
+      .toast {
+        bottom: calc(70px + env(safe-area-inset-bottom));
+        right: 12px;
+      }
+
+      .stats-widget {
+        /* Reset desktop */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* Layout ngang */
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0;
+        /* Khoảng cách + safe area iOS */
+        padding: 8px 6px;
+        padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        /* Nền mờ */
+        background: rgba(10,10,15,0.97);
+        border-top: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 0;
+      }
+
+      /* Mỗi pill chiếm 1/3 hàng ngang, bỏ background riêng */
+      .heart-pill,
+      .online-pill,
+      .visits-pill {
+        flex: 1;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 4px 0;
+        gap: 5px;
+        font-size: 11px;
+      }
+
+      /* Ngăn cách dọc nhẹ giữa các pill */
+      .heart-pill  { border-right: 1px solid var(--border) !important; }
+      .online-pill { border-right: 1px solid var(--border) !important; }
+
+      /* Thu nhỏ icon tim */
+      .heart-icon-wrap { width: 20px; height: 20px; }
+      .heart-icon { font-size: 16px; }
+      .heart-count { font-size: 12px; }
+
+      .online-count,
+      .visits-count { font-size: 12px; }
+      .online-dot,
+      .visits-dot { width: 6px; height: 6px; }
+    }
 
     /* ALBUM TABS */
     .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
@@ -196,7 +310,6 @@
       .album-tab-btn { padding: 8px 12px; font-size: 11px; }
       .album-title { font-size: 20px; }
       .lb-runner-name { font-size: 14px; }
-
     }
 
     /* LYCHEE LOADING */
@@ -852,7 +965,6 @@ function initFirebase(config) {
     console.warn('Firebase error:', e);
     const w = document.getElementById('stats-widget');
     if (w) w.style.display = 'none';
-    // heart pill hidden via stats-widget
   }
 }
 
@@ -863,7 +975,6 @@ function initHeartWidget(db) {
   const countEl = document.getElementById('heart-count');
   const heartsRef = db.ref('total_hearts');
 
-  // Always red heart
   icon.textContent = '❤️';
 
   function fmtCount(n) {
@@ -896,7 +1007,6 @@ function initHeartWidget(db) {
   }
 
   window.toggleHeart = function () {
-    // Mỗi lần nhấn luôn cộng +1, không giới hạn số lần
     const wrap = document.getElementById('heart-icon-wrap');
     icon.textContent = '❤️';
     icon.classList.add('loved');
@@ -906,7 +1016,6 @@ function initHeartWidget(db) {
     pill.classList.add('beat');
     pill.addEventListener('animationend', () => pill.classList.remove('beat'), { once: true });
 
-    // Spawn 5-7 hearts flying upward
     const count = 5 + Math.floor(Math.random() * 3);
     for (let i = 0; i < count; i++) {
       setTimeout(spawnFloatingHeart, i * 90);
@@ -916,12 +1025,10 @@ function initHeartWidget(db) {
       if (!err && snap) updateUI(snap.val() || 0);
     });
 
-    // Optimistic UI update
     const cur = parseInt(countEl.textContent.replace(/[^0-9]/g, '')) || 0;
     updateUI(cur + 1);
   };
 
-  // Realtime listener
   heartsRef.on('value', snap => updateUI(snap.val() || 0));
 }
 </script>
