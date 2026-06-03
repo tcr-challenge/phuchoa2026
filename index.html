@@ -349,8 +349,8 @@
     .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
     .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
-    .tab-clicks { display: inline-flex; align-items: center; gap: 3px; background: rgba(255,107,53,0.13); color: var(--accent2); font-family: var(--font-body); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 20px; letter-spacing: 0; opacity: 0.85; }
-    .tab-clicks::before { content: '👁'; font-size: 9px; }
+    .tab-count .tc-sep { color: rgba(247,201,72,0.4); margin: 0 3px; font-weight: 300; }
+    .tab-count .tc-views { color: var(--accent2); }
 
     /* ALBUM SECTION */
     #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
@@ -438,7 +438,7 @@
 
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
-  <p>Nhập số BIB hoặc tên vận động viên để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
+  <p>Nhập số BIB hoặc Tên vận động viên để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
   <div class="search-container">
     <div class="bib-row">
       <div class="mf-labels">
@@ -446,7 +446,7 @@
       </div>
       <div style="flex:1;position:relative;min-width:0;">
         <input class="bib-input" id="bib-input" type="text" inputmode="text"
-               placeholder="044 hoặc tên VĐV" maxlength="50"
+               placeholder="044 hoặc Tên của bạn" maxlength="50"
                oninput="onBibInputChange(this)"
                onkeydown="onBibInputKeyDown(event)"
                autocomplete="off">
@@ -458,22 +458,22 @@
     <!-- ALBUM TABS -->
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
-        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span><span class="tab-clicks" id="tk-khai-mac">--</span>
+        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khai-mac">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
-        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span><span class="tab-clicks" id="tk-start-finish">--</span>
+        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...<span class="tc-sep">|</span><span class="tc-views" id="tk-start-finish">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
-        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span><span class="tab-clicks" id="tk-khoanh-khac">--</span>
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khoanh-khac">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
-        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span><span class="tab-clicks" id="tk-btc">--</span>
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...<span class="tc-sep">|</span><span class="tc-views" id="tk-btc">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
-        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...</span><span class="tab-clicks" id="tk-tong-hop">--</span>
+        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...<span class="tc-sep">|</span><span class="tc-views" id="tk-tong-hop">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
-        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...</span><span class="tab-clicks" id="tk-flycam">--</span>
+        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...<span class="tc-sep">|</span><span class="tc-views" id="tk-flycam">0</span></span>
       </button>
     </div>
 
@@ -490,9 +490,9 @@
       <div class="name-results-title" id="name-results-title">KẾT QUẢ TÌM KIẾM</div>
       <div class="name-results-count" id="name-results-count"></div>
     </div>
-    <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
-      onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-      onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Tất cả ảnh</button>
+    <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;"
+      onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'"
+      onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
   </div>
   <div class="runner-card-grid" id="name-results-grid"></div>
 </div>
@@ -513,9 +513,9 @@
         <div id="viewer-subtitle" class="viewer-subtitle" style="margin-top:8px;"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
-      <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
-        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Tất cả ảnh</button>
+      <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;"
+        onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'"
+        onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
     </div>
     <div class="result-grid" id="result-grid"></div>
     <div class="pagination" id="viewer-pagination"></div>
@@ -611,6 +611,21 @@ const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) |
 let PHOTOS  = [];
 let RUNNERS = {};
 let browsePage = 1;
+let BROWSE_PHOTOS = []; // sorted: an-tuong-ph first
+
+function buildBrowseOrder() {
+  const priority = PHOTOS.filter(p =>
+    (p.folderUrl && p.folderUrl.toLowerCase().includes('an-tuong-ph')) ||
+    (p.tab && p.tab.toLowerCase().includes('an-tuong-ph')) ||
+    (p.folder && p.folder.toLowerCase().includes('an-tuong-ph'))
+  );
+  const rest = PHOTOS.filter(p =>
+    !(p.folderUrl && p.folderUrl.toLowerCase().includes('an-tuong-ph')) &&
+    !(p.tab && p.tab.toLowerCase().includes('an-tuong-ph')) &&
+    !(p.folder && p.folder.toLowerCase().includes('an-tuong-ph'))
+  );
+  BROWSE_PHOTOS = [...priority, ...rest];
+}
 const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
 
 let viewerAllList = [];
@@ -640,6 +655,7 @@ async function fetchAll() {
     setStatus('Đã tải ' + PHOTOS.length.toLocaleString() + ' ảnh', 'success');
     setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
     browsePage = 1;
+    buildBrowseOrder();
     renderBrowseGrid();
     updateAlbumTabCounts();
   } catch(e) {
@@ -661,6 +677,7 @@ function loadDemoData() {
   RUNNERS = { 'M001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
+  buildBrowseOrder();
   renderBrowseGrid();
   updateAlbumTabCounts();
 }
@@ -1093,9 +1110,10 @@ function clearResults() {
 
 function renderBrowseGrid() {
   const grid  = document.getElementById('main-grid');
-  const total = PHOTOS.length;
+  const list  = BROWSE_PHOTOS.length ? BROWSE_PHOTOS : PHOTOS;
+  const total = list.length;
   const start = (browsePage - 1) * BROWSE_PAGE_SIZE;
-  const page  = PHOTOS.slice(start, start + BROWSE_PAGE_SIZE);
+  const page  = list.slice(start, start + BROWSE_PAGE_SIZE);
   if (total === 0) { grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>'; document.getElementById('pagination').innerHTML = ''; return; }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1109,7 +1127,7 @@ function renderBrowseGrid() {
       card.innerHTML = '<img src="' + photo.thumb + '" alt="" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
         (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
       card.onclick = () => {
-        viewerAllList = PHOTOS;
+        viewerAllList = list;
         viewerIndex   = start + parseInt(card.dataset.idx);
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -1187,7 +1205,14 @@ function updateAlbumTabCounts() {
   ALBUM_DEFS.forEach(def => {
     const count = PHOTOS.filter(p => p.tab === def.key).length;
     const el = document.getElementById('tc-' + def.key);
-    if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
+    if (!el) return;
+    // Chỉ cập nhật text node đầu (số ảnh), giữ nguyên .tc-sep và .tc-views bên trong
+    const firstNode = el.childNodes[0];
+    if (firstNode && firstNode.nodeType === 3) {
+      firstNode.textContent = count > 0 ? count.toLocaleString() : '0';
+    } else {
+      el.insertBefore(document.createTextNode(count > 0 ? count.toLocaleString() : '0'), el.firstChild);
+    }
   });
 }
 function openAlbumTab(key) {
