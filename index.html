@@ -74,6 +74,21 @@
     .runner-card-bib { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: 2px; color: var(--accent); }
     .runner-card-club { font-family: var(--font-body); font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
+    /* CLEAR BUTTON inside input */
+    .bib-clear-btn {
+      display: none; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--border); border: none; cursor: pointer;
+      color: var(--text); font-size: 13px; line-height: 1;
+      align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0; padding: 0;
+      z-index: 5;
+    }
+    .bib-clear-btn:hover { background: var(--accent); color: #0a0a0f; }
+    .bib-clear-btn.visible { display: flex; }
+    /* Shift input padding so text doesn't go under X button */
+    .bib-input.has-value { padding-right: 44px; }
+
     /* AUTOCOMPLETE DROPDOWN */
     .autocomplete-dropdown {
       display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
@@ -334,6 +349,8 @@
     .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
     .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
+    .tab-clicks { display: inline-flex; align-items: center; gap: 3px; background: rgba(255,107,53,0.13); color: var(--accent2); font-family: var(--font-body); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 20px; letter-spacing: 0; opacity: 0.85; }
+    .tab-clicks::before { content: '👁'; font-size: 9px; }
 
     /* ALBUM SECTION */
     #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
@@ -432,6 +449,7 @@
                oninput="onBibInputChange(this)"
                onkeydown="onBibInputKeyDown(event)"
                autocomplete="off">
+        <button class="bib-clear-btn" id="bib-clear-btn" onclick="clearBibInput()" title="Xóa" tabindex="-1">✕</button>
         <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
       </div>
       <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
@@ -439,22 +457,22 @@
     <!-- ALBUM TABS -->
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
-        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span>
+        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span><span class="tab-clicks" id="tk-khai-mac">--</span>
       </button>
       <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
-        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span>
+        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span><span class="tab-clicks" id="tk-start-finish">--</span>
       </button>
       <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
-        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span>
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span><span class="tab-clicks" id="tk-khoanh-khac">--</span>
       </button>
       <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
-        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span>
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span><span class="tab-clicks" id="tk-btc">--</span>
       </button>
       <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
-        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...</span>
+        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...</span><span class="tab-clicks" id="tk-tong-hop">--</span>
       </button>
       <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
-        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...</span>
+        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...</span><span class="tab-clicks" id="tk-flycam">--</span>
       </button>
     </div>
 
@@ -677,10 +695,18 @@ function searchRunnersByName(query) {
     const matchesName = nameNorm.includes(q) || nameWords.some(w => w.startsWith(q));
     const matchesClub = clubNorm.includes(q);
     if (matchesName || matchesClub) {
-      const photoCount = PHOTOS.filter(p => p.bib && p.bib.toUpperCase() === bib.toUpperCase()).length;
-      // Lấy ảnh đầu tiên làm thumbnail đại diện
-      const firstPhoto = PHOTOS.find(p => p.bib && p.bib.toUpperCase() === bib.toUpperCase());
-      results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: firstPhoto ? firstPhoto.thumb : null });
+      // BIB trong RUNNERS có thể là "069", còn PHOTOS dùng "M069"/"F069"
+      // So sánh phần số (digits) để khớp cả hai kiểu
+      const bibDigits = bib.replace(/^[MmFf]/, '');
+      const bibPhotos = PHOTOS.filter(p => {
+        if (!p.bib) return false;
+        const pb = p.bib.toUpperCase();
+        return pb === bib.toUpperCase() || pb.replace(/^[MF]/, '') === bibDigits;
+      });
+      const photoCount = bibPhotos.length;
+      // Lấy ngẫu nhiên 1 ảnh làm thumbnail đại diện
+      const randomPhoto = bibPhotos.length ? bibPhotos[Math.floor(Math.random() * bibPhotos.length)] : null;
+      results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: randomPhoto ? randomPhoto.thumb : null });
     }
   }
   // Sắp xếp: trùng đầu từ lên trên, sau đó theo BIB
@@ -704,9 +730,30 @@ function removeVietnameseTones(str) {
     .replace(/[đ]/gi, 'D');
 }
 
+function toggleClearBtn(val) {
+  const btn = document.getElementById('bib-clear-btn');
+  const inp = document.getElementById('bib-input');
+  if (val) {
+    btn.classList.add('visible');
+    inp.classList.add('has-value');
+  } else {
+    btn.classList.remove('visible');
+    inp.classList.remove('has-value');
+  }
+}
+
+function clearBibInput() {
+  const inp = document.getElementById('bib-input');
+  inp.value = '';
+  inp.focus();
+  toggleClearBtn('');
+  closeAutocomplete();
+}
+
 function onBibInputChange(el) {
   const raw = el.value;
   acFocusIdx = -1;
+  toggleClearBtn(raw);
 
   // Nếu trống, ẩn dropdown
   if (!raw.trim()) { closeAutocomplete(); return; }
@@ -781,7 +828,9 @@ function closeAutocomplete() {
 }
 
 function selectRunnerFromAc(bib) {
-  document.getElementById('bib-input').value = bib;
+  const inp = document.getElementById('bib-input');
+  inp.value = bib;
+  toggleClearBtn(bib);
   closeAutocomplete();
   searchByBib();
 }
@@ -799,6 +848,16 @@ function highlightMatch(text, query) {
   return text.slice(0, idx) +
     '<mark>' + text.slice(idx, idx + q.length) + '</mark>' +
     text.slice(idx + q.length);
+}
+
+function rcImgError(img) {
+  // Ảnh lỗi → thay bằng placeholder giữ nguyên badge đếm
+  img.style.display = 'none';
+  const wrap = img.parentElement;
+  const placeholder = document.createElement('div');
+  placeholder.className = 'rc-no-photo';
+  placeholder.textContent = '\u{1F464}';
+  wrap.insertBefore(placeholder, wrap.firstChild);
 }
 
 function showNameResults(results, query) {
@@ -819,13 +878,13 @@ function showNameResults(results, query) {
   grid.innerHTML = results.map(r => {
     const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
     const nameHtml = highlightMatch(r.name, query);
-    const thumbHtml = r.thumb
-      ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=rc-no-photo>👤</div>\'">'
-      : '<div class="rc-no-photo">👤</div>';
     const countBadge = r.photoCount > 0
-      ? '<div class="rc-photo-count">📸 ' + r.photoCount + '</div>' : '';
+      ? '<div class="rc-photo-count">\u{1F4F8} ' + r.photoCount + '</div>' : '';
+    const thumbInner = r.thumb
+      ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="rcImgError(this)">'
+      : '<div class="rc-no-photo">\u{1F464}</div>';
     return '<div class="runner-card" onclick="selectRunnerFromAc(\'' + r.bib + '\')">' +
-      '<div class="runner-card-thumb">' + thumbHtml + countBadge + '</div>' +
+      '<div class="runner-card-thumb">' + thumbInner + countBadge + '</div>' +
       '<div class="runner-card-body">' +
         '<div class="runner-card-bib">' + r.bib + '</div>' +
         '<div class="runner-card-name">' + nameHtml + '</div>' +
@@ -1023,6 +1082,7 @@ function clearResults() {
   document.getElementById('name-results-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
+  toggleClearBtn('');
   closeAutocomplete();
   document.getElementById('runner-info-card').classList.remove('visible');
   viewerAllList = [];
@@ -1131,6 +1191,7 @@ function updateAlbumTabCounts() {
 }
 function openAlbumTab(key) {
   ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.toggle('active', def.key === key); });
+  trackTabClick(key);
   activeAlbumKey   = key;
   albumCurrentList = PHOTOS.filter(p => p.tab === key);
   albumPage = 1;
@@ -1193,6 +1254,30 @@ function openLightboxAlbum(globalIdx) {
   document.addEventListener('keydown', lbKeyHandler);
 }
 
+/* ══ TAB CLICK TRACKING ══ */
+let _tabDb = null;
+
+function trackTabClick(key) {
+  if (!_tabDb) return;
+  const ref = _tabDb.ref('tab_clicks/' + key);
+  ref.transaction(cur => (cur || 0) + 1);
+}
+
+function initTabTracking(db) {
+  _tabDb = db;
+  const fmtClicks = n => {
+    if (!n) return '0';
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return n.toLocaleString('vi-VN');
+  };
+  ['khai-mac','start-finish','khoanh-khac','btc','tong-hop','flycam'].forEach(key => {
+    db.ref('tab_clicks/' + key).on('value', snap => {
+      const el = document.getElementById('tk-' + key);
+      if (el) el.textContent = fmtClicks(snap.val() || 0);
+    });
+  });
+}
+
 /* ══ FIREBASE ══ */
 (function () {
   const firebaseConfig = {
@@ -1229,6 +1314,9 @@ function initFirebase(config) {
     onlineRef.on('value', snap => { const el = document.getElementById('online-count'); if (el) el.textContent = snap.numChildren(); });
     visitsRef.transaction(cur => (cur || 0) + 1);
     visitsRef.on('value', snap => { const total = snap.val() || 0; const el = document.getElementById('visits-count'); if (el) el.textContent = total.toLocaleString('vi-VN'); });
+
+    /* ── Tab click tracking ── */
+    initTabTracking(db);
 
     /* ── Heart widget ── */
     initHeartWidget(db);
