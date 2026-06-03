@@ -34,12 +34,66 @@
     .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
     .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
     .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
-    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: 4px; outline: none; transition: border-color 0.2s; min-width: 0; }
-    .bib-input::placeholder { color: var(--border); font-size: 20px; letter-spacing: 3px; }
+    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 2px; outline: none; transition: border-color 0.2s; min-width: 0; width: 100%; }
+    .bib-input::placeholder { color: var(--border); font-size: 16px; letter-spacing: 1px; }
     .bib-input:focus { border-color: var(--accent); }
     .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
+    /* NAME RESULTS — lưới VĐV nhiều kết quả */
+    #name-results-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
+    .name-results-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .name-results-title { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 1px; color: var(--text); }
+    .name-results-title em { color: var(--accent); font-style: normal; }
+    .name-results-count { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+    .runner-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .runner-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; cursor: pointer; transition: all 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .runner-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(247,201,72,0.18); transform: translateY(-2px); }
+    .runner-card-thumb {
+      width: 100%; aspect-ratio: 3/2; background: var(--surface2); overflow: hidden; position: relative;
+    }
+    .runner-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .runner-card:hover .runner-card-thumb img { transform: scale(1.06); }
+    .runner-card-thumb .rc-no-photo {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 36px; color: var(--border); background: var(--surface2);
+    }
+    .runner-card-thumb .rc-photo-count {
+      position: absolute; top: 6px; right: 6px;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      color: var(--accent); font-family: var(--font-display); font-weight: 700;
+      font-size: 11px; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px;
+    }
+    .runner-card-body { padding: 10px 12px 12px; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .runner-card-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--text); line-height: 1.3; }
+    .runner-card-name mark { background: rgba(247,201,72,0.28); color: var(--accent); border-radius: 2px; }
+    .runner-card-bib { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: 2px; color: var(--accent); }
+    .runner-card-club { font-family: var(--font-body); font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+    /* AUTOCOMPLETE DROPDOWN */
+    .autocomplete-dropdown {
+      display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      max-height: 260px; overflow-y: auto;
+    }
+    .autocomplete-dropdown.open { display: block; }
+    .ac-item {
+      display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+      cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border);
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item:hover, .ac-item.focused { background: var(--surface2); }
+    .ac-bib { font-family: var(--font-display); font-weight: 700; font-size: 15px;
+              letter-spacing: 1px; color: var(--accent); min-width: 52px; flex-shrink: 0; }
+    .ac-name { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ac-club { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+    .ac-count { font-family: var(--font-body); font-size: 11px; color: var(--accent2); background: rgba(255,107,53,0.12); padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
+    .ac-empty { padding: 14px 16px; color: var(--muted); font-size: 13px; text-align: center; }
     .status-bar { max-width: 700px; margin: 10px auto 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; min-height: 20px; letter-spacing: 0.2px; }
     .status-bar.loading { color: var(--accent); }
     .status-bar.success { color: var(--success); }
@@ -366,17 +420,21 @@
 
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
-  <p>Nhập số BIB để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
+  <p>Nhập số BIB hoặc tên vận động viên để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
   <div class="search-container">
     <div class="bib-row">
       <div class="mf-labels">
         <span class="mf-m">M</span><span class="mf-sep">/</span><span class="mf-f">F</span>
       </div>
-      <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
-             placeholder="044" maxlength="3"
-             oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3)"
-             onkeydown="if(event.key==='Enter') searchByBib()">
-      <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
+      <div style="flex:1;position:relative;min-width:0;">
+        <input class="bib-input" id="bib-input" type="text" inputmode="text"
+               placeholder="044 hoặc tên VĐV" maxlength="50"
+               oninput="onBibInputChange(this)"
+               onkeydown="onBibInputKeyDown(event)"
+               autocomplete="off">
+        <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
+      </div>
+      <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
     <!-- ALBUM TABS -->
     <div class="album-tabs-wrap">
@@ -404,6 +462,20 @@
     <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="notice-banner" style="display:none;"></div>
   </div>
+</div>
+
+<!-- NAME RESULTS SECTION — nhiều VĐV cùng tên -->
+<div id="name-results-section">
+  <div class="name-results-header">
+    <div>
+      <div class="name-results-title" id="name-results-title">KẾT QUẢ TÌM KIẾM</div>
+      <div class="name-results-count" id="name-results-count"></div>
+    </div>
+    <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
+      onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+      onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Tất cả ảnh</button>
+  </div>
+  <div class="runner-card-grid" id="name-results-grid"></div>
 </div>
 
 <!-- VIEWER SECTION -->
@@ -585,9 +657,207 @@ function lookupRunner(bib) {
   return null;
 }
 
+/* ── Autocomplete state ── */
+let acFocusIdx = -1;
+
+function isLikelyBib(raw) {
+  // Là BIB chỉ khi: thuần số (044) hoặc M/F + số (M044, F44)
+  return /^[MmFf]?\d+$/.test(raw.trim());
+}
+
+function searchRunnersByName(query) {
+  if (!query || query.length < 2) return [];
+  const q = removeVietnameseTones(query.toUpperCase().trim());
+  const results = [];
+  for (const [bib, info] of Object.entries(RUNNERS)) {
+    const nameNorm = removeVietnameseTones((info.name || '').toUpperCase());
+    const clubNorm = removeVietnameseTones((info.club || '').toUpperCase());
+    // Tìm khớp bất kỳ từ nào trong tên (tách theo dấu cách)
+    const nameWords = nameNorm.split(/\s+/);
+    const matchesName = nameNorm.includes(q) || nameWords.some(w => w.startsWith(q));
+    const matchesClub = clubNorm.includes(q);
+    if (matchesName || matchesClub) {
+      const photoCount = PHOTOS.filter(p => p.bib && p.bib.toUpperCase() === bib.toUpperCase()).length;
+      // Lấy ảnh đầu tiên làm thumbnail đại diện
+      const firstPhoto = PHOTOS.find(p => p.bib && p.bib.toUpperCase() === bib.toUpperCase());
+      results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: firstPhoto ? firstPhoto.thumb : null });
+    }
+  }
+  // Sắp xếp: trùng đầu từ lên trên, sau đó theo BIB
+  results.sort((a, b) => {
+    const an = removeVietnameseTones(a.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    const bn = removeVietnameseTones(b.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    return an - bn || a.bib.localeCompare(b.bib);
+  });
+  return results;
+}
+
+// Bỏ dấu tiếng Việt để so sánh không phân biệt dấu
+function removeVietnameseTones(str) {
+  return str
+    .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/gi, 'A')
+    .replace(/[èéẹẻẽêềếệểễ]/gi, 'E')
+    .replace(/[ìíịỉĩ]/gi, 'I')
+    .replace(/[òóọỏõôồốộổỗơờớợởỡ]/gi, 'O')
+    .replace(/[ùúụủũưừứựửữ]/gi, 'U')
+    .replace(/[ỳýỵỷỹ]/gi, 'Y')
+    .replace(/[đ]/gi, 'D');
+}
+
+function onBibInputChange(el) {
+  const raw = el.value;
+  acFocusIdx = -1;
+
+  // Nếu trống, ẩn dropdown
+  if (!raw.trim()) { closeAutocomplete(); return; }
+
+  // Nếu nhập BIB số → không gợi ý dropdown
+  if (isLikelyBib(raw)) { closeAutocomplete(); return; }
+
+  // Tìm theo tên
+  const results = searchRunnersByName(raw);
+  renderAutocomplete(results, raw);
+}
+
+function onBibInputKeyDown(e) {
+  const dd = document.getElementById('autocomplete-dropdown');
+  const items = dd.querySelectorAll('.ac-item');
+  if (dd.classList.contains('open') && items.length) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      acFocusIdx = Math.min(acFocusIdx + 1, items.length - 1);
+      updateAcFocus(items);
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      acFocusIdx = Math.max(acFocusIdx - 1, 0);
+      updateAcFocus(items);
+      return;
+    }
+    if (e.key === 'Enter') {
+      if (acFocusIdx >= 0 && items[acFocusIdx]) {
+        items[acFocusIdx].click(); return;
+      }
+    }
+    if (e.key === 'Escape') { closeAutocomplete(); return; }
+  }
+  if (e.key === 'Enter') searchByBib();
+}
+
+function updateAcFocus(items) {
+  items.forEach((el, i) => el.classList.toggle('focused', i === acFocusIdx));
+  if (items[acFocusIdx]) items[acFocusIdx].scrollIntoView({ block: 'nearest' });
+}
+
+function renderAutocomplete(results, query) {
+  const dd = document.getElementById('autocomplete-dropdown');
+  if (!results.length) {
+    dd.innerHTML = '<div class="ac-empty">Không tìm thấy vận động viên</div>';
+    dd.classList.add('open');
+    return;
+  }
+  const showMax = Math.min(results.length, 8);
+  dd.innerHTML = results.slice(0, showMax).map(r => {
+    const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
+    const countBadge = r.photoCount > 0 ? '<span class="ac-count">📸 ' + r.photoCount + '</span>' : '';
+    const nameHtml = highlightMatch(r.name, query);
+    return '<div class="ac-item" onclick="selectRunnerFromAc(\'' + r.bib + '\')" data-bib="' + r.bib + '">' +
+      '<span class="ac-bib">' + r.bib + '</span>' +
+      '<span class="ac-name">' + nameHtml + '</span>' +
+      (clubText ? '<span class="ac-club">' + clubText + '</span>' : '') +
+      countBadge +
+      '</div>';
+  }).join('') +
+  (results.length > showMax ? '<div class="ac-empty" style="cursor:pointer;color:var(--accent);" onclick="document.getElementById(\'search-btn-main\').click()">▼ Xem thêm ' + (results.length - showMax) + ' kết quả...</div>' : '');
+  dd.classList.add('open');
+}
+
+function closeAutocomplete() {
+  const dd = document.getElementById('autocomplete-dropdown');
+  dd.classList.remove('open');
+  dd.innerHTML = '';
+  acFocusIdx = -1;
+}
+
+function selectRunnerFromAc(bib) {
+  document.getElementById('bib-input').value = bib;
+  closeAutocomplete();
+  searchByBib();
+}
+
+// Đóng dropdown khi click ra ngoài
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.bib-row')) closeAutocomplete();
+});
+
+function highlightMatch(text, query) {
+  const q = removeVietnameseTones(query.toUpperCase().trim());
+  const textNorm = removeVietnameseTones(text.toUpperCase());
+  const idx = textNorm.indexOf(q);
+  if (idx < 0) return text;
+  return text.slice(0, idx) +
+    '<mark>' + text.slice(idx, idx + q.length) + '</mark>' +
+    text.slice(idx + q.length);
+}
+
+function showNameResults(results, query) {
+  closeAutocomplete();
+  // Ẩn các section khác
+  document.getElementById('viewer-section').style.display   = 'none';
+  document.getElementById('browse-section').style.display   = 'none';
+  document.getElementById('album-section').style.display    = 'none';
+  const sec = document.getElementById('name-results-section');
+  sec.style.display = 'block';
+
+  document.getElementById('name-results-title').innerHTML =
+    'KẾT QUẢ TÌM KIẾM: <em>"' + query + '"</em>';
+  document.getElementById('name-results-count').textContent =
+    'Tìm thấy ' + results.length + ' vận động viên — chọn để xem ảnh';
+
+  const grid = document.getElementById('name-results-grid');
+  grid.innerHTML = results.map(r => {
+    const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
+    const nameHtml = highlightMatch(r.name, query);
+    const thumbHtml = r.thumb
+      ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=rc-no-photo>👤</div>\'">'
+      : '<div class="rc-no-photo">👤</div>';
+    const countBadge = r.photoCount > 0
+      ? '<div class="rc-photo-count">📸 ' + r.photoCount + '</div>' : '';
+    return '<div class="runner-card" onclick="selectRunnerFromAc(\'' + r.bib + '\')">' +
+      '<div class="runner-card-thumb">' + thumbHtml + countBadge + '</div>' +
+      '<div class="runner-card-body">' +
+        '<div class="runner-card-bib">' + r.bib + '</div>' +
+        '<div class="runner-card-name">' + nameHtml + '</div>' +
+        (clubText ? '<div class="runner-card-club">' + clubText + '</div>' : '') +
+      '</div></div>';
+  }).join('');
+
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function searchByBib() {
+  closeAutocomplete();
   const raw = document.getElementById('bib-input').value.trim();
-  if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
+  if (!raw) { showToast('Vui lòng nhập số BIB hoặc tên VĐV', 'error'); return; }
+
+  // Nếu nhập tên (không phải BIB số) → tìm theo tên
+  if (!isLikelyBib(raw)) {
+    const found = searchRunnersByName(raw);
+    if (found.length === 0) {
+      showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return;
+    } else if (found.length === 1) {
+      selectRunnerFromAc(found[0].bib);
+      return;
+    } else {
+      // Nhiều kết quả → hiện lưới chọn
+      showNameResults(found, raw);
+      return;
+    }
+  }
+
+  // Tìm theo BIB số
+  document.getElementById('name-results-section').style.display = 'none';
   const digits = raw.replace(/[^0-9]/g, '');
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
   const last3  = digits.slice(-3).padStart(3, '0');
@@ -750,8 +1020,10 @@ function lbKeyHandler(e) { if (e.key==='Escape') closeLightbox(); if (e.key==='A
 
 function clearResults() {
   document.getElementById('viewer-section').style.display = 'none';
+  document.getElementById('name-results-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
+  closeAutocomplete();
   document.getElementById('runner-info-card').classList.remove('visible');
   viewerAllList = [];
   setStatus('', '');
