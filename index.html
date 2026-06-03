@@ -378,8 +378,23 @@
       .bib-row { flex-wrap: nowrap; }
       .mf-m, .mf-f { font-size: 18px; }
       .page-jump-label { display: none; }
-      .album-tabs-wrap { gap: 6px; padding: 0 8px; }
-      .album-tab-btn { padding: 8px 12px; font-size: 11px; }
+      .album-tabs-wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        padding: 0 8px;
+        width: 100%;
+        max-width: 100%;
+        justify-content: unset;
+        flex-wrap: unset;
+      }
+      .album-tab-btn {
+        padding: 8px 6px;
+        font-size: 11px;
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
+      }
       .album-title { font-size: 20px; }
       .lb-runner-name { font-size: 14px; }
     }
