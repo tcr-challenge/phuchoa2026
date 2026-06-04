@@ -18,8 +18,11 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: center; }
-    .logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-decoration: none; text-align: center; }
+    .logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-decoration: none; text-align: center; white-space: nowrap; }
     .logo span { color: var(--accent2); }
+    @media (max-width: 600px) {
+      .logo { font-size: clamp(10px, 3.2vw, 18px); letter-spacing: 1px; }
+    }
     .hero { padding: 56px 24px 36px; text-align: center; position: relative; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%); pointer-events: none; }
     .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 7vw, 64px); letter-spacing: 2px; line-height: 1.05; margin-bottom: 16px; }
@@ -31,12 +34,48 @@
     .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
     .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
     .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
-    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: 4px; outline: none; transition: border-color 0.2s; min-width: 0; }
-    .bib-input::placeholder { color: var(--border); font-size: 20px; letter-spacing: 3px; }
+    /* ẨN M/F LABELS TRÊN MOBILE */
+    @media (max-width: 600px) {
+      .mf-labels { display: none; }
+    }
+    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 2px; outline: none; transition: border-color 0.2s; min-width: 0; width: 100%; }
+    .bib-input::placeholder { color: var(--border); font-size: 16px; letter-spacing: 1px; }
     .bib-input:focus { border-color: var(--accent); }
     .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
+    #name-results-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
+    .name-results-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .name-results-title { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 1px; color: var(--text); }
+    .name-results-title em { color: var(--accent); font-style: normal; }
+    .name-results-count { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
+    .runner-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .runner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; }
+    .runner-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(247,201,72,0.18); transform: translateY(-2px); }
+    .runner-card-thumb { width: 100%; aspect-ratio: 3/2; background: var(--surface2); overflow: hidden; position: relative; }
+    .runner-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .runner-card:hover .runner-card-thumb img { transform: scale(1.06); }
+    .runner-card-thumb .rc-no-photo { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: var(--border); background: var(--surface2); }
+    .runner-card-thumb .rc-photo-count { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; }
+    .runner-card-body { padding: 10px 12px 12px; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .runner-card-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--text); line-height: 1.3; }
+    .runner-card-name mark { background: rgba(247,201,72,0.28); color: var(--accent); border-radius: 2px; }
+    .runner-card-bib { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: 2px; color: var(--accent); }
+    .runner-card-club { font-family: var(--font-body); font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .bib-clear-btn { display: none; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; color: var(--text); font-size: 13px; line-height: 1; align-items: center; justify-content: center; transition: background 0.15s, color 0.15s; flex-shrink: 0; padding: 0; z-index: 5; }
+    .bib-clear-btn:hover { background: var(--accent); color: #0a0a0f; }
+    .bib-clear-btn.visible { display: flex; }
+    .bib-input.has-value { padding-right: 44px; }
+    .autocomplete-dropdown { display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); max-height: 260px; overflow-y: auto; }
+    .autocomplete-dropdown.open { display: block; }
+    .ac-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item:hover, .ac-item.focused { background: var(--surface2); }
+    .ac-bib { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; color: var(--accent); min-width: 52px; flex-shrink: 0; }
+    .ac-name { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ac-club { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+    .ac-count { font-family: var(--font-body); font-size: 11px; color: var(--accent2); background: rgba(255,107,53,0.12); padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
+    .ac-empty { padding: 14px 16px; color: var(--muted); font-size: 13px; text-align: center; }
     .status-bar { max-width: 700px; margin: 10px auto 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; min-height: 20px; letter-spacing: 0.2px; }
     .status-bar.loading { color: var(--accent); }
     .status-bar.success { color: var(--success); }
@@ -44,67 +83,17 @@
     .progress-wrap { max-width: 700px; margin: 6px auto 0; height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; display: none; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width 0.3s; }
     .progress-wrap.active { display: block; }
-
-    /* NOTICE BANNER — hidden */
     .notice-banner { display: none; }
-
-    /* VIEWER */
     #viewer-section { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
     .viewer-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .viewer-bib { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: 3px; color: var(--accent); line-height: 1; }
     .viewer-subtitle { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 5px; letter-spacing: 0.2px; }
-
-    /* RUNNER INFO CARD — hiển thị dưới viewer-bib khi search */
-    .runner-info-card {
-      display: none;
-      margin-top: 10px;
-      padding: 9px 16px;
-      background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%);
-      border: 1px solid rgba(247,201,72,0.3);
-      border-radius: 10px;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      width: fit-content;
-      max-width: 100%;
-    }
+    .runner-info-card { display: none; margin-top: 10px; padding: 9px 16px; background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%); border: 1px solid rgba(247,201,72,0.3); border-radius: 10px; flex-direction: row; align-items: center; gap: 0; width: fit-content; max-width: 100%; }
     .runner-info-card.visible { display: inline-flex; }
-    .runner-info-name {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      color: #fff;
-      line-height: 1.2;
-      white-space: nowrap;
-      padding-right: 14px;
-    }
-    .runner-info-sep {
-      width: 1px;
-      align-self: stretch;
-      background: rgba(247,201,72,0.3);
-      flex-shrink: 0;
-      margin: 0 14px 0 0;
-    }
-    .runner-info-club {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-    }
-    .runner-info-club-label {
-      color: var(--muted);
-      font-weight: 400;
-    }
-    .runner-info-club-name {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
+    .runner-info-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; color: #fff; line-height: 1.2; white-space: nowrap; padding-right: 14px; }
+    .runner-info-sep { width: 1px; align-self: stretch; background: rgba(247,201,72,0.3); flex-shrink: 0; margin: 0 14px 0 0; }
+    .runner-info-club { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .runner-info-club-name { color: var(--accent); font-weight: 600; }
     .folder-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
@@ -112,8 +101,6 @@
     .result-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .result-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
-
-    /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.93); backdrop-filter: blur(14px); align-items: center; justify-content: center; flex-direction: column; padding: 16px; cursor: pointer; }
     .lightbox.open { display: flex; }
     .lb-close { position: absolute; top: 18px; right: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
@@ -125,50 +112,13 @@
     .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,15,0.75); border: 1px solid var(--border); color: var(--text); width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; backdrop-filter: blur(6px); z-index: 5; }
     .lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
     #lb-prev { left: -64px; } #lb-next { right: -64px; }
-
-    /* RUNNER CARD IN LIGHTBOX */
     .lb-info { margin-top: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
     .lb-bib-label { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 3px; color: var(--accent); }
-
-    /* Runner name+club block inside lightbox */
-    .lb-runner-block {
-      display: none;
-      flex-direction: row;
-      align-items: center;
-      gap: 0;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07));
-      border: 1px solid rgba(247,201,72,0.25);
-      border-radius: 10px;
-      width: fit-content;
-    }
+    .lb-runner-block { display: none; flex-direction: row; align-items: center; gap: 0; padding: 8px 16px; background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07)); border: 1px solid rgba(247,201,72,0.25); border-radius: 10px; width: fit-content; }
     .lb-runner-block.visible { display: inline-flex; }
-    .lb-runner-name {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      color: #fff;
-      line-height: 1.2;
-      white-space: nowrap;
-      padding-right: 14px;
-    }
-    .lb-runner-sep {
-      width: 1px;
-      align-self: stretch;
-      background: rgba(247,201,72,0.3);
-      flex-shrink: 0;
-      margin: 0 14px 0 0;
-    }
-    .lb-runner-club {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.3px;
-      white-space: nowrap;
-    }
-
+    .lb-runner-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; color: #fff; line-height: 1.2; white-space: nowrap; padding-right: 14px; }
+    .lb-runner-sep { width: 1px; align-self: stretch; background: rgba(247,201,72,0.3); flex-shrink: 0; margin: 0 14px 0 0; }
+    .lb-runner-club { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.3px; white-space: nowrap; }
     .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
     .lb-folder-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -178,8 +128,6 @@
     .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .lb-thumb:hover { border-color: var(--muted); } .lb-thumb.active { border-color: var(--accent); }
     @media (max-width: 680px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-img { max-height: 50vh; } }
-
-    /* SECTIONS */
     .section { padding: 36px 24px; max-width: 1100px; margin: 0 auto; }
     .section-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
@@ -191,8 +139,6 @@
     .photo-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
     .skeleton { background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { to { background-position: -200% 0; } }
-
-    /* PAGINATION */
     .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 28px; flex-wrap: wrap; }
     .page-btn { width: 38px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .page-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -206,24 +152,37 @@
     .page-jump-btn { height: 38px; padding: 0 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.3px; }
     .page-jump-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; margin: 0 2px; }
-
-    /* TOAST */
     .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 13px 18px; border-radius: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 500; z-index: 3000; transform: translateY(100px); opacity: 0; transition: all 0.3s; max-width: 300px; }
     .toast.show { transform: none; opacity: 1; }
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    /* STATS */
+    /* ══ STATS WIDGET ══ */
     .stats-widget { position: fixed; bottom: 24px; left: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 6px; user-select: none; }
     .online-pill, .visits-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; cursor: default; white-space: nowrap; }
-    .online-pill:hover { border-color: var(--success); } .visits-pill:hover { border-color: var(--accent); }
+    .online-pill:hover { border-color: var(--success); }
+    .visits-pill:hover { border-color: var(--accent); }
     .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
     .visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
     .online-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
     .visits-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
 
-    /* ALBUM TABS */
+    @media (max-width: 600px) {
+      body { padding-bottom: calc(58px + env(safe-area-inset-bottom)); }
+      .toast { bottom: calc(70px + env(safe-area-inset-bottom)); right: 12px; }
+      .stats-widget { left: 0; right: 0; bottom: 0; flex-direction: row; justify-content: space-around; align-items: center; gap: 0; padding: 8px 6px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); background: rgba(10,10,15,0.97); border-top: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 0; }
+      .heart-pill, .online-pill, .visits-pill { flex: 1; justify-content: center; background: transparent; border: none; border-radius: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 4px 0; gap: 5px; font-size: 11px; }
+      .heart-pill  { border-right: 1px solid var(--border) !important; }
+      .online-pill { border-right: 1px solid var(--border) !important; }
+      .heart-icon-wrap { width: 20px; height: 20px; }
+      .heart-icon { font-size: 16px; }
+      .heart-count { font-size: 12px; }
+      .online-count, .visits-count { font-size: 12px; }
+      .online-dot, .visits-dot { width: 6px; height: 6px; }
+    }
+
+    /* ══ ALBUM TABS ══ */
     .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
     .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
     .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
@@ -232,15 +191,16 @@
     .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
     .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
-
-    /* ALBUM SECTION */
+    .tab-count .tc-sep { color: rgba(247,201,72,0.4); margin: 0 3px; font-weight: 300; }
+    .tab-count .tc-views { color: var(--accent2); }
     #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
     .album-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
     .album-header-left { display: flex; flex-direction: column; gap: 4px; }
     .album-title { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
     .album-meta { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 400; }
-    .album-back-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
-    .album-back-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .album-back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: linear-gradient(135deg, rgba(247,201,72,0.12), rgba(255,107,53,0.08)); border: 1.5px solid var(--accent); border-radius: 10px; color: var(--accent); font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; box-shadow: 0 0 10px rgba(247,201,72,0.1); }
+    .album-back-btn:hover { background: linear-gradient(135deg, rgba(247,201,72,0.22), rgba(255,107,53,0.14)); box-shadow: 0 0 18px rgba(247,201,72,0.22); transform: translateY(-1px); }
+    .album-back-btn:active { transform: translateY(0); }
     .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
     .album-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .album-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
@@ -249,6 +209,8 @@
 
     @media (max-width: 600px) {
       :root { --thumb-w: 140px; }
+      header { padding: 10px 12px; }
+      .logo { font-size: clamp(9px, 3vw, 16px); letter-spacing: 0.5px; }
       .viewer-bib { font-size: 24px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .bib-input { font-size: 20px; letter-spacing: 3px; }
@@ -256,67 +218,56 @@
       .bib-row { flex-wrap: nowrap; }
       .mf-m, .mf-f { font-size: 18px; }
       .page-jump-label { display: none; }
-      .album-tabs-wrap { gap: 6px; padding: 0 8px; }
-      .album-tab-btn { padding: 8px 12px; font-size: 11px; }
+      .album-tabs-wrap { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 8px; width: 100%; max-width: 100%; justify-content: unset; flex-wrap: unset; }
+      .album-tab-btn { padding: 8px 6px; font-size: 11px; width: 100%; min-width: 0; justify-content: center; }
       .album-title { font-size: 20px; }
       .lb-runner-name { font-size: 14px; }
     }
-    /* LYCHEE LOADING OVERLAY */
-    .lychee-loading {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(10,10,15,0.88);
-      backdrop-filter: blur(10px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-    }
+
+    /* LYCHEE LOADING */
+    .lychee-loading { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(10,10,15,0.88); backdrop-filter: blur(10px); flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
     .lychee-loading.show { display: flex; }
-    .lychee-bounce {
-      font-size: 64px;
-      animation: lychee-jump 0.7s ease-in-out infinite alternate;
-      transform-origin: bottom center;
-      filter: drop-shadow(0 8px 18px rgba(247,100,80,0.5));
+    .lychee-bounce { font-size: 64px; animation: lychee-jump 0.7s ease-in-out infinite alternate; transform-origin: bottom center; filter: drop-shadow(0 8px 18px rgba(247,100,80,0.5)); line-height: 1; }
+    @keyframes lychee-jump { 0% { transform: translateY(0) rotate(-8deg) scale(1); } 40% { transform: translateY(-28px) rotate(6deg) scale(1.08); } 70% { transform: translateY(-42px) rotate(-4deg) scale(1.12); } 100% { transform: translateY(-20px) rotate(8deg) scale(1.05); } }
+    .lychee-shadow { width: 36px; height: 10px; background: rgba(247,100,80,0.22); border-radius: 50%; animation: lychee-shadow 0.7s ease-in-out infinite alternate; margin-top: -8px; }
+    @keyframes lychee-shadow { 0% { transform: scaleX(1); opacity: 0.6; } 100% { transform: scaleX(0.5); opacity: 0.2; } }
+    .lychee-text { font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--text); letter-spacing: 0.3px; margin-top: 4px; }
+    .lychee-text em { font-style: normal; color: var(--accent); font-weight: 600; }
+
+    /* ══ HEART PILL ══ */
+    .heart-pill { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; white-space: nowrap; user-select: none; }
+    .heart-pill:hover { border-color: #f87171; }
+
+    /* CHỮ "THẢ" TRƯỚC TIM */
+    .heart-label {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: #e53935;
       line-height: 1;
+      flex-shrink: 0;
     }
-    @keyframes lychee-jump {
-      0%   { transform: translateY(0)   rotate(-8deg) scale(1);    }
-      40%  { transform: translateY(-28px) rotate(6deg) scale(1.08); }
-      70%  { transform: translateY(-42px) rotate(-4deg) scale(1.12); }
-      100% { transform: translateY(-20px) rotate(8deg) scale(1.05); }
+    @media (max-width: 600px) {
+      .heart-label { font-size: 11px; }
     }
-    .lychee-shadow {
-      width: 36px; height: 10px;
-      background: rgba(247,100,80,0.22);
-      border-radius: 50%;
-      animation: lychee-shadow 0.7s ease-in-out infinite alternate;
-      margin-top: -8px;
-    }
-    @keyframes lychee-shadow {
-      0%   { transform: scaleX(1);   opacity: 0.6; }
-      100% { transform: scaleX(0.5); opacity: 0.2; }
-    }
-    .lychee-text {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: 0.3px;
-      margin-top: 4px;
-    }
-    .lychee-text em {
-      font-style: normal;
-      color: var(--accent);
-      font-weight: 600;
-    }
+
+    .heart-icon-wrap { position: relative; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .heart-icon { font-size: 22px; line-height: 1; display: block; animation: heartPulse 2s ease-in-out infinite; transform-origin: center; }
+    @keyframes heartPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.18); } 70% { transform: scale(1.06); } }
+    .heart-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(248,113,113,0); pointer-events: none; }
+    .heart-ring-1 { animation: ringOut 2s ease-out 0s infinite; }
+    .heart-ring-2 { animation: ringOut 2s ease-out 0.65s infinite; }
+    @keyframes ringOut { 0% { transform: scale(0.6); border-color: rgba(248,113,113,0.7); } 100% { transform: scale(2.4); border-color: rgba(248,113,113,0); } }
+    .heart-pill.beat .heart-icon { animation: heartBeat 0.42s ease-out forwards; }
+    @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.55); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: #f87171; transition: color 0.3s; }
+    .float-heart { position: fixed; pointer-events: none; z-index: 4000; animation: floatUp 1.4s ease-out forwards; font-size: 18px; }
+    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--r0)); } 30% { opacity: 1; transform: translateY(-60px) scale(1.3) rotate(var(--r1)); } 70% { opacity: 0.7; transform: translateY(-130px) scale(1.1) rotate(var(--r2)); } 100% { opacity: 0; transform: translateY(-220px) scale(0.6) rotate(var(--r3)); } }
   </style>
 </head>
 <body>
 
-<!-- LYCHEE LOADING -->
 <div class="lychee-loading" id="lychee-loading">
   <div class="lychee-bounce">🍒</div>
   <div class="lychee-shadow"></div>
@@ -329,85 +280,92 @@
 
 <div class="hero">
   <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
-  <p>Nhập số BIB để tìm khoảnh khắc của bạn trong giải marathon</p>
+  <p>Nhập số BIB hoặc Tên vận động viên để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
   <div class="search-container">
     <div class="bib-row">
       <div class="mf-labels">
         <span class="mf-m">M</span><span class="mf-sep">/</span><span class="mf-f">F</span>
       </div>
-      <input class="bib-input" id="bib-input" type="text" inputmode="numeric"
-             placeholder="044" maxlength="3"
-             oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,3)"
-             onkeydown="if(event.key==='Enter') searchByBib()">
-      <button class="search-btn" onclick="searchByBib()">TÌM KIẾM</button>
+      <div style="flex:1;position:relative;min-width:0;">
+        <input class="bib-input" id="bib-input" type="text" inputmode="text"
+               placeholder="044 hoặc Tên của bạn" maxlength="50"
+               oninput="onBibInputChange(this)"
+               onkeydown="onBibInputKeyDown(event)"
+               autocomplete="off">
+        <button class="bib-clear-btn" id="bib-clear-btn" onclick="clearBibInput()" title="Xóa" tabindex="-1">✕</button>
+        <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
+      </div>
+      <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
-    <!-- ALBUM TABS — right below search -->
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
-        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...</span>
+        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khai-mac">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
-        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...</span>
+        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...<span class="tc-sep">|</span><span class="tc-views" id="tk-start-finish">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
-        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...</span>
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khoanh-khac">0</span></span>
       </button>
       <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
-        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...</span>
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...<span class="tc-sep">|</span><span class="tc-views" id="tk-btc">0</span></span>
       </button>
-      <button class="album-tab-btn" id="tab-non-bib"      onclick="openAlbumTab('non-bib')">
-        <span class="tab-icon">🙌</span> NO BIB <span class="tab-count" id="tc-non-bib">...</span>
+      <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
+        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...<span class="tc-sep">|</span><span class="tc-views" id="tk-tong-hop">0</span></span>
+      </button>
+      <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
+        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...<span class="tc-sep">|</span><span class="tc-views" id="tk-flycam">0</span></span>
       </button>
     </div>
-
     <div class="status-bar" id="status-bar"></div>
     <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
-
-    <!-- NOTICE BANNER — hidden -->
     <div class="notice-banner" style="display:none;"></div>
   </div>
 </div>
 
-<!-- VIEWER SECTION -->
+<div id="name-results-section">
+  <div class="name-results-header">
+    <div>
+      <div class="name-results-title" id="name-results-title">KẾT QUẢ TÌM KIẾM</div>
+      <div class="name-results-count" id="name-results-count"></div>
+    </div>
+    <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
+  </div>
+  <div class="runner-card-grid" id="name-results-grid"></div>
+</div>
+
 <div id="viewer-section">
   <div style="max-width:1100px;margin:0 auto;padding:0 20px;">
     <div class="viewer-header">
       <div>
         <div id="viewer-bib" class="viewer-bib"></div>
-        <!-- Runner info card shown after BIB search -->
         <div class="runner-info-card" id="runner-info-card">
           <div class="runner-info-name" id="runner-info-name"></div>
           <span class="runner-info-sep"></span>
-          <div class="runner-info-club">
-            <span class="runner-info-club-name" id="runner-info-club"></span>
-          </div>
+          <div class="runner-info-club"><span class="runner-info-club-name" id="runner-info-club"></span></div>
         </div>
         <div id="viewer-subtitle" class="viewer-subtitle" style="margin-top:8px;"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
-      <button onclick="clearResults()" style="padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;"
-        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Tất cả ảnh</button>
+      <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
     </div>
     <div class="result-grid" id="result-grid"></div>
     <div class="pagination" id="viewer-pagination"></div>
   </div>
 </div>
 
-<!-- ALBUM SECTION -->
 <div id="album-section">
   <div class="album-header">
     <div class="album-header-left">
       <div class="album-title" id="album-title"></div>
       <div class="album-meta" id="album-meta"></div>
     </div>
-    <button class="album-back-btn" onclick="closeAlbumTab()">← Trang chủ</button>
+    <button class="album-back-btn" onclick="closeAlbumTab()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
   </div>
   <div id="album-grid" class="album-grid"></div>
   <div class="pagination" id="album-pagination"></div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="handleLightboxBackdropClick(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <div class="lb-main" onclick="event.stopPropagation()">
@@ -420,7 +378,6 @@
   </div>
   <div class="lb-info" onclick="event.stopPropagation()">
     <div class="lb-bib-label" id="lb-bib-label"></div>
-    <!-- Runner name + club in lightbox -->
     <div class="lb-runner-block" id="lb-runner-block">
       <div class="lb-runner-name" id="lb-runner-name"></div>
       <span class="lb-runner-sep"></span>
@@ -432,34 +389,10 @@
   <div class="lb-thumbs" id="lb-thumbs" onclick="event.stopPropagation()"></div>
 </div>
 
-<!-- BROWSE SECTION -->
 <div class="section" id="browse-section">
   <div class="section-title">ẢNH MỚI NHẤT <span class="count-badge" id="total-count">--</span></div>
   <div class="photo-grid" id="main-grid"></div>
   <div class="pagination" id="pagination"></div>
-</div>
-
-<!-- GISCUS COMMENTS -->
-<div style="max-width:800px;margin:0 auto 60px;padding:0 24px;">
-  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:12px;">
-    💬 BÌNH LUẬN
-    <span style="flex:1;height:1px;background:var(--border);display:block;"></span>
-  </div>
-  <script src="https://giscus.app/client.js"
-    data-repo="tcr-challenge/phuchoa2026"
-    data-repo-id="R_kgDOSmUbmA"
-    data-category="General"
-    data-category-id="DIC_kwDOSmUbmM4C-D90"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="dark"
-    data-lang="vi"
-    crossorigin="anonymous"
-    async>
-  </script>
 </div>
 
 <footer style="border-top:1px solid var(--border);margin-top:60px;padding:40px 24px 32px;text-align:center;background:var(--surface);">
@@ -469,17 +402,32 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     THUONG CAT RUNNERS - TCR
   </a>
-  <div style="margin-top:18px;font-family:var(--font-body);font-size:12px;color:var(--border);letter-spacing:0.5px;">© 2026 Marathon Photos</div>
+  <div style="margin-top:18px;font-family:var(--font-body);font-size:12px;letter-spacing:0.5px;">
+    <a href="https://web.facebook.com/thuongcatbactuliemhanoi" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='#ffe080'" onmouseout="this.style.color='var(--accent)'">© 2026 Làng Bên Sông</a>
+  </div>
 </footer>
 
+<!-- STATS WIDGET -->
 <div class="stats-widget" id="stats-widget">
+  <!-- HEART PILL: chữ "Thả" đỏ + tim + số đếm -->
+  <div class="heart-pill" id="heart-pill" title="Thả tim — cảm ơn bạn!" onclick="toggleHeart()" style="cursor:pointer;">
+    <span class="heart-label">Thả</span>
+    <div class="heart-icon-wrap" id="heart-icon-wrap">
+      <span class="heart-ring heart-ring-1"></span>
+      <span class="heart-ring heart-ring-2"></span>
+      <span class="heart-icon" id="heart-icon">❤️</span>
+    </div>
+    <span class="heart-count" id="heart-count">--</span>
+    <span></span>
+  </div>
   <div class="online-pill" id="online-pill" title="Đang xem trang lúc này">
-    <span class="online-dot"></span><span class="online-count" id="online-count">--</span><span>đang online</span>
+    <span class="online-dot"></span><span class="online-count" id="online-count">--</span><span>online</span>
   </div>
   <div class="visits-pill" id="visits-pill" title="Tổng lượt truy cập">
-    <span class="visits-dot">👁</span><span class="visits-count" id="visits-count">--</span><span>lượt xem</span>
+    <span class="visits-dot"></span><span class="visits-count" id="visits-count">--</span><span>views</span>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -492,10 +440,24 @@ const CONFIG = {
 
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
 let PHOTOS  = [];
-let RUNNERS = {}; // { "M044": { name: "Nguyễn Văn A", club: "TCR" }, ... }
+let RUNNERS = {};
 let browsePage = 1;
-const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
+let BROWSE_PHOTOS = [];
 
+function buildBrowseOrder() {
+  const priority = PHOTOS.filter(p =>
+    (p.folderUrl && p.folderUrl.toLowerCase().includes('an-tuong-ph')) ||
+    (p.tab && p.tab.toLowerCase().includes('an-tuong-ph')) ||
+    (p.folder && p.folder.toLowerCase().includes('an-tuong-ph'))
+  );
+  const rest = PHOTOS.filter(p =>
+    !(p.folderUrl && p.folderUrl.toLowerCase().includes('an-tuong-ph')) &&
+    !(p.tab && p.tab.toLowerCase().includes('an-tuong-ph')) &&
+    !(p.folder && p.folder.toLowerCase().includes('an-tuong-ph'))
+  );
+  BROWSE_PHOTOS = [...priority, ...rest];
+}
+const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
 let viewerAllList = [];
 let viewerPage    = 1;
 const VIEWER_PAGE_SIZE = 50;
@@ -514,16 +476,14 @@ async function fetchAll() {
     if (!photosRes.ok) throw new Error('HTTP ' + photosRes.status);
     PHOTOS = await photosRes.json();
     showProgress(80);
-    // Runners — optional, không crash nếu file chưa có
-    if (runnersRes && runnersRes.ok) {
-      RUNNERS = await runnersRes.json();
-    }
+    if (runnersRes && runnersRes.ok) { RUNNERS = await runnersRes.json(); }
     showProgress(100);
     document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
     document.getElementById('lychee-loading').classList.remove('show');
     setStatus('Đã tải ' + PHOTOS.length.toLocaleString() + ' ảnh', 'success');
     setTimeout(() => { setStatus(''); hideProgress(); }, 2000);
     browsePage = 1;
+    buildBrowseOrder();
     renderBrowseGrid();
     updateAlbumTabCounts();
   } catch(e) {
@@ -542,34 +502,186 @@ function loadDemoData() {
     const tabs = ['khai-mac', 'start-finish', 'khoanh-khac'];
     return { id: 'demo_' + i, bib, thumb: 'https://picsum.photos/seed/' + bib + '/300/200', full: 'https://picsum.photos/seed/' + bib + '/900/600', folderUrl: '', drive: 1, tab: tabs[i % 3] };
   });
-  // Demo runners data
   RUNNERS = { 'M001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
+  buildBrowseOrder();
   renderBrowseGrid();
   updateAlbumTabCounts();
 }
 
-/* ── RUNNER LOOKUP ──
-   BIB trong ảnh dạng "M044" hoặc "F044"
-   Key trong runners.json cũng dạng "M044" / "F044" / "044"
-   Hàm này thử cả 3 dạng để tìm */
 function lookupRunner(bib) {
   if (!bib || !Object.keys(RUNNERS).length) return null;
   const b = bib.toString().toUpperCase().trim();
   if (RUNNERS[b]) return RUNNERS[b];
-  // thử không prefix
   const digits = b.replace(/^[MF]/, '');
   if (RUNNERS[digits]) return RUNNERS[digits];
-  // thử prefix ngược
   const alt = b.startsWith('M') ? 'F' + digits : b.startsWith('F') ? 'M' + digits : null;
   if (alt && RUNNERS[alt]) return RUNNERS[alt];
   return null;
 }
 
+let acFocusIdx = -1;
+
+function isLikelyBib(raw) { return /^[MmFf]?\d+$/.test(raw.trim()); }
+
+function searchRunnersByName(query) {
+  if (!query || query.length < 2) return [];
+  const q = removeVietnameseTones(query.toUpperCase().trim());
+  const results = [];
+  for (const [bib, info] of Object.entries(RUNNERS)) {
+    const nameNorm = removeVietnameseTones((info.name || '').toUpperCase());
+    const clubNorm = removeVietnameseTones((info.club || '').toUpperCase());
+    const nameWords = nameNorm.split(/\s+/);
+    const matchesName = nameNorm.includes(q) || nameWords.some(w => w.startsWith(q));
+    const matchesClub = clubNorm.includes(q);
+    if (matchesName || matchesClub) {
+      const bibDigits = bib.replace(/^[MmFf]/, '');
+      const bibPhotos = PHOTOS.filter(p => {
+        if (!p.bib) return false;
+        const pb = p.bib.toUpperCase();
+        return pb === bib.toUpperCase() || pb.replace(/^[MF]/, '') === bibDigits;
+      });
+      const photoCount = bibPhotos.length;
+      const randomPhoto = bibPhotos.length ? bibPhotos[Math.floor(Math.random() * bibPhotos.length)] : null;
+      results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: randomPhoto ? randomPhoto.thumb : null });
+    }
+  }
+  results.sort((a, b) => {
+    const an = removeVietnameseTones(a.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    const bn = removeVietnameseTones(b.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    return an - bn || a.bib.localeCompare(b.bib);
+  });
+  return results;
+}
+
+function removeVietnameseTones(str) {
+  return str
+    .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/gi, 'A')
+    .replace(/[èéẹẻẽêềếệểễ]/gi, 'E')
+    .replace(/[ìíịỉĩ]/gi, 'I')
+    .replace(/[òóọỏõôồốộổỗơờớợởỡ]/gi, 'O')
+    .replace(/[ùúụủũưừứựửữ]/gi, 'U')
+    .replace(/[ỳýỵỷỹ]/gi, 'Y')
+    .replace(/[đ]/gi, 'D');
+}
+
+function toggleClearBtn(val) {
+  const btn = document.getElementById('bib-clear-btn');
+  const inp = document.getElementById('bib-input');
+  if (val) { btn.classList.add('visible'); inp.classList.add('has-value'); }
+  else { btn.classList.remove('visible'); inp.classList.remove('has-value'); }
+}
+
+function clearBibInput() {
+  const inp = document.getElementById('bib-input');
+  inp.value = ''; inp.focus(); toggleClearBtn(''); closeAutocomplete();
+}
+
+function onBibInputChange(el) {
+  const raw = el.value;
+  acFocusIdx = -1;
+  toggleClearBtn(raw);
+  if (!raw.trim()) { closeAutocomplete(); return; }
+  if (isLikelyBib(raw)) { closeAutocomplete(); return; }
+  const results = searchRunnersByName(raw);
+  renderAutocomplete(results, raw);
+}
+
+function onBibInputKeyDown(e) {
+  const dd = document.getElementById('autocomplete-dropdown');
+  const items = dd.querySelectorAll('.ac-item');
+  if (dd.classList.contains('open') && items.length) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); acFocusIdx = Math.min(acFocusIdx + 1, items.length - 1); updateAcFocus(items); return; }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); acFocusIdx = Math.max(acFocusIdx - 1, 0); updateAcFocus(items); return; }
+    if (e.key === 'Enter') { if (acFocusIdx >= 0 && items[acFocusIdx]) { items[acFocusIdx].click(); return; } }
+    if (e.key === 'Escape') { closeAutocomplete(); return; }
+  }
+  if (e.key === 'Enter') searchByBib();
+}
+
+function updateAcFocus(items) {
+  items.forEach((el, i) => el.classList.toggle('focused', i === acFocusIdx));
+  if (items[acFocusIdx]) items[acFocusIdx].scrollIntoView({ block: 'nearest' });
+}
+
+function renderAutocomplete(results, query) {
+  const dd = document.getElementById('autocomplete-dropdown');
+  if (!results.length) { dd.innerHTML = '<div class="ac-empty">Không tìm thấy vận động viên</div>'; dd.classList.add('open'); return; }
+  const showMax = Math.min(results.length, 8);
+  dd.innerHTML = results.slice(0, showMax).map(r => {
+    const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
+    const countBadge = r.photoCount > 0 ? '<span class="ac-count">📸 ' + r.photoCount + '</span>' : '';
+    const nameHtml = highlightMatch(r.name, query);
+    return '<div class="ac-item" onclick="selectRunnerFromAc(\'' + r.bib + '\')" data-bib="' + r.bib + '">' +
+      '<span class="ac-bib">' + r.bib + '</span><span class="ac-name">' + nameHtml + '</span>' +
+      (clubText ? '<span class="ac-club">' + clubText + '</span>' : '') + countBadge + '</div>';
+  }).join('') +
+  (results.length > showMax ? '<div class="ac-empty" style="cursor:pointer;color:var(--accent);" onclick="document.getElementById(\'search-btn-main\').click()">▼ Xem thêm ' + (results.length - showMax) + ' kết quả...</div>' : '');
+  dd.classList.add('open');
+}
+
+function closeAutocomplete() { const dd = document.getElementById('autocomplete-dropdown'); dd.classList.remove('open'); dd.innerHTML = ''; acFocusIdx = -1; }
+
+function selectRunnerFromAc(bib) {
+  const inp = document.getElementById('bib-input');
+  inp.value = bib; toggleClearBtn(bib); closeAutocomplete(); searchByBib();
+}
+
+document.addEventListener('click', (e) => { if (!e.target.closest('.bib-row')) closeAutocomplete(); });
+
+function highlightMatch(text, query) {
+  const q = removeVietnameseTones(query.toUpperCase().trim());
+  const textNorm = removeVietnameseTones(text.toUpperCase());
+  const idx = textNorm.indexOf(q);
+  if (idx < 0) return text;
+  return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + q.length) + '</mark>' + text.slice(idx + q.length);
+}
+
+function rcImgError(img) {
+  img.style.display = 'none';
+  const wrap = img.parentElement;
+  const placeholder = document.createElement('div');
+  placeholder.className = 'rc-no-photo';
+  placeholder.textContent = '\u{1F464}';
+  wrap.insertBefore(placeholder, wrap.firstChild);
+}
+
+function showNameResults(results, query) {
+  closeAutocomplete();
+  document.getElementById('viewer-section').style.display   = 'none';
+  document.getElementById('browse-section').style.display   = 'none';
+  document.getElementById('album-section').style.display    = 'none';
+  const sec = document.getElementById('name-results-section');
+  sec.style.display = 'block';
+  document.getElementById('name-results-title').innerHTML = 'KẾT QUẢ TÌM KIẾM: <em>"' + query + '"</em>';
+  document.getElementById('name-results-count').textContent = 'Tìm thấy ' + results.length + ' vận động viên — chọn để xem ảnh';
+  const grid = document.getElementById('name-results-grid');
+  grid.innerHTML = results.map(r => {
+    const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
+    const nameHtml = highlightMatch(r.name, query);
+    const countBadge = r.photoCount > 0 ? '<div class="rc-photo-count">\u{1F4F8} ' + r.photoCount + '</div>' : '';
+    const thumbInner = r.thumb ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="rcImgError(this)">' : '<div class="rc-no-photo">\u{1F464}</div>';
+    return '<div class="runner-card" onclick="selectRunnerFromAc(\'' + r.bib + '\')">' +
+      '<div class="runner-card-thumb">' + thumbInner + countBadge + '</div>' +
+      '<div class="runner-card-body"><div class="runner-card-bib">' + r.bib + '</div>' +
+      '<div class="runner-card-name">' + nameHtml + '</div>' +
+      (clubText ? '<div class="runner-card-club">' + clubText + '</div>' : '') + '</div></div>';
+  }).join('');
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function searchByBib() {
+  closeAutocomplete();
   const raw = document.getElementById('bib-input').value.trim();
-  if (!raw) { showToast('Vui lòng nhập số BIB', 'error'); return; }
+  if (!raw) { showToast('Vui lòng nhập số BIB hoặc tên VĐV', 'error'); return; }
+  if (!isLikelyBib(raw)) {
+    const found = searchRunnersByName(raw);
+    if (found.length === 0) { showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return; }
+    else if (found.length === 1) { selectRunnerFromAc(found[0].bib); return; }
+    else { showNameResults(found, raw); return; }
+  }
+  document.getElementById('name-results-section').style.display = 'none';
   const digits = raw.replace(/[^0-9]/g, '');
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
   const last3  = digits.slice(-3).padStart(3, '0');
@@ -583,19 +695,15 @@ function searchByBib() {
 }
 
 function showViewer(list, label, digits) {
-  viewerAllList = list;
-  viewerPage    = 1;
+  viewerAllList = list; viewerPage = 1;
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
   document.getElementById('browse-section').style.display  = 'none';
   document.getElementById('album-section').style.display   = 'none';
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
-
-  // --- Runner info card ---
-  const card     = document.getElementById('runner-info-card');
-  const nameEl   = document.getElementById('runner-info-name');
-  const clubEl   = document.getElementById('runner-info-club');
-  // Thử tìm theo M+digits hoặc F+digits
+  const card   = document.getElementById('runner-info-card');
+  const nameEl = document.getElementById('runner-info-name');
+  const clubEl = document.getElementById('runner-info-club');
   const runnerM = lookupRunner('M' + (digits || '').padStart(3,'0'));
   const runnerF = lookupRunner('F' + (digits || '').padStart(3,'0'));
   const runner  = runnerM || runnerF;
@@ -603,17 +711,13 @@ function showViewer(list, label, digits) {
     nameEl.textContent = runner.name || '';
     clubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
     card.classList.add('visible');
-  } else {
-    card.classList.remove('visible');
-  }
-
+  } else { card.classList.remove('visible'); }
   if (list.length === 0) {
     document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
     document.getElementById('result-grid').innerHTML = '<div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">BIB <strong style="color:var(--accent)">' + label + '</strong> chưa có ảnh trong hệ thống</div>';
     document.getElementById('viewer-folder-links').innerHTML = '';
     document.getElementById('viewer-pagination').innerHTML  = '';
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' }); return;
   }
   const seen = new Set();
   const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
@@ -624,12 +728,11 @@ function showViewer(list, label, digits) {
 }
 
 function renderViewerPage() {
-  const total      = viewerAllList.length;
+  const total = viewerAllList.length;
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
-  const start      = (viewerPage - 1) * VIEWER_PAGE_SIZE;
-  const pageItems  = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
-  document.getElementById('viewer-subtitle').textContent =
-    total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
+  const start = (viewerPage - 1) * VIEWER_PAGE_SIZE;
+  const pageItems = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
+  document.getElementById('viewer-subtitle').textContent = total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
   const grid = document.getElementById('result-grid');
   grid.innerHTML = pageItems.map((photo, i) =>
     '<div class="result-card" onclick="openLightboxViewer(' + (start + i) + ')" title="Ảnh ' + (start+i+1) + '">' +
@@ -646,10 +749,7 @@ function renderViewerPagination(total) {
   el.innerHTML = buildPaginationHTML(viewerPage, totalPages, 'goViewerPage');
 }
 
-function goViewerPage(p) {
-  viewerPage = p; renderViewerPage();
-  document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goViewerPage(p) { viewerPage = p; renderViewerPage(); document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpViewerPage() {
   const input = document.getElementById('viewer-jump-input');
   const totalPages = Math.ceil(viewerAllList.length / VIEWER_PAGE_SIZE);
@@ -666,16 +766,9 @@ function openLightboxViewer(globalIdx) {
   document.addEventListener('keydown', lbKeyHandler);
 }
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-  document.removeEventListener('keydown', lbKeyHandler);
-}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; document.removeEventListener('keydown', lbKeyHandler); }
 function handleLightboxBackdropClick(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
-function lbNav(dir) {
-  viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length;
-  renderLightboxImage(); syncLbThumbs();
-}
+function lbNav(dir) { viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length; renderLightboxImage(); syncLbThumbs(); }
 
 function renderLightboxImage() {
   const list  = viewerAllList.length ? viewerAllList : PHOTOS;
@@ -684,17 +777,12 @@ function renderLightboxImage() {
   const img     = document.getElementById('lb-img');
   const spinner = document.getElementById('lb-spinner');
   img.classList.add('hidden'); spinner.style.display = 'flex'; spinner.textContent = 'Đang tải ảnh...';
-
   let displayUrl = photo.thumb;
   if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
   else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
-
-  // BIB label
   const bibLabel = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
   document.getElementById('lb-bib-label').textContent = bibLabel;
-
-  // Runner info in lightbox
   const runnerBlock = document.getElementById('lb-runner-block');
   const runnerNameEl = document.getElementById('lb-runner-name');
   const runnerClubEl = document.getElementById('lb-runner-club');
@@ -703,10 +791,7 @@ function renderLightboxImage() {
     runnerNameEl.textContent = runner.name || '';
     runnerClubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
     runnerBlock.classList.add('visible');
-  } else {
-    runnerBlock.classList.remove('visible');
-  }
-
+  } else { runnerBlock.classList.remove('visible'); }
   document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + list.length;
   const folderBtn = document.getElementById('lb-folder-btn');
   if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; }
@@ -736,19 +821,21 @@ function lbKeyHandler(e) { if (e.key==='Escape') closeLightbox(); if (e.key==='A
 
 function clearResults() {
   document.getElementById('viewer-section').style.display = 'none';
+  document.getElementById('name-results-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
+  toggleClearBtn(''); closeAutocomplete();
   document.getElementById('runner-info-card').classList.remove('visible');
-  viewerAllList = [];
-  setStatus('', '');
+  viewerAllList = []; setStatus('', '');
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderBrowseGrid() {
   const grid  = document.getElementById('main-grid');
-  const total = PHOTOS.length;
+  const list  = BROWSE_PHOTOS.length ? BROWSE_PHOTOS : PHOTOS;
+  const total = list.length;
   const start = (browsePage - 1) * BROWSE_PAGE_SIZE;
-  const page  = PHOTOS.slice(start, start + BROWSE_PAGE_SIZE);
+  const page  = list.slice(start, start + BROWSE_PAGE_SIZE);
   if (total === 0) { grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px;">Chưa có dữ liệu ảnh</div>'; document.getElementById('pagination').innerHTML = ''; return; }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -762,8 +849,7 @@ function renderBrowseGrid() {
       card.innerHTML = '<img src="' + photo.thumb + '" alt="" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
         (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
       card.onclick = () => {
-        viewerAllList = PHOTOS;
-        viewerIndex   = start + parseInt(card.dataset.idx);
+        viewerAllList = list; viewerIndex = start + parseInt(card.dataset.idx);
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
         renderLightboxImage(); buildLbThumbs();
@@ -783,10 +869,7 @@ function renderBrowsePagination(total) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(browsePage, totalPages, 'goBrowsePage');
 }
-function goBrowsePage(p) {
-  browsePage = p; renderBrowseGrid();
-  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goBrowsePage(p) { browsePage = p; renderBrowseGrid(); document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpBrowsePage() {
   const input = document.getElementById('browse-jump-input');
   const totalPages = Math.ceil(PHOTOS.length / BROWSE_PAGE_SIZE);
@@ -822,13 +905,13 @@ function showProgress(pct) { document.getElementById('progress-wrap').classList.
 function hideProgress()    { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
-/* ══ ALBUM TABS ══ */
 const ALBUM_DEFS = [
   { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
   { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
   { key: 'btc',          label: 'BAN TỔ CHỨC',    icon: '🏅' },
-  { key: 'non-bib',      label: 'NO BIB',         icon: '🙌' },
+  { key: 'tong-hop',      label: 'TỔNG HỢP',       icon: '🙌' },
+  { key: 'flycam',        label: 'FLYCAM',          icon: '🚁' },
 ];
 const ALBUM_PAGE_SIZE = 50;
 let activeAlbumKey   = null;
@@ -839,11 +922,15 @@ function updateAlbumTabCounts() {
   ALBUM_DEFS.forEach(def => {
     const count = PHOTOS.filter(p => p.tab === def.key).length;
     const el = document.getElementById('tc-' + def.key);
-    if (el) el.textContent = count > 0 ? count.toLocaleString() : '0';
+    if (!el) return;
+    const firstNode = el.childNodes[0];
+    if (firstNode && firstNode.nodeType === 3) { firstNode.textContent = count > 0 ? count.toLocaleString() : '0'; }
+    else { el.insertBefore(document.createTextNode(count > 0 ? count.toLocaleString() : '0'), el.firstChild); }
   });
 }
 function openAlbumTab(key) {
   ALBUM_DEFS.forEach(def => { const btn = document.getElementById('tab-' + def.key); if (btn) btn.classList.toggle('active', def.key === key); });
+  trackTabClick(key);
   activeAlbumKey   = key;
   albumCurrentList = PHOTOS.filter(p => p.tab === key);
   albumPage = 1;
@@ -886,10 +973,7 @@ function renderAlbumPagination(total) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(albumPage, totalPages, 'goAlbumPage');
 }
-function goAlbumPage(p) {
-  albumPage = p; renderAlbumPage();
-  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goAlbumPage(p) { albumPage = p; renderAlbumPage(); document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpAlbumPage() {
   const input = document.getElementById('album-jump-input');
   const totalPages = Math.ceil(albumCurrentList.length / ALBUM_PAGE_SIZE);
@@ -898,15 +982,23 @@ function jumpAlbumPage() {
   input.value = ''; goAlbumPage(p);
 }
 function openLightboxAlbum(globalIdx) {
-  viewerAllList = albumCurrentList;
-  viewerIndex   = globalIdx;
+  viewerAllList = albumCurrentList; viewerIndex = globalIdx;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderLightboxImage(); buildLbThumbs();
   document.addEventListener('keydown', lbKeyHandler);
 }
 
-/* ══ FIREBASE ══ */
+let _tabDb = null;
+function trackTabClick(key) { if (!_tabDb) return; _tabDb.ref('tab_clicks/' + key).transaction(cur => (cur || 0) + 1); }
+function initTabTracking(db) {
+  _tabDb = db;
+  const fmtClicks = n => { if (!n) return '0'; if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; return n.toLocaleString('vi-VN'); };
+  ['khai-mac','start-finish','khoanh-khac','btc','tong-hop','flycam'].forEach(key => {
+    db.ref('tab_clicks/' + key).on('value', snap => { const el = document.getElementById('tk-' + key); if (el) el.textContent = fmtClicks(snap.val() || 0); });
+  });
+}
+
 (function () {
   const firebaseConfig = {
     apiKey: "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
@@ -922,16 +1014,17 @@ function openLightboxAlbum(globalIdx) {
   s1.onload = () => {
     const s2 = document.createElement('script');
     s2.src = 'https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js';
-    s2.onload = () => initOnlineCounter(firebaseConfig);
+    s2.onload = () => initFirebase(firebaseConfig);
     document.head.appendChild(s2);
   };
   document.head.appendChild(s1);
 })();
-function initOnlineCounter(config) {
+
+function initFirebase(config) {
   try {
     firebase.initializeApp(config);
     const db = firebase.database();
-    const connRef = db.ref('.info/connected');
+    const connRef   = db.ref('.info/connected');
     const onlineRef = db.ref('online_users');
     const visitsRef = db.ref('total_visits');
     const myRef = onlineRef.push();
@@ -939,11 +1032,53 @@ function initOnlineCounter(config) {
     onlineRef.on('value', snap => { const el = document.getElementById('online-count'); if (el) el.textContent = snap.numChildren(); });
     visitsRef.transaction(cur => (cur || 0) + 1);
     visitsRef.on('value', snap => { const total = snap.val() || 0; const el = document.getElementById('visits-count'); if (el) el.textContent = total.toLocaleString('vi-VN'); });
+    initTabTracking(db);
+    initHeartWidget(db);
   } catch (e) {
     console.warn('Firebase error:', e);
     const w = document.getElementById('stats-widget');
     if (w) w.style.display = 'none';
   }
+}
+
+function initHeartWidget(db) {
+  const pill    = document.getElementById('heart-pill');
+  const icon    = document.getElementById('heart-icon');
+  const countEl = document.getElementById('heart-count');
+  const heartsRef = db.ref('total_hearts');
+  icon.textContent = '❤️';
+  function fmtCount(n) { if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; return n.toLocaleString('vi-VN'); }
+  function updateUI(count) { countEl.textContent = fmtCount(count); }
+  function spawnFloatingHeart() {
+    const rect = pill.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2; const cy = rect.top;
+    const x = cx + (Math.random() - 0.5) * 60;
+    const el = document.createElement('div');
+    el.className = 'float-heart';
+    el.textContent = ['❤️', '🧡', '💗', '💕', '💖'][Math.floor(Math.random() * 5)];
+    el.style.left = x + 'px'; el.style.top = cy + 'px';
+    el.style.fontSize = (14 + Math.random() * 14) + 'px';
+    el.style.setProperty('--r0', (Math.random()*20-10) + 'deg');
+    el.style.setProperty('--r1', (Math.random()*30-15) + 'deg');
+    el.style.setProperty('--r2', (Math.random()*20-10) + 'deg');
+    el.style.setProperty('--r3', (Math.random()*30-15) + 'deg');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500);
+  }
+  window.toggleHeart = function () {
+    const wrap = document.getElementById('heart-icon-wrap');
+    icon.textContent = '❤️';
+    icon.classList.add('loved'); countEl.classList.add('active');
+    if (wrap) wrap.classList.add('loved');
+    pill.classList.add('beat');
+    pill.addEventListener('animationend', () => pill.classList.remove('beat'), { once: true });
+    const count = 5 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) setTimeout(spawnFloatingHeart, i * 90);
+    heartsRef.transaction(cur => (cur || 0) + 1, (err, committed, snap) => { if (!err && snap) updateUI(snap.val() || 0); });
+    const cur = parseInt(countEl.textContent.replace(/[^0-9]/g, '')) || 0;
+    updateUI(cur + 1);
+  };
+  heartsRef.on('value', snap => updateUI(snap.val() || 0));
 }
 </script>
 </body>
