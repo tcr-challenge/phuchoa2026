@@ -183,12 +183,15 @@
     }
 
     /* ══ ALBUM TABS ══ */
-    .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
+    .album-tabs-outer { max-width: 700px; margin: 10px auto 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .album-tabs-wrap { display: grid; grid-template-columns: 1fr 1fr; }
+    .album-tab-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; padding: 13px 18px; background: var(--surface); border: none; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; width: 100%; }
+    .album-tab-btn:nth-child(2n)       { border-right: none; }
+    .album-tab-btn:nth-last-child(-n+2) { border-bottom: none; }
     .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
-    .album-tab-btn:hover { border-color: var(--accent); color: var(--text); }
+    .album-tab-btn:hover { background: var(--surface2); color: var(--text); }
     .album-tab-btn:hover::before { opacity: 1; }
-    .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.15), rgba(255,107,53,0.08)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(247,201,72,0.15); }
+    .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.13), rgba(255,107,53,0.07)); color: var(--accent); }
     .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
     .tab-count .tc-sep { color: rgba(247,201,72,0.4); margin: 0 3px; font-weight: 300; }
@@ -218,8 +221,8 @@
       .bib-row { flex-wrap: nowrap; }
       .mf-m, .mf-f { font-size: 18px; }
       .page-jump-label { display: none; }
-      .album-tabs-wrap { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 8px; width: 100%; max-width: 100%; justify-content: unset; flex-wrap: unset; }
-      .album-tab-btn { padding: 8px 6px; font-size: 11px; width: 100%; min-width: 0; justify-content: center; }
+      .album-tabs-outer { max-width: 100%; margin: 10px 8px 0; }
+      .album-tab-btn { padding: 11px 6px; font-size: 11px; }
       .album-title { font-size: 20px; }
       .lb-runner-name { font-size: 14px; }
     }
@@ -297,25 +300,27 @@
       </div>
       <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
+    <div class="album-tabs-outer">
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
-        <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khai-mac">0</span></span>
+        <span class="tab-icon">🎪</span> KHAI MẠC
       </button>
       <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
-        <span class="tab-icon">🏁</span> START / FINISH <span class="tab-count" id="tc-start-finish">...<span class="tc-sep">|</span><span class="tc-views" id="tk-start-finish">0</span></span>
+        <span class="tab-icon">🏁</span> START / FINISH
       </button>
       <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
-        <span class="tab-icon">📸</span> KHOẢNH KHẮC <span class="tab-count" id="tc-khoanh-khac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khoanh-khac">0</span></span>
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC
       </button>
       <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
-        <span class="tab-icon">🏅</span> BAN TỔ CHỨC <span class="tab-count" id="tc-btc">...<span class="tc-sep">|</span><span class="tc-views" id="tk-btc">0</span></span>
+        <span class="tab-icon">🏅</span> BAN TỔ CHỨC
       </button>
       <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
-        <span class="tab-icon">🙌</span> TỔNG HỢP <span class="tab-count" id="tc-tong-hop">...<span class="tc-sep">|</span><span class="tc-views" id="tk-tong-hop">0</span></span>
+        <span class="tab-icon">🙌</span> TỔNG HỢP
       </button>
       <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
-        <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...<span class="tc-sep">|</span><span class="tc-views" id="tk-flycam">0</span></span>
+        <span class="tab-icon">🚁</span> FLYCAM
       </button>
+    </div>
     </div>
     <div class="status-bar" id="status-bar"></div>
     <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
