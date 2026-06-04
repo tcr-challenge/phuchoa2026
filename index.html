@@ -34,77 +34,44 @@
     .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
     .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
     .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
+    /* ẨN M/F LABELS TRÊN MOBILE */
+    @media (max-width: 600px) {
+      .mf-labels { display: none; }
+    }
     .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 2px; outline: none; transition: border-color 0.2s; min-width: 0; width: 100%; }
     .bib-input::placeholder { color: var(--border); font-size: 16px; letter-spacing: 1px; }
     .bib-input:focus { border-color: var(--accent); }
     .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
     .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
     .search-btn:active { transform: translateY(0); }
-    /* NAME RESULTS — lưới VĐV nhiều kết quả */
     #name-results-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
     .name-results-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
     .name-results-title { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 1px; color: var(--text); }
     .name-results-title em { color: var(--accent); font-style: normal; }
     .name-results-count { font-family: var(--font-body); font-size: 13px; color: var(--muted); }
     .runner-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .runner-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      overflow: hidden; cursor: pointer; transition: all 0.2s;
-      display: flex; flex-direction: column;
-    }
+    .runner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; }
     .runner-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(247,201,72,0.18); transform: translateY(-2px); }
-    .runner-card-thumb {
-      width: 100%; aspect-ratio: 3/2; background: var(--surface2); overflow: hidden; position: relative;
-    }
+    .runner-card-thumb { width: 100%; aspect-ratio: 3/2; background: var(--surface2); overflow: hidden; position: relative; }
     .runner-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
     .runner-card:hover .runner-card-thumb img { transform: scale(1.06); }
-    .runner-card-thumb .rc-no-photo {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      font-size: 36px; color: var(--border); background: var(--surface2);
-    }
-    .runner-card-thumb .rc-photo-count {
-      position: absolute; top: 6px; right: 6px;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-      color: var(--accent); font-family: var(--font-display); font-weight: 700;
-      font-size: 11px; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px;
-    }
+    .runner-card-thumb .rc-no-photo { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: var(--border); background: var(--surface2); }
+    .runner-card-thumb .rc-photo-count { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; }
     .runner-card-body { padding: 10px 12px 12px; flex: 1; display: flex; flex-direction: column; gap: 3px; }
     .runner-card-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--text); line-height: 1.3; }
     .runner-card-name mark { background: rgba(247,201,72,0.28); color: var(--accent); border-radius: 2px; }
     .runner-card-bib { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: 2px; color: var(--accent); }
     .runner-card-club { font-family: var(--font-body); font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-
-    /* CLEAR BUTTON inside input */
-    .bib-clear-btn {
-      display: none; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      width: 24px; height: 24px; border-radius: 50%;
-      background: var(--border); border: none; cursor: pointer;
-      color: var(--text); font-size: 13px; line-height: 1;
-      align-items: center; justify-content: center;
-      transition: background 0.15s, color 0.15s; flex-shrink: 0; padding: 0;
-      z-index: 5;
-    }
+    .bib-clear-btn { display: none; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; color: var(--text); font-size: 13px; line-height: 1; align-items: center; justify-content: center; transition: background 0.15s, color 0.15s; flex-shrink: 0; padding: 0; z-index: 5; }
     .bib-clear-btn:hover { background: var(--accent); color: #0a0a0f; }
     .bib-clear-btn.visible { display: flex; }
-    /* Shift input padding so text doesn't go under X button */
     .bib-input.has-value { padding-right: 44px; }
-
-    /* AUTOCOMPLETE DROPDOWN */
-    .autocomplete-dropdown {
-      display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-      max-height: 260px; overflow-y: auto;
-    }
+    .autocomplete-dropdown { display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); max-height: 260px; overflow-y: auto; }
     .autocomplete-dropdown.open { display: block; }
-    .ac-item {
-      display: flex; align-items: center; gap: 12px; padding: 10px 16px;
-      cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border);
-    }
+    .ac-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
     .ac-item:last-child { border-bottom: none; }
     .ac-item:hover, .ac-item.focused { background: var(--surface2); }
-    .ac-bib { font-family: var(--font-display); font-weight: 700; font-size: 15px;
-              letter-spacing: 1px; color: var(--accent); min-width: 52px; flex-shrink: 0; }
+    .ac-bib { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; color: var(--accent); min-width: 52px; flex-shrink: 0; }
     .ac-name { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .ac-club { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
     .ac-count { font-family: var(--font-body); font-size: 11px; color: var(--accent2); background: rgba(255,107,53,0.12); padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
@@ -116,27 +83,17 @@
     .progress-wrap { max-width: 700px; margin: 6px auto 0; height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; display: none; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width 0.3s; }
     .progress-wrap.active { display: block; }
-
     .notice-banner { display: none; }
-
-    /* VIEWER */
     #viewer-section { display: none; max-width: 1100px; margin: 40px auto; padding: 0 20px; }
     .viewer-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .viewer-bib { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: 3px; color: var(--accent); line-height: 1; }
     .viewer-subtitle { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 5px; letter-spacing: 0.2px; }
-
-    .runner-info-card {
-      display: none; margin-top: 10px; padding: 9px 16px;
-      background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%);
-      border: 1px solid rgba(247,201,72,0.3); border-radius: 10px;
-      flex-direction: row; align-items: center; gap: 0; width: fit-content; max-width: 100%;
-    }
+    .runner-info-card { display: none; margin-top: 10px; padding: 9px 16px; background: linear-gradient(135deg, rgba(247,201,72,0.08) 0%, rgba(255,107,53,0.06) 100%); border: 1px solid rgba(247,201,72,0.3); border-radius: 10px; flex-direction: row; align-items: center; gap: 0; width: fit-content; max-width: 100%; }
     .runner-info-card.visible { display: inline-flex; }
     .runner-info-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; color: #fff; line-height: 1.2; white-space: nowrap; padding-right: 14px; }
     .runner-info-sep { width: 1px; align-self: stretch; background: rgba(247,201,72,0.3); flex-shrink: 0; margin: 0 14px 0 0; }
     .runner-info-club { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 5px; white-space: nowrap; }
     .runner-info-club-name { color: var(--accent); font-weight: 600; }
-
     .folder-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
@@ -144,8 +101,6 @@
     .result-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .result-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
-
-    /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.93); backdrop-filter: blur(14px); align-items: center; justify-content: center; flex-direction: column; padding: 16px; cursor: pointer; }
     .lightbox.open { display: flex; }
     .lb-close { position: absolute; top: 18px; right: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
@@ -157,21 +112,13 @@
     .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,15,0.75); border: 1px solid var(--border); color: var(--text); width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; backdrop-filter: blur(6px); z-index: 5; }
     .lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(10,10,15,0.95); }
     #lb-prev { left: -64px; } #lb-next { right: -64px; }
-
     .lb-info { margin-top: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
     .lb-bib-label { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 3px; color: var(--accent); }
-
-    .lb-runner-block {
-      display: none; flex-direction: row; align-items: center; gap: 0;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07));
-      border: 1px solid rgba(247,201,72,0.25); border-radius: 10px; width: fit-content;
-    }
+    .lb-runner-block { display: none; flex-direction: row; align-items: center; gap: 0; padding: 8px 16px; background: linear-gradient(135deg, rgba(247,201,72,0.1), rgba(255,107,53,0.07)); border: 1px solid rgba(247,201,72,0.25); border-radius: 10px; width: fit-content; }
     .lb-runner-block.visible { display: inline-flex; }
     .lb-runner-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px; color: #fff; line-height: 1.2; white-space: nowrap; padding-right: 14px; }
     .lb-runner-sep { width: 1px; align-self: stretch; background: rgba(247,201,72,0.3); flex-shrink: 0; margin: 0 14px 0 0; }
     .lb-runner-club { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.3px; white-space: nowrap; }
-
     .lb-counter { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--muted); }
     .lb-folder-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .lb-folder-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -181,8 +128,6 @@
     .lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .lb-thumb:hover { border-color: var(--muted); } .lb-thumb.active { border-color: var(--accent); }
     @media (max-width: 680px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-img { max-height: 50vh; } }
-
-    /* SECTIONS */
     .section { padding: 36px 24px; max-width: 1100px; margin: 0 auto; }
     .section-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
@@ -194,8 +139,6 @@
     .photo-card .bib-tag { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 4px; }
     .skeleton { background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
     @keyframes shimmer { to { background-position: -200% 0; } }
-
-    /* PAGINATION */
     .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 28px; flex-wrap: wrap; }
     .page-btn { width: 38px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .page-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -209,138 +152,37 @@
     .page-jump-btn { height: 38px; padding: 0 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; letter-spacing: 0.3px; }
     .page-jump-btn:hover { border-color: var(--accent); color: var(--accent); }
     .page-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; margin: 0 2px; }
-
-    /* TOAST */
     .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 13px 18px; border-radius: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 500; z-index: 3000; transform: translateY(100px); opacity: 0; transition: all 0.3s; max-width: 300px; }
     .toast.show { transform: none; opacity: 1; }
     .toast.success { border-color: var(--success); color: var(--success); }
     .toast.error { border-color: #f87171; color: #f87171; }
 
-    /* ══════════════════════════════════════════
-       STATS WIDGET — Desktop: cột dọc góc trái
-       ══════════════════════════════════════════ */
-    .stats-widget {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      z-index: 3000;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      user-select: none;
-    }
-
-    .online-pill,
-    .visits-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: rgba(19,19,26,0.92);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted);
-      backdrop-filter: blur(12px);
-      transition: border-color 0.2s;
-      cursor: default;
-      white-space: nowrap;
-    }
+    /* ══ STATS WIDGET ══ */
+    .stats-widget { position: fixed; bottom: 24px; left: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 6px; user-select: none; }
+    .online-pill, .visits-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; cursor: default; white-space: nowrap; }
     .online-pill:hover { border-color: var(--success); }
     .visits-pill:hover { border-color: var(--accent); }
+    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
+    .visits-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
+    .online-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
+    .visits-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
 
-    .online-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--success);
-      flex-shrink: 0;
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-    .visits-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.75); }
-    }
-    .online-count  { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--success); }
-    .visits-count  { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: var(--accent); }
-
-    /* ══════════════════════════════════════════
-       STATS WIDGET — Mobile ≤ 600px:
-       Thanh ngang cố định đáy, 3 pill 1 hàng
-       Loại trừ iPad (> 600px) & Fold mở (> 600px)
-       ══════════════════════════════════════════ */
     @media (max-width: 600px) {
-      /* Đẩy nội dung trang lên để thanh pill không che footer */
-      body {
-        padding-bottom: calc(58px + env(safe-area-inset-bottom));
-      }
-
-      /* Toast không bị che bởi stats bar */
-      .toast {
-        bottom: calc(70px + env(safe-area-inset-bottom));
-        right: 12px;
-      }
-
-      .stats-widget {
-        /* Reset desktop */
-        left: 0;
-        right: 0;
-        bottom: 0;
-        /* Layout ngang */
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        gap: 0;
-        /* Khoảng cách + safe area iOS */
-        padding: 8px 6px;
-        padding-bottom: calc(8px + env(safe-area-inset-bottom));
-        /* Nền mờ */
-        background: rgba(10,10,15,0.97);
-        border-top: 1px solid var(--border);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 0;
-      }
-
-      /* Mỗi pill chiếm 1/3 hàng ngang, bỏ background riêng */
-      .heart-pill,
-      .online-pill,
-      .visits-pill {
-        flex: 1;
-        justify-content: center;
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        padding: 4px 0;
-        gap: 5px;
-        font-size: 11px;
-      }
-
-      /* Ngăn cách dọc nhẹ giữa các pill */
+      body { padding-bottom: calc(58px + env(safe-area-inset-bottom)); }
+      .toast { bottom: calc(70px + env(safe-area-inset-bottom)); right: 12px; }
+      .stats-widget { left: 0; right: 0; bottom: 0; flex-direction: row; justify-content: space-around; align-items: center; gap: 0; padding: 8px 6px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); background: rgba(10,10,15,0.97); border-top: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 0; }
+      .heart-pill, .online-pill, .visits-pill { flex: 1; justify-content: center; background: transparent; border: none; border-radius: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 4px 0; gap: 5px; font-size: 11px; }
       .heart-pill  { border-right: 1px solid var(--border) !important; }
       .online-pill { border-right: 1px solid var(--border) !important; }
-
-      /* Thu nhỏ icon tim */
       .heart-icon-wrap { width: 20px; height: 20px; }
       .heart-icon { font-size: 16px; }
       .heart-count { font-size: 12px; }
-
-      .online-count,
-      .visits-count { font-size: 12px; }
-      .online-dot,
-      .visits-dot { width: 6px; height: 6px; }
+      .online-count, .visits-count { font-size: 12px; }
+      .online-dot, .visits-dot { width: 6px; height: 6px; }
     }
 
-    /* ALBUM TABS */
+    /* ══ ALBUM TABS ══ */
     .album-tabs-wrap { max-width: 700px; margin: 10px auto 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
     .album-tab-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; }
     .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
@@ -351,8 +193,6 @@
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
     .tab-count .tc-sep { color: rgba(247,201,72,0.4); margin: 0 3px; font-weight: 300; }
     .tab-count .tc-views { color: var(--accent2); }
-
-    /* ALBUM SECTION */
     #album-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px 60px; }
     .album-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
     .album-header-left { display: flex; flex-direction: column; gap: 4px; }
@@ -378,23 +218,8 @@
       .bib-row { flex-wrap: nowrap; }
       .mf-m, .mf-f { font-size: 18px; }
       .page-jump-label { display: none; }
-      .album-tabs-wrap {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-        padding: 0 8px;
-        width: 100%;
-        max-width: 100%;
-        justify-content: unset;
-        flex-wrap: unset;
-      }
-      .album-tab-btn {
-        padding: 8px 6px;
-        font-size: 11px;
-        width: 100%;
-        min-width: 0;
-        justify-content: center;
-      }
+      .album-tabs-wrap { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 8px; width: 100%; max-width: 100%; justify-content: unset; flex-wrap: unset; }
+      .album-tab-btn { padding: 8px 6px; font-size: 11px; width: 100%; min-width: 0; justify-content: center; }
       .album-title { font-size: 20px; }
       .lb-runner-name { font-size: 14px; }
     }
@@ -409,38 +234,40 @@
     .lychee-text { font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--text); letter-spacing: 0.3px; margin-top: 4px; }
     .lychee-text em { font-style: normal; color: var(--accent); font-weight: 600; }
 
-    /* HEART PILL */
+    /* ══ HEART PILL ══ */
     .heart-pill { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(19,19,26,0.92); border: 1px solid var(--border); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--muted); backdrop-filter: blur(12px); transition: border-color 0.2s; white-space: nowrap; user-select: none; }
     .heart-pill:hover { border-color: #f87171; }
+
+    /* CHỮ "THẢ" TRƯỚC TIM */
+    .heart-label {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: #e53935;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .heart-label { font-size: 11px; }
+    }
+
     .heart-icon-wrap { position: relative; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .heart-icon { font-size: 22px; line-height: 1; display: block; animation: heartPulse 2s ease-in-out infinite; transform-origin: center; }
-    @keyframes heartPulse {
-      0%, 100% { transform: scale(1); }
-      40%       { transform: scale(1.18); }
-      70%       { transform: scale(1.06); }
-    }
+    @keyframes heartPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.18); } 70% { transform: scale(1.06); } }
     .heart-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(248,113,113,0); pointer-events: none; }
     .heart-ring-1 { animation: ringOut 2s ease-out 0s infinite; }
     .heart-ring-2 { animation: ringOut 2s ease-out 0.65s infinite; }
-    @keyframes ringOut {
-      0%   { transform: scale(0.6); border-color: rgba(248,113,113,0.7); }
-      100% { transform: scale(2.4); border-color: rgba(248,113,113,0); }
-    }
+    @keyframes ringOut { 0% { transform: scale(0.6); border-color: rgba(248,113,113,0.7); } 100% { transform: scale(2.4); border-color: rgba(248,113,113,0); } }
     .heart-pill.beat .heart-icon { animation: heartBeat 0.42s ease-out forwards; }
     @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.55); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
     .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: #f87171; transition: color 0.3s; }
     .float-heart { position: fixed; pointer-events: none; z-index: 4000; animation: floatUp 1.4s ease-out forwards; font-size: 18px; }
-    @keyframes floatUp {
-      0%   { opacity: 1;   transform: translateY(0)     scale(1)    rotate(var(--r0)); }
-      30%  { opacity: 1;   transform: translateY(-60px)  scale(1.3)  rotate(var(--r1)); }
-      70%  { opacity: 0.7; transform: translateY(-130px) scale(1.1)  rotate(var(--r2)); }
-      100% { opacity: 0;   transform: translateY(-220px) scale(0.6)  rotate(var(--r3)); }
-    }
+    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--r0)); } 30% { opacity: 1; transform: translateY(-60px) scale(1.3) rotate(var(--r1)); } 70% { opacity: 0.7; transform: translateY(-130px) scale(1.1) rotate(var(--r2)); } 100% { opacity: 0; transform: translateY(-220px) scale(0.6) rotate(var(--r3)); } }
   </style>
 </head>
 <body>
 
-<!-- LYCHEE LOADING -->
 <div class="lychee-loading" id="lychee-loading">
   <div class="lychee-bounce">🍒</div>
   <div class="lychee-shadow"></div>
@@ -470,7 +297,6 @@
       </div>
       <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
     </div>
-    <!-- ALBUM TABS -->
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
         <span class="tab-icon">🎪</span> KHAI MẠC <span class="tab-count" id="tc-khai-mac">...<span class="tc-sep">|</span><span class="tc-views" id="tk-khai-mac">0</span></span>
@@ -491,28 +317,23 @@
         <span class="tab-icon">🚁</span> FLYCAM <span class="tab-count" id="tc-flycam">...<span class="tc-sep">|</span><span class="tc-views" id="tk-flycam">0</span></span>
       </button>
     </div>
-
     <div class="status-bar" id="status-bar"></div>
     <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="notice-banner" style="display:none;"></div>
   </div>
 </div>
 
-<!-- NAME RESULTS SECTION — nhiều VĐV cùng tên -->
 <div id="name-results-section">
   <div class="name-results-header">
     <div>
       <div class="name-results-title" id="name-results-title">KẾT QUẢ TÌM KIẾM</div>
       <div class="name-results-count" id="name-results-count"></div>
     </div>
-    <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;"
-      onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'"
-      onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"> <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
+    <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
   </div>
   <div class="runner-card-grid" id="name-results-grid"></div>
 </div>
 
-<!-- VIEWER SECTION -->
 <div id="viewer-section">
   <div style="max-width:1100px;margin:0 auto;padding:0 20px;">
     <div class="viewer-header">
@@ -521,23 +342,18 @@
         <div class="runner-info-card" id="runner-info-card">
           <div class="runner-info-name" id="runner-info-name"></div>
           <span class="runner-info-sep"></span>
-          <div class="runner-info-club">
-            <span class="runner-info-club-name" id="runner-info-club"></span>
-          </div>
+          <div class="runner-info-club"><span class="runner-info-club-name" id="runner-info-club"></span></div>
         </div>
         <div id="viewer-subtitle" class="viewer-subtitle" style="margin-top:8px;"></div>
       </div>
       <div id="viewer-folder-links" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"></div>
-      <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;"
-        onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'"
-        onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
+      <button onclick="clearResults()" style="padding:10px 20px;background:linear-gradient(135deg,rgba(247,201,72,0.12),rgba(255,107,53,0.08));border:1.5px solid var(--accent);border-radius:10px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;box-shadow:0 0 10px rgba(247,201,72,0.1);display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.boxShadow='0 0 18px rgba(247,201,72,0.22)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='0 0 10px rgba(247,201,72,0.1)';this.style.transform=''"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg> TRANG CHỦ</button>
     </div>
     <div class="result-grid" id="result-grid"></div>
     <div class="pagination" id="viewer-pagination"></div>
   </div>
 </div>
 
-<!-- ALBUM SECTION -->
 <div id="album-section">
   <div class="album-header">
     <div class="album-header-left">
@@ -550,7 +366,6 @@
   <div class="pagination" id="album-pagination"></div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="handleLightboxBackdropClick(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <div class="lb-main" onclick="event.stopPropagation()">
@@ -574,7 +389,6 @@
   <div class="lb-thumbs" id="lb-thumbs" onclick="event.stopPropagation()"></div>
 </div>
 
-<!-- BROWSE SECTION -->
 <div class="section" id="browse-section">
   <div class="section-title">ẢNH MỚI NHẤT <span class="count-badge" id="total-count">--</span></div>
   <div class="photo-grid" id="main-grid"></div>
@@ -593,9 +407,11 @@
   </div>
 </footer>
 
-<!-- STATS WIDGET (heart on top) -->
+<!-- STATS WIDGET -->
 <div class="stats-widget" id="stats-widget">
+  <!-- HEART PILL: chữ "Thả" đỏ + tim + số đếm -->
   <div class="heart-pill" id="heart-pill" title="Thả tim — cảm ơn bạn!" onclick="toggleHeart()" style="cursor:pointer;">
+    <span class="heart-label">Thả</span>
     <div class="heart-icon-wrap" id="heart-icon-wrap">
       <span class="heart-ring heart-ring-1"></span>
       <span class="heart-ring heart-ring-2"></span>
@@ -626,7 +442,7 @@ const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) |
 let PHOTOS  = [];
 let RUNNERS = {};
 let browsePage = 1;
-let BROWSE_PHOTOS = []; // sorted: an-tuong-ph first
+let BROWSE_PHOTOS = [];
 
 function buildBrowseOrder() {
   const priority = PHOTOS.filter(p =>
@@ -642,7 +458,6 @@ function buildBrowseOrder() {
   BROWSE_PHOTOS = [...priority, ...rest];
 }
 const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
-
 let viewerAllList = [];
 let viewerPage    = 1;
 const VIEWER_PAGE_SIZE = 50;
@@ -661,9 +476,7 @@ async function fetchAll() {
     if (!photosRes.ok) throw new Error('HTTP ' + photosRes.status);
     PHOTOS = await photosRes.json();
     showProgress(80);
-    if (runnersRes && runnersRes.ok) {
-      RUNNERS = await runnersRes.json();
-    }
+    if (runnersRes && runnersRes.ok) { RUNNERS = await runnersRes.json(); }
     showProgress(100);
     document.getElementById('total-count').textContent = PHOTOS.length.toLocaleString();
     document.getElementById('lychee-loading').classList.remove('show');
@@ -708,13 +521,9 @@ function lookupRunner(bib) {
   return null;
 }
 
-/* ── Autocomplete state ── */
 let acFocusIdx = -1;
 
-function isLikelyBib(raw) {
-  // Là BIB chỉ khi: thuần số (044) hoặc M/F + số (M044, F44)
-  return /^[MmFf]?\d+$/.test(raw.trim());
-}
+function isLikelyBib(raw) { return /^[MmFf]?\d+$/.test(raw.trim()); }
 
 function searchRunnersByName(query) {
   if (!query || query.length < 2) return [];
@@ -723,13 +532,10 @@ function searchRunnersByName(query) {
   for (const [bib, info] of Object.entries(RUNNERS)) {
     const nameNorm = removeVietnameseTones((info.name || '').toUpperCase());
     const clubNorm = removeVietnameseTones((info.club || '').toUpperCase());
-    // Tìm khớp bất kỳ từ nào trong tên (tách theo dấu cách)
     const nameWords = nameNorm.split(/\s+/);
     const matchesName = nameNorm.includes(q) || nameWords.some(w => w.startsWith(q));
     const matchesClub = clubNorm.includes(q);
     if (matchesName || matchesClub) {
-      // BIB trong RUNNERS có thể là "069", còn PHOTOS dùng "M069"/"F069"
-      // So sánh phần số (digits) để khớp cả hai kiểu
       const bibDigits = bib.replace(/^[MmFf]/, '');
       const bibPhotos = PHOTOS.filter(p => {
         if (!p.bib) return false;
@@ -737,12 +543,10 @@ function searchRunnersByName(query) {
         return pb === bib.toUpperCase() || pb.replace(/^[MF]/, '') === bibDigits;
       });
       const photoCount = bibPhotos.length;
-      // Lấy ngẫu nhiên 1 ảnh làm thumbnail đại diện
       const randomPhoto = bibPhotos.length ? bibPhotos[Math.floor(Math.random() * bibPhotos.length)] : null;
       results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: randomPhoto ? randomPhoto.thumb : null });
     }
   }
-  // Sắp xếp: trùng đầu từ lên trên, sau đó theo BIB
   results.sort((a, b) => {
     const an = removeVietnameseTones(a.name.toUpperCase()).startsWith(q) ? 0 : 1;
     const bn = removeVietnameseTones(b.name.toUpperCase()).startsWith(q) ? 0 : 1;
@@ -751,7 +555,6 @@ function searchRunnersByName(query) {
   return results;
 }
 
-// Bỏ dấu tiếng Việt để so sánh không phân biệt dấu
 function removeVietnameseTones(str) {
   return str
     .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/gi, 'A')
@@ -766,35 +569,21 @@ function removeVietnameseTones(str) {
 function toggleClearBtn(val) {
   const btn = document.getElementById('bib-clear-btn');
   const inp = document.getElementById('bib-input');
-  if (val) {
-    btn.classList.add('visible');
-    inp.classList.add('has-value');
-  } else {
-    btn.classList.remove('visible');
-    inp.classList.remove('has-value');
-  }
+  if (val) { btn.classList.add('visible'); inp.classList.add('has-value'); }
+  else { btn.classList.remove('visible'); inp.classList.remove('has-value'); }
 }
 
 function clearBibInput() {
   const inp = document.getElementById('bib-input');
-  inp.value = '';
-  inp.focus();
-  toggleClearBtn('');
-  closeAutocomplete();
+  inp.value = ''; inp.focus(); toggleClearBtn(''); closeAutocomplete();
 }
 
 function onBibInputChange(el) {
   const raw = el.value;
   acFocusIdx = -1;
   toggleClearBtn(raw);
-
-  // Nếu trống, ẩn dropdown
   if (!raw.trim()) { closeAutocomplete(); return; }
-
-  // Nếu nhập BIB số → không gợi ý dropdown
   if (isLikelyBib(raw)) { closeAutocomplete(); return; }
-
-  // Tìm theo tên
   const results = searchRunnersByName(raw);
   renderAutocomplete(results, raw);
 }
@@ -803,23 +592,9 @@ function onBibInputKeyDown(e) {
   const dd = document.getElementById('autocomplete-dropdown');
   const items = dd.querySelectorAll('.ac-item');
   if (dd.classList.contains('open') && items.length) {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      acFocusIdx = Math.min(acFocusIdx + 1, items.length - 1);
-      updateAcFocus(items);
-      return;
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      acFocusIdx = Math.max(acFocusIdx - 1, 0);
-      updateAcFocus(items);
-      return;
-    }
-    if (e.key === 'Enter') {
-      if (acFocusIdx >= 0 && items[acFocusIdx]) {
-        items[acFocusIdx].click(); return;
-      }
-    }
+    if (e.key === 'ArrowDown') { e.preventDefault(); acFocusIdx = Math.min(acFocusIdx + 1, items.length - 1); updateAcFocus(items); return; }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); acFocusIdx = Math.max(acFocusIdx - 1, 0); updateAcFocus(items); return; }
+    if (e.key === 'Enter') { if (acFocusIdx >= 0 && items[acFocusIdx]) { items[acFocusIdx].click(); return; } }
     if (e.key === 'Escape') { closeAutocomplete(); return; }
   }
   if (e.key === 'Enter') searchByBib();
@@ -832,59 +607,38 @@ function updateAcFocus(items) {
 
 function renderAutocomplete(results, query) {
   const dd = document.getElementById('autocomplete-dropdown');
-  if (!results.length) {
-    dd.innerHTML = '<div class="ac-empty">Không tìm thấy vận động viên</div>';
-    dd.classList.add('open');
-    return;
-  }
+  if (!results.length) { dd.innerHTML = '<div class="ac-empty">Không tìm thấy vận động viên</div>'; dd.classList.add('open'); return; }
   const showMax = Math.min(results.length, 8);
   dd.innerHTML = results.slice(0, showMax).map(r => {
     const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
     const countBadge = r.photoCount > 0 ? '<span class="ac-count">📸 ' + r.photoCount + '</span>' : '';
     const nameHtml = highlightMatch(r.name, query);
     return '<div class="ac-item" onclick="selectRunnerFromAc(\'' + r.bib + '\')" data-bib="' + r.bib + '">' +
-      '<span class="ac-bib">' + r.bib + '</span>' +
-      '<span class="ac-name">' + nameHtml + '</span>' +
-      (clubText ? '<span class="ac-club">' + clubText + '</span>' : '') +
-      countBadge +
-      '</div>';
+      '<span class="ac-bib">' + r.bib + '</span><span class="ac-name">' + nameHtml + '</span>' +
+      (clubText ? '<span class="ac-club">' + clubText + '</span>' : '') + countBadge + '</div>';
   }).join('') +
   (results.length > showMax ? '<div class="ac-empty" style="cursor:pointer;color:var(--accent);" onclick="document.getElementById(\'search-btn-main\').click()">▼ Xem thêm ' + (results.length - showMax) + ' kết quả...</div>' : '');
   dd.classList.add('open');
 }
 
-function closeAutocomplete() {
-  const dd = document.getElementById('autocomplete-dropdown');
-  dd.classList.remove('open');
-  dd.innerHTML = '';
-  acFocusIdx = -1;
-}
+function closeAutocomplete() { const dd = document.getElementById('autocomplete-dropdown'); dd.classList.remove('open'); dd.innerHTML = ''; acFocusIdx = -1; }
 
 function selectRunnerFromAc(bib) {
   const inp = document.getElementById('bib-input');
-  inp.value = bib;
-  toggleClearBtn(bib);
-  closeAutocomplete();
-  searchByBib();
+  inp.value = bib; toggleClearBtn(bib); closeAutocomplete(); searchByBib();
 }
 
-// Đóng dropdown khi click ra ngoài
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.bib-row')) closeAutocomplete();
-});
+document.addEventListener('click', (e) => { if (!e.target.closest('.bib-row')) closeAutocomplete(); });
 
 function highlightMatch(text, query) {
   const q = removeVietnameseTones(query.toUpperCase().trim());
   const textNorm = removeVietnameseTones(text.toUpperCase());
   const idx = textNorm.indexOf(q);
   if (idx < 0) return text;
-  return text.slice(0, idx) +
-    '<mark>' + text.slice(idx, idx + q.length) + '</mark>' +
-    text.slice(idx + q.length);
+  return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + q.length) + '</mark>' + text.slice(idx + q.length);
 }
 
 function rcImgError(img) {
-  // Ảnh lỗi → thay bằng placeholder giữ nguyên badge đếm
   img.style.display = 'none';
   const wrap = img.parentElement;
   const placeholder = document.createElement('div');
@@ -895,36 +649,25 @@ function rcImgError(img) {
 
 function showNameResults(results, query) {
   closeAutocomplete();
-  // Ẩn các section khác
   document.getElementById('viewer-section').style.display   = 'none';
   document.getElementById('browse-section').style.display   = 'none';
   document.getElementById('album-section').style.display    = 'none';
   const sec = document.getElementById('name-results-section');
   sec.style.display = 'block';
-
-  document.getElementById('name-results-title').innerHTML =
-    'KẾT QUẢ TÌM KIẾM: <em>"' + query + '"</em>';
-  document.getElementById('name-results-count').textContent =
-    'Tìm thấy ' + results.length + ' vận động viên — chọn để xem ảnh';
-
+  document.getElementById('name-results-title').innerHTML = 'KẾT QUẢ TÌM KIẾM: <em>"' + query + '"</em>';
+  document.getElementById('name-results-count').textContent = 'Tìm thấy ' + results.length + ' vận động viên — chọn để xem ảnh';
   const grid = document.getElementById('name-results-grid');
   grid.innerHTML = results.map(r => {
     const clubText = (r.club && r.club.trim() && r.club.toLowerCase() !== 'nan') ? r.club : '';
     const nameHtml = highlightMatch(r.name, query);
-    const countBadge = r.photoCount > 0
-      ? '<div class="rc-photo-count">\u{1F4F8} ' + r.photoCount + '</div>' : '';
-    const thumbInner = r.thumb
-      ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="rcImgError(this)">'
-      : '<div class="rc-no-photo">\u{1F464}</div>';
+    const countBadge = r.photoCount > 0 ? '<div class="rc-photo-count">\u{1F4F8} ' + r.photoCount + '</div>' : '';
+    const thumbInner = r.thumb ? '<img src="' + r.thumb + '" alt="" loading="lazy" onerror="rcImgError(this)">' : '<div class="rc-no-photo">\u{1F464}</div>';
     return '<div class="runner-card" onclick="selectRunnerFromAc(\'' + r.bib + '\')">' +
       '<div class="runner-card-thumb">' + thumbInner + countBadge + '</div>' +
-      '<div class="runner-card-body">' +
-        '<div class="runner-card-bib">' + r.bib + '</div>' +
-        '<div class="runner-card-name">' + nameHtml + '</div>' +
-        (clubText ? '<div class="runner-card-club">' + clubText + '</div>' : '') +
-      '</div></div>';
+      '<div class="runner-card-body"><div class="runner-card-bib">' + r.bib + '</div>' +
+      '<div class="runner-card-name">' + nameHtml + '</div>' +
+      (clubText ? '<div class="runner-card-club">' + clubText + '</div>' : '') + '</div></div>';
   }).join('');
-
   sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -932,23 +675,12 @@ function searchByBib() {
   closeAutocomplete();
   const raw = document.getElementById('bib-input').value.trim();
   if (!raw) { showToast('Vui lòng nhập số BIB hoặc tên VĐV', 'error'); return; }
-
-  // Nếu nhập tên (không phải BIB số) → tìm theo tên
   if (!isLikelyBib(raw)) {
     const found = searchRunnersByName(raw);
-    if (found.length === 0) {
-      showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return;
-    } else if (found.length === 1) {
-      selectRunnerFromAc(found[0].bib);
-      return;
-    } else {
-      // Nhiều kết quả → hiện lưới chọn
-      showNameResults(found, raw);
-      return;
-    }
+    if (found.length === 0) { showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return; }
+    else if (found.length === 1) { selectRunnerFromAc(found[0].bib); return; }
+    else { showNameResults(found, raw); return; }
   }
-
-  // Tìm theo BIB số
   document.getElementById('name-results-section').style.display = 'none';
   const digits = raw.replace(/[^0-9]/g, '');
   if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
@@ -963,17 +695,15 @@ function searchByBib() {
 }
 
 function showViewer(list, label, digits) {
-  viewerAllList = list;
-  viewerPage    = 1;
+  viewerAllList = list; viewerPage = 1;
   const section = document.getElementById('viewer-section');
   section.style.display = 'block';
   document.getElementById('browse-section').style.display  = 'none';
   document.getElementById('album-section').style.display   = 'none';
   document.getElementById('viewer-bib').textContent = 'BIB ' + label;
-
-  const card     = document.getElementById('runner-info-card');
-  const nameEl   = document.getElementById('runner-info-name');
-  const clubEl   = document.getElementById('runner-info-club');
+  const card   = document.getElementById('runner-info-card');
+  const nameEl = document.getElementById('runner-info-name');
+  const clubEl = document.getElementById('runner-info-club');
   const runnerM = lookupRunner('M' + (digits || '').padStart(3,'0'));
   const runnerF = lookupRunner('F' + (digits || '').padStart(3,'0'));
   const runner  = runnerM || runnerF;
@@ -981,17 +711,13 @@ function showViewer(list, label, digits) {
     nameEl.textContent = runner.name || '';
     clubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
     card.classList.add('visible');
-  } else {
-    card.classList.remove('visible');
-  }
-
+  } else { card.classList.remove('visible'); }
   if (list.length === 0) {
     document.getElementById('viewer-subtitle').textContent = 'Không tìm thấy ảnh nào trong hệ thống';
     document.getElementById('result-grid').innerHTML = '<div style="color:var(--muted);padding:40px 0;font-size:14px;grid-column:1/-1;text-align:center;">BIB <strong style="color:var(--accent)">' + label + '</strong> chưa có ảnh trong hệ thống</div>';
     document.getElementById('viewer-folder-links').innerHTML = '';
     document.getElementById('viewer-pagination').innerHTML  = '';
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' }); return;
   }
   const seen = new Set();
   const linksHtml = list.filter(p => { const url = p.folderUrl; if (!url || seen.has(url)) return false; seen.add(url); return true; })
@@ -1002,12 +728,11 @@ function showViewer(list, label, digits) {
 }
 
 function renderViewerPage() {
-  const total      = viewerAllList.length;
+  const total = viewerAllList.length;
   const totalPages = Math.ceil(total / VIEWER_PAGE_SIZE);
-  const start      = (viewerPage - 1) * VIEWER_PAGE_SIZE;
-  const pageItems  = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
-  document.getElementById('viewer-subtitle').textContent =
-    total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
+  const start = (viewerPage - 1) * VIEWER_PAGE_SIZE;
+  const pageItems = viewerAllList.slice(start, start + VIEWER_PAGE_SIZE);
+  document.getElementById('viewer-subtitle').textContent = total + ' ảnh — Trang ' + viewerPage + '/' + totalPages + ' — click để xem lớn';
   const grid = document.getElementById('result-grid');
   grid.innerHTML = pageItems.map((photo, i) =>
     '<div class="result-card" onclick="openLightboxViewer(' + (start + i) + ')" title="Ảnh ' + (start+i+1) + '">' +
@@ -1024,10 +749,7 @@ function renderViewerPagination(total) {
   el.innerHTML = buildPaginationHTML(viewerPage, totalPages, 'goViewerPage');
 }
 
-function goViewerPage(p) {
-  viewerPage = p; renderViewerPage();
-  document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goViewerPage(p) { viewerPage = p; renderViewerPage(); document.getElementById('viewer-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpViewerPage() {
   const input = document.getElementById('viewer-jump-input');
   const totalPages = Math.ceil(viewerAllList.length / VIEWER_PAGE_SIZE);
@@ -1044,16 +766,9 @@ function openLightboxViewer(globalIdx) {
   document.addEventListener('keydown', lbKeyHandler);
 }
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-  document.removeEventListener('keydown', lbKeyHandler);
-}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; document.removeEventListener('keydown', lbKeyHandler); }
 function handleLightboxBackdropClick(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
-function lbNav(dir) {
-  viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length;
-  renderLightboxImage(); syncLbThumbs();
-}
+function lbNav(dir) { viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length; renderLightboxImage(); syncLbThumbs(); }
 
 function renderLightboxImage() {
   const list  = viewerAllList.length ? viewerAllList : PHOTOS;
@@ -1062,15 +777,12 @@ function renderLightboxImage() {
   const img     = document.getElementById('lb-img');
   const spinner = document.getElementById('lb-spinner');
   img.classList.add('hidden'); spinner.style.display = 'flex'; spinner.textContent = 'Đang tải ảnh...';
-
   let displayUrl = photo.thumb;
   if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
   else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
-
   const bibLabel = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
   document.getElementById('lb-bib-label').textContent = bibLabel;
-
   const runnerBlock = document.getElementById('lb-runner-block');
   const runnerNameEl = document.getElementById('lb-runner-name');
   const runnerClubEl = document.getElementById('lb-runner-club');
@@ -1079,10 +791,7 @@ function renderLightboxImage() {
     runnerNameEl.textContent = runner.name || '';
     runnerClubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
     runnerBlock.classList.add('visible');
-  } else {
-    runnerBlock.classList.remove('visible');
-  }
-
+  } else { runnerBlock.classList.remove('visible'); }
   document.getElementById('lb-counter').textContent = (viewerIndex + 1) + ' / ' + list.length;
   const folderBtn = document.getElementById('lb-folder-btn');
   if (photo.folderUrl) { folderBtn.href = photo.folderUrl; folderBtn.style.display = ''; }
@@ -1115,11 +824,9 @@ function clearResults() {
   document.getElementById('name-results-section').style.display = 'none';
   document.getElementById('browse-section').style.display = '';
   document.getElementById('bib-input').value = '';
-  toggleClearBtn('');
-  closeAutocomplete();
+  toggleClearBtn(''); closeAutocomplete();
   document.getElementById('runner-info-card').classList.remove('visible');
-  viewerAllList = [];
-  setStatus('', '');
+  viewerAllList = []; setStatus('', '');
   document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1142,8 +849,7 @@ function renderBrowseGrid() {
       card.innerHTML = '<img src="' + photo.thumb + '" alt="" onerror="this.src=\'https://placehold.co/300x200/1c1c27/7070a0?text=?\'">' +
         (photo.bib ? '<div class="bib-tag">' + photo.bib + '</div>' : '');
       card.onclick = () => {
-        viewerAllList = list;
-        viewerIndex   = start + parseInt(card.dataset.idx);
+        viewerAllList = list; viewerIndex = start + parseInt(card.dataset.idx);
         document.getElementById('lightbox').classList.add('open');
         document.body.style.overflow = 'hidden';
         renderLightboxImage(); buildLbThumbs();
@@ -1163,10 +869,7 @@ function renderBrowsePagination(total) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(browsePage, totalPages, 'goBrowsePage');
 }
-function goBrowsePage(p) {
-  browsePage = p; renderBrowseGrid();
-  document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goBrowsePage(p) { browsePage = p; renderBrowseGrid(); document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpBrowsePage() {
   const input = document.getElementById('browse-jump-input');
   const totalPages = Math.ceil(PHOTOS.length / BROWSE_PAGE_SIZE);
@@ -1202,7 +905,6 @@ function showProgress(pct) { document.getElementById('progress-wrap').classList.
 function hideProgress()    { document.getElementById('progress-wrap').classList.remove('active'); document.getElementById('progress-fill').style.width = '0%'; }
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
-/* ══ ALBUM TABS ══ */
 const ALBUM_DEFS = [
   { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
@@ -1221,13 +923,9 @@ function updateAlbumTabCounts() {
     const count = PHOTOS.filter(p => p.tab === def.key).length;
     const el = document.getElementById('tc-' + def.key);
     if (!el) return;
-    // Chỉ cập nhật text node đầu (số ảnh), giữ nguyên .tc-sep và .tc-views bên trong
     const firstNode = el.childNodes[0];
-    if (firstNode && firstNode.nodeType === 3) {
-      firstNode.textContent = count > 0 ? count.toLocaleString() : '0';
-    } else {
-      el.insertBefore(document.createTextNode(count > 0 ? count.toLocaleString() : '0'), el.firstChild);
-    }
+    if (firstNode && firstNode.nodeType === 3) { firstNode.textContent = count > 0 ? count.toLocaleString() : '0'; }
+    else { el.insertBefore(document.createTextNode(count > 0 ? count.toLocaleString() : '0'), el.firstChild); }
   });
 }
 function openAlbumTab(key) {
@@ -1275,10 +973,7 @@ function renderAlbumPagination(total) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   el.innerHTML = buildPaginationHTML(albumPage, totalPages, 'goAlbumPage');
 }
-function goAlbumPage(p) {
-  albumPage = p; renderAlbumPage();
-  document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+function goAlbumPage(p) { albumPage = p; renderAlbumPage(); document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function jumpAlbumPage() {
   const input = document.getElementById('album-jump-input');
   const totalPages = Math.ceil(albumCurrentList.length / ALBUM_PAGE_SIZE);
@@ -1287,39 +982,23 @@ function jumpAlbumPage() {
   input.value = ''; goAlbumPage(p);
 }
 function openLightboxAlbum(globalIdx) {
-  viewerAllList = albumCurrentList;
-  viewerIndex   = globalIdx;
+  viewerAllList = albumCurrentList; viewerIndex = globalIdx;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderLightboxImage(); buildLbThumbs();
   document.addEventListener('keydown', lbKeyHandler);
 }
 
-/* ══ TAB CLICK TRACKING ══ */
 let _tabDb = null;
-
-function trackTabClick(key) {
-  if (!_tabDb) return;
-  const ref = _tabDb.ref('tab_clicks/' + key);
-  ref.transaction(cur => (cur || 0) + 1);
-}
-
+function trackTabClick(key) { if (!_tabDb) return; _tabDb.ref('tab_clicks/' + key).transaction(cur => (cur || 0) + 1); }
 function initTabTracking(db) {
   _tabDb = db;
-  const fmtClicks = n => {
-    if (!n) return '0';
-    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    return n.toLocaleString('vi-VN');
-  };
+  const fmtClicks = n => { if (!n) return '0'; if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; return n.toLocaleString('vi-VN'); };
   ['khai-mac','start-finish','khoanh-khac','btc','tong-hop','flycam'].forEach(key => {
-    db.ref('tab_clicks/' + key).on('value', snap => {
-      const el = document.getElementById('tk-' + key);
-      if (el) el.textContent = fmtClicks(snap.val() || 0);
-    });
+    db.ref('tab_clicks/' + key).on('value', snap => { const el = document.getElementById('tk-' + key); if (el) el.textContent = fmtClicks(snap.val() || 0); });
   });
 }
 
-/* ══ FIREBASE ══ */
 (function () {
   const firebaseConfig = {
     apiKey: "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
@@ -1345,8 +1024,6 @@ function initFirebase(config) {
   try {
     firebase.initializeApp(config);
     const db = firebase.database();
-
-    /* ── Online counter ── */
     const connRef   = db.ref('.info/connected');
     const onlineRef = db.ref('online_users');
     const visitsRef = db.ref('total_visits');
@@ -1355,13 +1032,8 @@ function initFirebase(config) {
     onlineRef.on('value', snap => { const el = document.getElementById('online-count'); if (el) el.textContent = snap.numChildren(); });
     visitsRef.transaction(cur => (cur || 0) + 1);
     visitsRef.on('value', snap => { const total = snap.val() || 0; const el = document.getElementById('visits-count'); if (el) el.textContent = total.toLocaleString('vi-VN'); });
-
-    /* ── Tab click tracking ── */
     initTabTracking(db);
-
-    /* ── Heart widget ── */
     initHeartWidget(db);
-
   } catch (e) {
     console.warn('Firebase error:', e);
     const w = document.getElementById('stats-widget');
@@ -1369,35 +1041,22 @@ function initFirebase(config) {
   }
 }
 
-/* ══ HEART WIDGET ══ */
 function initHeartWidget(db) {
   const pill    = document.getElementById('heart-pill');
   const icon    = document.getElementById('heart-icon');
   const countEl = document.getElementById('heart-count');
   const heartsRef = db.ref('total_hearts');
-
   icon.textContent = '❤️';
-
-  function fmtCount(n) {
-    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-    return n.toLocaleString('vi-VN');
-  }
-
-  function updateUI(count) {
-    countEl.textContent = fmtCount(count);
-  }
-
+  function fmtCount(n) { if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; return n.toLocaleString('vi-VN'); }
+  function updateUI(count) { countEl.textContent = fmtCount(count); }
   function spawnFloatingHeart() {
     const rect = pill.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top;
-    const spread = 30;
-    const x = cx + (Math.random() - 0.5) * spread * 2;
+    const cx = rect.left + rect.width / 2; const cy = rect.top;
+    const x = cx + (Math.random() - 0.5) * 60;
     const el = document.createElement('div');
     el.className = 'float-heart';
     el.textContent = ['❤️', '🧡', '💗', '💕', '💖'][Math.floor(Math.random() * 5)];
-    el.style.left = x + 'px';
-    el.style.top  = cy + 'px';
+    el.style.left = x + 'px'; el.style.top = cy + 'px';
     el.style.fontSize = (14 + Math.random() * 14) + 'px';
     el.style.setProperty('--r0', (Math.random()*20-10) + 'deg');
     el.style.setProperty('--r1', (Math.random()*30-15) + 'deg');
@@ -1406,30 +1065,19 @@ function initHeartWidget(db) {
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 1500);
   }
-
   window.toggleHeart = function () {
     const wrap = document.getElementById('heart-icon-wrap');
     icon.textContent = '❤️';
-    icon.classList.add('loved');
-    countEl.classList.add('active');
+    icon.classList.add('loved'); countEl.classList.add('active');
     if (wrap) wrap.classList.add('loved');
-
     pill.classList.add('beat');
     pill.addEventListener('animationend', () => pill.classList.remove('beat'), { once: true });
-
     const count = 5 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < count; i++) {
-      setTimeout(spawnFloatingHeart, i * 90);
-    }
-
-    heartsRef.transaction(cur => (cur || 0) + 1, (err, committed, snap) => {
-      if (!err && snap) updateUI(snap.val() || 0);
-    });
-
+    for (let i = 0; i < count; i++) setTimeout(spawnFloatingHeart, i * 90);
+    heartsRef.transaction(cur => (cur || 0) + 1, (err, committed, snap) => { if (!err && snap) updateUI(snap.val() || 0); });
     const cur = parseInt(countEl.textContent.replace(/[^0-9]/g, '')) || 0;
     updateUI(cur + 1);
   };
-
   heartsRef.on('value', snap => updateUI(snap.val() || 0));
 }
 </script>
