@@ -252,20 +252,37 @@
       .heart-label { font-size: 11px; }
     }
 
-    .heart-icon-wrap { position: relative; width: 32px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .vn-flag { width: 32px; height: 22px; display: block; transform-origin: left center; animation: flagWave 2.2s ease-in-out infinite; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)); }
-    @keyframes flagWave {
-      0%   { transform: skewY(0deg) scaleX(1);   }
-      15%  { transform: skewY(1.5deg) scaleX(0.97); }
-      30%  { transform: skewY(-1deg) scaleX(1.01); }
-      45%  { transform: skewY(2deg) scaleX(0.96);  }
-      60%  { transform: skewY(-0.5deg) scaleX(1);  }
-      75%  { transform: skewY(1deg) scaleX(0.98);  }
-      100% { transform: skewY(0deg) scaleX(1);     }
+    .heart-icon-wrap { position: relative; width: 32px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .vn-flag { width: 32px; height: 28px; display: block; filter: drop-shadow(0 2px 6px rgba(229,57,53,0.55)); animation: heartPulse 1.8s ease-in-out infinite; }
+    @keyframes heartPulse {
+      0%   { transform: scale(1); }
+      14%  { transform: scale(1.12); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.07); }
+      56%  { transform: scale(1); }
+      100% { transform: scale(1); }
     }
-    .heart-ring { display: none; }
-    .heart-pill.beat .vn-flag { animation: flagBeat 0.42s ease-out forwards, flagWave 2.2s ease-in-out 0.42s infinite; }
-    @keyframes flagBeat { 0% { transform: scale(1); } 25% { transform: scale(1.35); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    /* Vòng sáng tỏa ra */
+    .heart-ring {
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(229,57,53,0.7);
+      width: 32px; height: 32px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      animation: ringPulse 2.4s ease-out infinite;
+      pointer-events: none;
+    }
+    .heart-ring.ring2 { animation-delay: 0.8s; }
+    .heart-ring.ring3 { animation-delay: 1.6s; }
+    @keyframes ringPulse {
+      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; border-color: rgba(229,57,53,0.8); }
+      100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0;   border-color: rgba(229,57,53,0); }
+    }
+    .heart-pill.beat .vn-flag { animation: heartBeat 0.42s ease-out forwards, heartPulse 1.8s ease-in-out 0.42s infinite; }
+    @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.4); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
     .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: #f87171; transition: color 0.3s; }
     .float-heart { position: fixed; pointer-events: none; z-index: 4000; animation: floatUp 1.4s ease-out forwards; font-size: 18px; }
     @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--r0)); } 30% { opacity: 1; transform: translateY(-60px) scale(1.3) rotate(var(--r1)); } 70% { opacity: 0.7; transform: translateY(-130px) scale(1.1) rotate(var(--r2)); } 100% { opacity: 0; transform: translateY(-220px) scale(0.6) rotate(var(--r3)); } }
@@ -416,14 +433,16 @@
 
 <!-- STATS WIDGET -->
 <div class="stats-widget" id="stats-widget">
-  <!-- HEART PILL: chữ "YÊU" đỏ + tim + số đếm -->
+  <!-- HEART PILL: chữ "Thả" đỏ + tim + số đếm -->
   <div class="heart-pill" id="heart-pill" title="Thả tim — cảm ơn bạn!" onclick="toggleHeart()" style="cursor:pointer;">
-    <span class="heart-label">YÊU</span>
+    <span class="heart-label">Thả</span>
     <div class="heart-icon-wrap" id="heart-icon-wrap">
-      <svg class="vn-flag" id="heart-icon" viewBox="0 0 32 22" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="22" rx="1.5" fill="#DA251D"/>
-        <polygon points="16,3.5 17.47,8.09 22.29,8.09 18.41,10.91 19.88,15.5 16,12.68 12.12,15.5 13.59,10.91 9.71,8.09 14.53,8.09" fill="#FFCD00"/>
+      <svg class="vn-flag" id="heart-icon" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 24 C16 24 4 16 4 9 C4 5.7 6.7 3 10 3 C12.2 3 14.2 4.2 15.3 6 C15.6 6.5 16.4 6.5 16.7 6 C17.8 4.2 19.8 3 22 3 C25.3 3 28 5.7 28 9 C28 16 16 24 16 24Z" fill="#e53935"/>
       </svg>
+      <span class="heart-ring ring1"></span>
+      <span class="heart-ring ring2"></span>
+      <span class="heart-ring ring3"></span>
     </div>
     <span class="heart-count" id="heart-count">--</span>
     <span></span>
@@ -1062,7 +1081,7 @@ function initHeartWidget(db) {
     const x = cx + (Math.random() - 0.5) * 60;
     const el = document.createElement('div');
     el.className = 'float-heart';
-    el.textContent = ['🇻🇳', '❤️', '⭐', '💛', '🌟'][Math.floor(Math.random() * 5)];
+    el.textContent = ['❤️', '🩷', '💗', '💖', '💕'][Math.floor(Math.random() * 5)];
     el.style.left = x + 'px'; el.style.top = cy + 'px';
     el.style.fontSize = (14 + Math.random() * 14) + 'px';
     el.style.setProperty('--r0', (Math.random()*20-10) + 'deg');
