@@ -17,34 +17,33 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    /* ══ HERO BANNER ══ */
-    header { display: none; }
-    .hero { position: relative; padding: 0; overflow: hidden; min-height: 520px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1a0a2e 0%, #0d1a35 40%, #0a0a0f 100%); z-index: 0; }
-    .hero-bg::before { content: ''; position: absolute; inset: 0; background: url('images/banner.jpg') center/cover no-repeat; opacity: 0.50; }
-    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.5) 60%, rgba(10,10,15,0.92) 100%); }
-    .hero-content { position: relative; z-index: 2; width: 100%; text-align: center; padding: 56px 20px 44px; display: flex; flex-direction: column; align-items: center; gap: 0; }
-    .hero-top-badge { display: inline-block; background: var(--accent); color: #0a0a0f; font-family: var(--font-display); font-weight: 800; font-size: clamp(11px, 2vw, 14px); letter-spacing: 3px; padding: 7px 22px; border-radius: 4px; margin-bottom: 18px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(247,201,72,0.35); }
-    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(42px, 10vw, 96px); letter-spacing: 1px; line-height: 1; margin: 0 0 14px; text-transform: uppercase; color: #fff; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+    header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: center; }
+    .logo { font-family: var(--font-display); font-size: 18px; font-weight: 800; letter-spacing: 2px; color: var(--accent); text-decoration: none; text-align: center; white-space: nowrap; }
+    .logo span { color: var(--accent2); }
+    @media (max-width: 600px) {
+      .logo { font-size: clamp(10px, 3.2vw, 18px); letter-spacing: 1px; }
+    }
+    .hero { padding: 56px 24px 36px; text-align: center; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(247,201,72,0.07) 0%, transparent 70%); pointer-events: none; }
+    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 7vw, 64px); letter-spacing: 2px; line-height: 1.05; margin-bottom: 16px; }
     .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero-sub-badge { display: inline-block; background: var(--accent); color: #0a0a0f; font-family: var(--font-display); font-weight: 800; font-size: clamp(10px, 1.8vw, 13px); letter-spacing: 2.5px; padding: 7px 24px; border-radius: 4px; margin-bottom: 14px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(247,201,72,0.35); }
-    .hero-date { font-family: var(--font-display); font-weight: 700; font-size: clamp(11px, 1.8vw, 14px); letter-spacing: 2px; color: rgba(255,255,255,0.75); margin-bottom: 36px; text-transform: uppercase; }
-    .hero-date span { color: var(--accent); margin: 0 8px; }
-    .search-container { max-width: 680px; width: 100%; margin: 0 auto; position: relative; z-index: 10; padding: 0 16px; }
-    .bib-row { display: flex; gap: 0; align-items: stretch; margin-bottom: 16px; background: #fff; border-radius: 50px; overflow: visible; padding: 6px 6px 6px 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.35); }
+    .hero p { color: var(--muted); font-family: var(--font-body); font-size: 15px; font-weight: 400; max-width: 460px; margin: 0 auto 36px; line-height: 1.65; }
+    .search-container { max-width: 700px; margin: 0 auto; position: relative; z-index: 10; }
+    .bib-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 16px; }
+    .mf-labels { display: flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 0 6px; }
     .mf-m { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #4fc3f7; line-height: 1; }
     .mf-sep { color: var(--border); font-size: 20px; line-height: 1; font-weight: 300; }
     .mf-f { font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #f48fb1; line-height: 1; }
     /* ẨN M/F LABELS TRÊN MOBILE */
     @media (max-width: 600px) {
+      .mf-labels { display: none; }
     }
-    .bib-input { flex: 1; padding: 10px 12px; background: transparent; border: none; color: #222; font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: 0.5px; outline: none; min-width: 0; width: 100%; }
-    .bib-input::placeholder { color: #aaa; font-size: 15px; font-weight: 500; letter-spacing: 0; }
-    .bib-input:focus { outline: none; }
-    .search-btn { padding: 12px 24px; background: #e63946; color: #fff; border: none; border-radius: 44px; font-family: var(--font-display); font-weight: 800; font-size: 14px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; box-shadow: 0 4px 16px rgba(230,57,70,0.45); display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; }
-    .search-btn:hover { background: #c1121f; transform: scale(1.06); }
-    .search-btn:active { transform: scale(0.98); }
-    .search-btn-icon { font-size: 20px; line-height: 1; }
+    .bib-input { flex: 1; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 2px; outline: none; transition: border-color 0.2s; min-width: 0; width: 100%; }
+    .bib-input::placeholder { color: var(--border); font-size: 16px; letter-spacing: 1px; }
+    .bib-input:focus { border-color: var(--accent); }
+    .search-btn { padding: 15px 28px; background: var(--accent); color: #0a0a0f; border: none; border-radius: var(--radius); font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .search-btn:hover { background: #ffe080; transform: translateY(-1px); }
+    .search-btn:active { transform: translateY(0); }
     #name-results-section { display: none; max-width: 1100px; margin: 32px auto 0; padding: 0 20px; }
     .name-results-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
     .name-results-title { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: 1px; color: var(--text); }
@@ -67,16 +66,16 @@
     .bib-clear-btn:hover { background: var(--accent); color: #0a0a0f; }
     .bib-clear-btn.visible { display: flex; }
     .bib-input.has-value { padding-right: 44px; }
-    .autocomplete-dropdown { display: none; position: absolute; top: calc(100% + 8px); left: 16px; right: 16px; background: #fff; border: 1px solid #e0e0e0; border-radius: 16px; z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.18); max-height: 260px; overflow-y: auto; }
+    .autocomplete-dropdown { display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); z-index: 200; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); max-height: 260px; overflow-y: auto; }
     .autocomplete-dropdown.open { display: block; }
-    .ac-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid #f0f0f0; }
+    .ac-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
     .ac-item:last-child { border-bottom: none; }
-    .ac-item:hover, .ac-item.focused { background: #f9f5e8; }
+    .ac-item:hover, .ac-item.focused { background: var(--surface2); }
     .ac-bib { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 1px; color: var(--accent); min-width: 52px; flex-shrink: 0; }
-    .ac-name { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: #111; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ac-name { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .ac-club { font-family: var(--font-body); font-size: 12px; color: var(--muted); white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
     .ac-count { font-family: var(--font-body); font-size: 11px; color: var(--accent2); background: rgba(255,107,53,0.12); padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
-    .ac-empty { padding: 14px 16px; color: #888; font-size: 13px; text-align: center; }
+    .ac-empty { padding: 14px 16px; color: var(--muted); font-size: 13px; text-align: center; }
     .status-bar { max-width: 700px; margin: 10px auto 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; min-height: 20px; letter-spacing: 0.2px; }
     .status-bar.loading { color: var(--accent); }
     .status-bar.success { color: var(--success); }
@@ -97,7 +96,7 @@
     .runner-info-club-name { color: var(--accent); font-weight: 600; }
     .folder-link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; transition: all 0.2s; }
     .folder-link-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
     .result-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .result-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .result-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -133,7 +132,7 @@
     .section-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
     .count-badge { background: var(--surface2); border: 1px solid var(--border); padding: 2px 10px; border-radius: 20px; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--accent); }
-    .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
     .photo-card { position: relative; aspect-ratio: 3/2; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .photo-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .photo-card img { width: 100%; height: 100%; object-fit: cover; }
@@ -184,12 +183,15 @@
     }
 
     /* ══ ALBUM TABS ══ */
-    .album-tabs-outer { max-width: 700px; margin: 10px auto 0; border-radius: 0; overflow: hidden; }
-    .album-tabs-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .album-tab-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; padding: 13px 18px; background: linear-gradient(to bottom, rgba(247,201,72,0.09) 0%, var(--bg) 100%); border: none; border-top: 2px solid var(--border); color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; width: 100%; border-radius: 0; }
-    .album-tab-btn::before { display: none; }
-    .album-tab-btn:hover { background: linear-gradient(to bottom, rgba(247,201,72,0.15) 0%, var(--bg) 100%); color: var(--text); border-top-color: var(--accent); }
-    .album-tab-btn.active { background: linear-gradient(to bottom, rgba(247,201,72,0.20) 0%, var(--bg) 100%); color: var(--accent); border-top: 2px solid var(--accent); }
+    .album-tabs-outer { max-width: 700px; margin: 10px auto 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .album-tabs-wrap { display: grid; grid-template-columns: 1fr 1fr; }
+    .album-tab-btn { display: inline-flex; align-items: center; justify-content: flex-start; gap: 7px; padding: 13px 18px; background: var(--surface); border: none; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--muted); font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: all 0.22s; white-space: nowrap; position: relative; overflow: hidden; width: 100%; }
+    .album-tab-btn:nth-child(2n)       { border-right: none; }
+    .album-tab-btn:nth-last-child(-n+2) { border-bottom: none; }
+    .album-tab-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,201,72,0.08), transparent); opacity: 0; transition: opacity 0.22s; }
+    .album-tab-btn:hover { background: var(--surface2); color: var(--text); }
+    .album-tab-btn:hover::before { opacity: 1; }
+    .album-tab-btn.active { background: linear-gradient(135deg, rgba(247,201,72,0.13), rgba(255,107,53,0.07)); color: var(--accent); }
     .album-tab-btn .tab-icon { font-size: 16px; line-height: 1; }
     .album-tab-btn .tab-count { background: rgba(247,201,72,0.15); color: var(--accent); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; letter-spacing: 0; }
     .tab-count .tc-sep { color: rgba(247,201,72,0.4); margin: 0 3px; font-weight: 300; }
@@ -202,7 +204,7 @@
     .album-back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: linear-gradient(135deg, rgba(247,201,72,0.12), rgba(255,107,53,0.08)); border: 1.5px solid var(--accent); border-radius: 10px; color: var(--accent); font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; box-shadow: 0 0 10px rgba(247,201,72,0.1); }
     .album-back-btn:hover { background: linear-gradient(135deg, rgba(247,201,72,0.22), rgba(255,107,53,0.14)); box-shadow: 0 0 18px rgba(247,201,72,0.22); transform: translateY(-1px); }
     .album-back-btn:active { transform: translateY(0); }
-    .album-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--thumb-w), 1fr)); gap: 8px; }
     .album-card { position: relative; aspect-ratio: var(--thumb-ratio); border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--surface2); border: 1px solid var(--border); transition: all 0.18s; }
     .album-card:hover { transform: scale(1.03); border-color: var(--accent); box-shadow: 0 0 18px rgba(247,201,72,0.18); z-index: 2; }
     .album-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -213,9 +215,7 @@
       header { padding: 10px 12px; }
       .logo { font-size: clamp(9px, 3vw, 16px); letter-spacing: 0.5px; }
       .viewer-bib { font-size: 24px; }
-      .photo-grid  { grid-template-columns: repeat(2, 1fr); }
-      .result-grid { grid-template-columns: repeat(2, 1fr); }
-      .album-grid  { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .bib-input { font-size: 20px; letter-spacing: 3px; }
       .search-btn { padding: 15px 14px; font-size: 13px; }
       .bib-row { flex-wrap: nowrap; }
@@ -255,37 +255,15 @@
       .heart-label { font-size: 11px; }
     }
 
-    .heart-icon-wrap { position: relative; width: 32px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .vn-flag { width: 32px; height: 28px; display: block; filter: drop-shadow(0 2px 6px rgba(229,57,53,0.55)); animation: heartPulse 1.8s ease-in-out infinite; }
-    @keyframes heartPulse {
-      0%   { transform: scale(1); }
-      14%  { transform: scale(1.12); }
-      28%  { transform: scale(1); }
-      42%  { transform: scale(1.07); }
-      56%  { transform: scale(1); }
-      100% { transform: scale(1); }
-    }
-    /* Vòng sáng tỏa ra */
-    .heart-ring {
-      display: block;
-      position: absolute;
-      border-radius: 50%;
-      border: 2px solid rgba(229,57,53,0.7);
-      width: 32px; height: 32px;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0.5);
-      opacity: 0;
-      animation: ringPulse 2.4s ease-out infinite;
-      pointer-events: none;
-    }
-    .heart-ring.ring2 { animation-delay: 0.8s; }
-    .heart-ring.ring3 { animation-delay: 1.6s; }
-    @keyframes ringPulse {
-      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; border-color: rgba(229,57,53,0.8); }
-      100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0;   border-color: rgba(229,57,53,0); }
-    }
-    .heart-pill.beat .vn-flag { animation: heartBeat 0.42s ease-out forwards, heartPulse 1.8s ease-in-out 0.42s infinite; }
-    @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.4); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    .heart-icon-wrap { position: relative; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .heart-icon { font-size: 22px; line-height: 1; display: block; animation: heartPulse 2s ease-in-out infinite; transform-origin: center; }
+    @keyframes heartPulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.18); } 70% { transform: scale(1.06); } }
+    .heart-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(248,113,113,0); pointer-events: none; }
+    .heart-ring-1 { animation: ringOut 2s ease-out 0s infinite; }
+    .heart-ring-2 { animation: ringOut 2s ease-out 0.65s infinite; }
+    @keyframes ringOut { 0% { transform: scale(0.6); border-color: rgba(248,113,113,0.7); } 100% { transform: scale(2.4); border-color: rgba(248,113,113,0); } }
+    .heart-pill.beat .heart-icon { animation: heartBeat 0.42s ease-out forwards; }
+    @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.55); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
     .heart-count { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.5px; color: #f87171; transition: color 0.3s; }
     .float-heart { position: fixed; pointer-events: none; z-index: 4000; animation: floatUp 1.4s ease-out forwards; font-size: 18px; }
     @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--r0)); } 30% { opacity: 1; transform: translateY(-60px) scale(1.3) rotate(var(--r1)); } 70% { opacity: 0.7; transform: translateY(-130px) scale(1.1) rotate(var(--r2)); } 100% { opacity: 0; transform: translateY(-220px) scale(0.6) rotate(var(--r3)); } }
@@ -294,54 +272,59 @@
 <body>
 
 <div class="lychee-loading" id="lychee-loading">
-  <div class="lychee-bounce">🌿</div>
+  <div class="lychee-bounce">🍒</div>
   <div class="lychee-shadow"></div>
-  <div class="lychee-text"><em>Em đang load ảnh với Pace 1.2</em> chờ em chút nha </div>
+  <div class="lychee-text"><em>Vải đang được trẩy,</em> bạn chờ tôi chút nha 🌿</div>
 </div>
 
+<header>
+  <a class="logo" href="#">TÌM ẢNH — <span>PHÚC HOÀ CITY TRAIL 2026</span></a>
+</header>
+
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-top-badge">TÌM ẢNH GIẢI CHẠY</div>
-    <h1>BƯỚC CHÂN<br><em>DI SẢN</em> 2026</h1>
-    <div class="hero-sub-badge">LỄ HỘI TRUYỀN THỐNG ĐÌNH LÀNG THƯỢNG CÁT 2026</div>
-    <div class="hero-date">Tháng 4, 2026 <span>•</span> THƯỢNG CÁT, HÀ NỘI</div>
-    <div class="search-container">
-      <div class="bib-row" style="position:relative;">
-        <div style="flex:1;position:relative;min-width:0;display:flex;align-items:center;">
-          <input class="bib-input" id="bib-input" type="text" inputmode="text"
-                 placeholder="Tìm ẢNH theo BIB hoặc Tên của bạn..." maxlength="50"
-                 oninput="onBibInputChange(this)"
-                 onkeydown="onBibInputKeyDown(event)"
-                 autocomplete="off">
-          <button class="bib-clear-btn" id="bib-clear-btn" onclick="clearBibInput()" title="Xóa" tabindex="-1">✕</button>
-        </div>
-        <button class="search-btn" id="search-btn-main" onclick="searchByBib()" title="Tìm kiếm"><span class="search-btn-icon">🔍</span></button>
-        <div class="autocomplete-dropdown" id="autocomplete-dropdown" style="left:0;right:0;"></div>
+  <h1>TÌM ẢNH<br><em>CỦA BẠN</em></h1>
+  <p>Nhập số BIB hoặc Tên vận động viên để tìm khoảnh khắc của bạn trong giải chạy Việt Dã - Phúc Hòa City Trail 2026</p>
+  <div class="search-container">
+    <div class="bib-row">
+      <div class="mf-labels">
+        <span class="mf-m">M</span><span class="mf-sep">/</span><span class="mf-f">F</span>
       </div>
+      <div style="flex:1;position:relative;min-width:0;">
+        <input class="bib-input" id="bib-input" type="text" inputmode="text"
+               placeholder="044 hoặc Tên của bạn" maxlength="50"
+               oninput="onBibInputChange(this)"
+               onkeydown="onBibInputKeyDown(event)"
+               autocomplete="off">
+        <button class="bib-clear-btn" id="bib-clear-btn" onclick="clearBibInput()" title="Xóa" tabindex="-1">✕</button>
+        <div class="autocomplete-dropdown" id="autocomplete-dropdown"></div>
+      </div>
+      <button class="search-btn" id="search-btn-main" onclick="searchByBib()">TÌM KIẾM</button>
+    </div>
     <div class="album-tabs-outer">
     <div class="album-tabs-wrap">
       <button class="album-tab-btn" id="tab-khai-mac"     onclick="openAlbumTab('khai-mac')">
-        <span class="tab-icon">🎪</span> KHAI MẠC / TRAO GIẢI
+        <span class="tab-icon">🎪</span> KHAI MẠC
       </button>
       <button class="album-tab-btn" id="tab-start-finish" onclick="openAlbumTab('start-finish')">
         <span class="tab-icon">🏁</span> START / FINISH
       </button>
-      <button class="album-tab-btn" id="tab-kid-run"  onclick="openAlbumTab('kid-run')">
-        <span class="tab-icon">📸</span> KID RUN
+      <button class="album-tab-btn" id="tab-khoanh-khac"  onclick="openAlbumTab('khoanh-khac')">
+        <span class="tab-icon">📸</span> KHOẢNH KHẮC
       </button>
-      <button class="album-tab-btn" id="tab-tong-hop"          onclick="openAlbumTab('tong-hop')">
-        <span class="tab-icon">🙌</span> TỔNG HỢP
-      </button>
-	  <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
+      <button class="album-tab-btn" id="tab-btc"          onclick="openAlbumTab('btc')">
         <span class="tab-icon">🏅</span> BAN TỔ CHỨC
       </button>
+      <button class="album-tab-btn" id="tab-tong-hop"      onclick="openAlbumTab('tong-hop')">
+        <span class="tab-icon">🙌</span> TỔNG HỢP
+      </button>
+      <button class="album-tab-btn" id="tab-flycam"      onclick="openAlbumTab('flycam')">
+        <span class="tab-icon">🚁</span> FLYCAM
+      </button>
     </div>
     </div>
-      <div class="status-bar" id="status-bar"></div>
-      <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
-      <div class="notice-banner" style="display:none;"></div>
-    </div>
+    <div class="status-bar" id="status-bar"></div>
+    <div class="progress-wrap" id="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="notice-banner" style="display:none;"></div>
   </div>
 </div>
 
@@ -418,14 +401,14 @@
 </div>
 
 <footer style="border-top:1px solid var(--border);margin-top:60px;padding:40px 24px 32px;text-align:center;background:var(--surface);">
-  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:800;font-size:clamp(14px,3vw,20px);letter-spacing:2px;color:var(--accent);margin-bottom:6px;">LỄ HỘI TRUYỀN THỐNG ĐÌNH LÀNG THƯỢNG CÁT 2026</div>
-  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:clamp(11px,2vw,15px);letter-spacing:1.5px;color:var(--accent2);margin-bottom:20px;">GIẢI CHẠY - BƯỚC CHÂN DI SẢN</div>
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:800;font-size:clamp(14px,3vw,20px);letter-spacing:2px;color:var(--accent);margin-bottom:6px;">GIẢI VIỆT DÃ XÃ PHÚC HÒA MỞ RỘNG</div>
+  <div style="font-family:'Montserrat','Segoe UI',sans-serif;font-weight:700;font-size:clamp(11px,2vw,15px);letter-spacing:1.5px;color:var(--accent2);margin-bottom:20px;">PHÚC HÒA CITY TRAIL 2026 · ĐÓN MÙA VẢI SỚM</div>
   <a href="https://www.facebook.com/thuongcatrunners" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-family:var(--font-body);font-size:14px;font-weight:500;transition:color 0.2s;" onmouseover="this.style.color='#4fc3f7'" onmouseout="this.style.color='var(--muted)'">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="#4fc3f7"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     THUONG CAT RUNNERS - TCR
   </a>
-  <div style="margin-top:1px;font-family:var(--font-body);font-size:12px;letter-spacing:0.5px;">
-    <a href="https://web.facebook.com/thuongcatbactuliemhanoi" target="_blank" style="color:gray;text-decoration:none;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='gray'" onmouseout="this.style.color=gray">© 2026 Làng Bên Sông</a>
+  <div style="margin-top:18px;font-family:var(--font-body);font-size:12px;letter-spacing:0.5px;">
+    <a href="https://web.facebook.com/thuongcatbactuliemhanoi" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='#ffe080'" onmouseout="this.style.color='var(--accent)'">© 2026 Làng Bên Sông</a>
   </div>
 </footer>
 
@@ -435,12 +418,9 @@
   <div class="heart-pill" id="heart-pill" title="Thả tim — cảm ơn bạn!" onclick="toggleHeart()" style="cursor:pointer;">
     <span class="heart-label">Thả</span>
     <div class="heart-icon-wrap" id="heart-icon-wrap">
-      <svg class="vn-flag" id="heart-icon" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 24 C16 24 4 16 4 9 C4 5.7 6.7 3 10 3 C12.2 3 14.2 4.2 15.3 6 C15.6 6.5 16.4 6.5 16.7 6 C17.8 4.2 19.8 3 22 3 C25.3 3 28 5.7 28 9 C28 16 16 24 16 24Z" fill="#e53935"/>
-      </svg>
-      <span class="heart-ring ring1"></span>
-      <span class="heart-ring ring2"></span>
-      <span class="heart-ring ring3"></span>
+      <span class="heart-ring heart-ring-1"></span>
+      <span class="heart-ring heart-ring-2"></span>
+      <span class="heart-icon" id="heart-icon">❤️</span>
     </div>
     <span class="heart-count" id="heart-count">--</span>
     <span></span>
@@ -457,10 +437,10 @@
 
 <script>
 const CONFIG = {
-  jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/buochandisan2026/main/photos.json',
-  runnersUrl:     'https://raw.githubusercontent.com/tcr-challenge/buochandisan2026/main/runners.json',
+  jsonUrl:        'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/photos.json',
+  runnersUrl:     'https://raw.githubusercontent.com/tcr-challenge/phuchoa2026/main/runners.json',
   folderTemplate: 'https://drive.google.com/drive/folders/1_z_YUXz1HzP8VEbjufSCeL6il8XEotdG',
-  // prefixes không cần nữa — BIB thuần 4 số
+  prefixes:       ['M', 'F'],
 };
 
 const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 600;
@@ -482,10 +462,10 @@ function buildBrowseOrder() {
   );
   BROWSE_PHOTOS = [...priority, ...rest];
 }
-const BROWSE_PAGE_SIZE = IS_MOBILE ? 12 : 24;
+const BROWSE_PAGE_SIZE = IS_MOBILE ? 24 : 50;
 let viewerAllList = [];
 let viewerPage    = 1;
-const VIEWER_PAGE_SIZE = 24;
+const VIEWER_PAGE_SIZE = 50;
 let viewerIndex   = 0;
 
 document.addEventListener('DOMContentLoaded', () => { fetchAll(); });
@@ -521,13 +501,13 @@ async function fetchAll() {
 
 function loadDemoData() {
   PHOTOS = Array.from({length: 148}, (_, i) => {
-    const num = String(i + 1).padStart(4, '0');
+    const num = String(i + 1).padStart(3, '0');
     const prefix = i % 3 === 0 ? 'F' : 'M';
     const bib = prefix + num;
     const tabs = ['khai-mac', 'start-finish', 'khoanh-khac'];
     return { id: 'demo_' + i, bib, thumb: 'https://picsum.photos/seed/' + bib + '/300/200', full: 'https://picsum.photos/seed/' + bib + '/900/600', folderUrl: '', drive: 1, tab: tabs[i % 3] };
   });
-  RUNNERS = { 'M0001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F0002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
+  RUNNERS = { 'M001': { name: 'NGUYỄN VĂN A', club: 'TCR - THUONG CAT RUNNERS' }, 'F002': { name: 'TRẦN THỊ B', club: 'RUN4SELF' } };
   document.getElementById('total-count').textContent = PHOTOS.length + ' (demo)';
   browsePage = 1;
   buildBrowseOrder();
@@ -537,90 +517,46 @@ function loadDemoData() {
 
 function lookupRunner(bib) {
   if (!bib || !Object.keys(RUNNERS).length) return null;
-  const digits = bib.toString().replace(/[^0-9]/g, "");
-  const key4   = digits.padStart(4, "0");
-  const keyRaw = digits.replace(/^0+/, '') || "0";
-  return RUNNERS[bib] || RUNNERS[key4] || RUNNERS[digits] || RUNNERS[keyRaw] || null;
+  const b = bib.toString().toUpperCase().trim();
+  if (RUNNERS[b]) return RUNNERS[b];
+  const digits = b.replace(/^[MF]/, '');
+  if (RUNNERS[digits]) return RUNNERS[digits];
+  const alt = b.startsWith('M') ? 'F' + digits : b.startsWith('F') ? 'M' + digits : null;
+  if (alt && RUNNERS[alt]) return RUNNERS[alt];
+  return null;
 }
 
 let acFocusIdx = -1;
 
-// ── BIB: chỉ cho phép nhập đúng 4 chữ số ──
-function isLikelyBib(raw) { return /^\d{1,4}$/.test(raw.trim()); }
-function isExactBib(raw)  { return /^\d{4}$/.test(raw.trim()); }
-
-// ── Nickname dictionary: từ khoá → tên chính thức (không dấu, viết hoa) ──
-// Key là từ khoá nickname (không dấu, hoa), value là mảng từ có thể là tên chính
-// Hệ thống tự học: nếu query có dạng "Tên + mô tả" thì bóc tách tên để tìm
-function extractNameFromNickQuery(rawQ) {
-  // Bóc tách: nếu query gồm nhiều từ, thử từng từ riêng lẻ xem có phải tên không
-  // Ưu tiên: từ đầu tiên viết hoa → có thể là tên chính
-  const words = rawQ.trim().split(/\s+/);
-  // Trả về mảng "ứng viên tên" theo thứ tự ưu tiên: từ đầu, từ cuối, toàn bộ
-  const candidates = [];
-  if (words.length > 1) {
-    candidates.push(words[0]);           // "Tuấn" trong "Tuấn đi bộ"
-    candidates.push(words[words.length - 1]); // từ cuối
-  }
-  candidates.push(rawQ.trim());          // toàn bộ query (fallback)
-  return candidates;
-}
-
-// Tính điểm ưu tiên cho 1 kết quả với query
-function scoreRunner(info, bib, q, qRaw) {
-  const nameNorm  = removeVietnameseTones((info.name || '').toUpperCase());
-  const clubNorm  = removeVietnameseTones((info.club || '').toUpperCase());
-  const nameWords = nameNorm.split(/\s+/);
-  const lastName  = nameWords[nameWords.length - 1]; // tên cuối = tên gọi VN
-
-  let score = 0;
-  let matched = false;
-
-  // === Ưu tiên 1: Khớp chính xác tên cuối ===
-  if (lastName === q) { score = 100; matched = true; }
-  // === Ưu tiên 2: Tên cuối bắt đầu bằng query ===
-  else if (lastName.startsWith(q)) { score = 80; matched = true; }
-  // === Ưu tiên 3: Tên cuối chứa query ===
-  else if (lastName.includes(q)) { score = 60; matched = true; }
-  // === Ưu tiên 4: Bất kỳ từ nào trong tên khớp chính xác ===
-  else if (nameWords.some(w => w === q)) { score = 50; matched = true; }
-  // === Ưu tiên 5: Tên đầy đủ bắt đầu bằng query ===
-  else if (nameNorm.startsWith(q)) { score = 40; matched = true; }
-  // === Ưu tiên 6: Tên đầy đủ chứa query ===
-  else if (nameNorm.includes(q)) { score = 20; matched = true; }
-  // === Ưu tiên 7: Nickname — query gồm nhiều từ, từ đầu khớp tên cuối ===
-  else {
-    const nickCandidates = extractNameFromNickQuery(removeVietnameseTones(qRaw.toUpperCase()));
-    for (const cand of nickCandidates) {
-      if (cand.length < 2) continue;
-      if (lastName === cand) { score = 35; matched = true; break; }
-      if (lastName.startsWith(cand)) { score = 25; matched = true; break; }
-      if (nameWords.some(w => w === cand)) { score = 15; matched = true; break; }
-    }
-  }
-  // Thưởng thêm nếu club khớp
-  if (!matched && clubNorm.includes(q)) { score = 5; matched = true; }
-
-  return { matched, score };
-}
+function isLikelyBib(raw) { return /^[MmFf]?\d+$/.test(raw.trim()); }
 
 function searchRunnersByName(query) {
   if (!query || query.length < 2) return [];
-  const qRaw = query.trim();
-  const q    = removeVietnameseTones(qRaw.toUpperCase());
+  const q = removeVietnameseTones(query.toUpperCase().trim());
   const results = [];
-
   for (const [bib, info] of Object.entries(RUNNERS)) {
-    const { matched, score } = scoreRunner(info, bib, q, qRaw);
-    if (!matched) continue;
-    const bibPhotos  = PHOTOS.filter(p => p.bib && p.bib === bib);
-    const photoCount = bibPhotos.length;
-    const randomPhoto = bibPhotos.length ? bibPhotos[Math.floor(Math.random() * bibPhotos.length)] : null;
-    results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: randomPhoto ? randomPhoto.thumb : null, _score: score });
+    const nameNorm = removeVietnameseTones((info.name || '').toUpperCase());
+    const clubNorm = removeVietnameseTones((info.club || '').toUpperCase());
+    const nameWords = nameNorm.split(/\s+/);
+    const matchesName = nameNorm.includes(q) || nameWords.some(w => w.startsWith(q));
+    const matchesClub = clubNorm.includes(q);
+    if (matchesName || matchesClub) {
+      const bibDigits = bib.replace(/^[MmFf]/, '');
+      const bibPhotos = PHOTOS.filter(p => {
+        if (!p.bib) return false;
+        const pb = p.bib.toUpperCase();
+        return pb === bib.toUpperCase() || pb.replace(/^[MF]/, '') === bibDigits;
+      });
+      const photoCount = bibPhotos.length;
+      const randomPhoto = bibPhotos.length ? bibPhotos[Math.floor(Math.random() * bibPhotos.length)] : null;
+      results.push({ bib, name: info.name || '', club: info.club || '', photoCount, thumb: randomPhoto ? randomPhoto.thumb : null });
+    }
   }
-
-  // Sắp xếp: score cao nhất lên đầu, cùng score thì theo bib
-  results.sort((a, b) => (b._score - a._score) || a.bib.localeCompare(b.bib));
+  results.sort((a, b) => {
+    const an = removeVietnameseTones(a.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    const bn = removeVietnameseTones(b.name.toUpperCase()).startsWith(q) ? 0 : 1;
+    return an - bn || a.bib.localeCompare(b.bib);
+  });
   return results;
 }
 
@@ -648,16 +584,11 @@ function clearBibInput() {
 }
 
 function onBibInputChange(el) {
-  let raw = el.value;
-  // Nếu đang nhập thuần số: chặn không cho quá 4 ký tự
-  if (/^\d+$/.test(raw)) {
-    if (raw.length > 4) { raw = raw.slice(0, 4); el.value = raw; }
-  }
+  const raw = el.value;
   acFocusIdx = -1;
   toggleClearBtn(raw);
   if (!raw.trim()) { closeAutocomplete(); return; }
-  // Nếu là số thì không gợi ý tên, chỉ chờ nhấn tìm
-  if (/^\d+$/.test(raw.trim())) { closeAutocomplete(); return; }
+  if (isLikelyBib(raw)) { closeAutocomplete(); return; }
   const results = searchRunnersByName(raw);
   renderAutocomplete(results, raw);
 }
@@ -749,29 +680,23 @@ function searchByBib() {
   closeAutocomplete();
   const raw = document.getElementById('bib-input').value.trim();
   if (!raw) { showToast('Vui lòng nhập số BIB hoặc tên VĐV', 'error'); return; }
-
-  // ── Tìm theo BIB (thuần số) ──
-  if (/^\d+$/.test(raw)) {
-    if (raw.length !== 4) {
-      showToast('Số BIB phải đúng 4 chữ số (ví dụ: 0044)', 'error');
-      return;
-    }
-    document.getElementById('name-results-section').style.display = 'none';
-    const bib4 = raw; // đã đúng 4 số
-    setStatus('Đang tìm BIB ' + bib4 + '...', 'loading');
-    const matches = PHOTOS.filter(p => p.bib === bib4);
-    if (matches.length === 0) { setStatus('', ''); showViewer([], bib4, bib4); return; }
-    setStatus('✓ Tìm thấy ' + matches.length + ' ảnh', 'success');
-    setTimeout(() => setStatus('', ''), 2500);
-    showViewer(matches, bib4, bib4);
-    return;
+  if (!isLikelyBib(raw)) {
+    const found = searchRunnersByName(raw);
+    if (found.length === 0) { showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return; }
+    else if (found.length === 1) { selectRunnerFromAc(found[0].bib); return; }
+    else { showNameResults(found, raw); return; }
   }
-
-  // ── Tìm theo tên / nickname ──
-  const found = searchRunnersByName(raw);
-  if (found.length === 0) { showToast('Không tìm thấy vận động viên "' + raw + '"', 'error'); return; }
-  if (found.length === 1) { selectRunnerFromAc(found[0].bib); return; }
-  showNameResults(found, raw);
+  document.getElementById('name-results-section').style.display = 'none';
+  const digits = raw.replace(/[^0-9]/g, '');
+  if (!digits) { showToast('Vui lòng nhập số BIB hợp lệ', 'error'); return; }
+  const last3  = digits.slice(-3).padStart(3, '0');
+  const allBibs = CONFIG.prefixes.map(p => p.toUpperCase() + last3);
+  setStatus('Đang tìm BIB ' + allBibs.join(' / ') + '...', 'loading');
+  const matches = PHOTOS.filter(p => { const pb = p.bib.toUpperCase(); return allBibs.some(bib => pb === bib); });
+  if (matches.length === 0) { setStatus('', ''); showViewer([], allBibs.join(' / '), last3); return; }
+  setStatus('✓ Tìm thấy ' + matches.length + ' ảnh', 'success');
+  setTimeout(() => setStatus('', ''), 2500);
+  showViewer(matches, allBibs.join(' / '), last3);
 }
 
 function showViewer(list, label, digits) {
@@ -784,7 +709,9 @@ function showViewer(list, label, digits) {
   const card   = document.getElementById('runner-info-card');
   const nameEl = document.getElementById('runner-info-name');
   const clubEl = document.getElementById('runner-info-club');
-  const runner = lookupRunner(digits || '');
+  const runnerM = lookupRunner('M' + (digits || '').padStart(3,'0'));
+  const runnerF = lookupRunner('F' + (digits || '').padStart(3,'0'));
+  const runner  = runnerM || runnerF;
   if (runner && (runner.name || runner.club)) {
     nameEl.textContent = runner.name || '';
     clubEl.textContent = (runner.club && runner.club.trim() && runner.club.toLowerCase() !== 'nan') ? runner.club : 'non team';
@@ -984,14 +911,14 @@ function hideProgress()    { document.getElementById('progress-wrap').classList.
 function showToast(msg, type) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show' + (type ? ' ' + type : ''); setTimeout(() => t.className = 'toast', 3000); }
 
 const ALBUM_DEFS = [
-  { key: 'khai-mac',     label: 'KHAI MẠC / TRAO GIẢI',      icon: '🎪' },
+  { key: 'khai-mac',     label: 'KHAI MẠC',      icon: '🎪' },
   { key: 'start-finish', label: 'START / FINISH', icon: '🏁' },
-  { key: 'kid-run',  label: 'KID RUN',   icon: '📸' },
-  { key: 'tong-hop', label: 'TỔNG HỢP',    icon: '🙌' },
-  { key: 'btc', label: 'BAN TỔ CHỨC',    icon: '🏅' },
+  { key: 'khoanh-khac',  label: 'KHOẢNH KHẮC',   icon: '📸' },
+  { key: 'btc',          label: 'BAN TỔ CHỨC',    icon: '🏅' },
+  { key: 'tong-hop',      label: 'TỔNG HỢP',       icon: '🙌' },
+  { key: 'flycam',        label: 'FLYCAM',          icon: '🚁' },
 ];
-
-const ALBUM_PAGE_SIZE = 24;
+const ALBUM_PAGE_SIZE = 50;
 let activeAlbumKey   = null;
 let albumCurrentList = [];
 let albumPage        = 1;
@@ -1079,14 +1006,13 @@ function initTabTracking(db) {
 
 (function () {
   const firebaseConfig = {
-    apiKey: "AIzaSyD9kOdlwT6jEtX3QdNZyq8h7khuNoammS8",
-    authDomain: "bcds2026-9c6a6.firebaseapp.com",
-    databaseURL: "https://bcds2026-9c6a6-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "bcds2026-9c6a6",
-    storageBucket: "bcds2026-9c6a6.firebasestorage.app",
-    messagingSenderId: "354115933539",
-    appId: "1:354115933539:web:f4c49fb913d494f92fef56",
-    measurementId: "G-DFQEFSMHTH"
+    apiKey: "AIzaSyBMMZU9dWuzWgzpjSyNL5xB9v-QEh95sdw",
+    authDomain: "phuchoatrail2026.firebaseapp.com",
+    databaseURL: "https://phuchoatrail2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "phuchoatrail2026",
+    storageBucket: "phuchoatrail2026.firebasestorage.app",
+    messagingSenderId: "665306842437",
+    appId: "1:665306842437:web:9ffc0f64e15bb01b542a2c",
   };
   const s1 = document.createElement('script');
   s1.src = 'https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js';
@@ -1125,6 +1051,7 @@ function initHeartWidget(db) {
   const icon    = document.getElementById('heart-icon');
   const countEl = document.getElementById('heart-count');
   const heartsRef = db.ref('total_hearts');
+  icon.textContent = '❤️';
   function fmtCount(n) { if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; return n.toLocaleString('vi-VN'); }
   function updateUI(count) { countEl.textContent = fmtCount(count); }
   function spawnFloatingHeart() {
@@ -1133,7 +1060,7 @@ function initHeartWidget(db) {
     const x = cx + (Math.random() - 0.5) * 60;
     const el = document.createElement('div');
     el.className = 'float-heart';
-    el.textContent = ['❤️', '🩷', '💗', '💖', '💕'][Math.floor(Math.random() * 5)];
+    el.textContent = ['❤️', '🧡', '💗', '💕', '💖'][Math.floor(Math.random() * 5)];
     el.style.left = x + 'px'; el.style.top = cy + 'px';
     el.style.fontSize = (14 + Math.random() * 14) + 'px';
     el.style.setProperty('--r0', (Math.random()*20-10) + 'deg');
@@ -1145,7 +1072,8 @@ function initHeartWidget(db) {
   }
   window.toggleHeart = function () {
     const wrap = document.getElementById('heart-icon-wrap');
-    countEl.classList.add('active');
+    icon.textContent = '❤️';
+    icon.classList.add('loved'); countEl.classList.add('active');
     if (wrap) wrap.classList.add('loved');
     pill.classList.add('beat');
     pill.addEventListener('animationend', () => pill.classList.remove('beat'), { once: true });
