@@ -775,6 +775,35 @@ function closeLightbox() { document.getElementById('lightbox').classList.remove(
 function handleLightboxBackdropClick(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
 function lbNav(dir) { viewerIndex = (viewerIndex + dir + viewerAllList.length) % viewerAllList.length; renderLightboxImage(); syncLbThumbs(); }
 
+function getNetworkSpeedFactor() {
+  // Network Information API — hỗ trợ Chrome/Edge/Android, Safari/Firefox sẽ dùng mặc định 1
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (!conn) return 1;
+  if (conn.saveData) return 0.5; // người dùng bật chế độ tiết kiệm dữ liệu
+  switch (conn.effectiveType) {
+    case 'slow-2g': return 0.35;
+    case '2g':      return 0.45;
+    case '3g':      return 0.65;
+    case '4g':
+    default:        return 1;
+  }
+}
+
+function getLbImageWidth() {
+  // Chọn kích thước ảnh theo màn hình (di động/tablet/desktop) rồi co lại theo tốc độ mạng
+  const w = window.innerWidth || document.documentElement.clientWidth;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2); // tối đa 2x để tránh ảnh quá nặng
+  let base;
+  if (w <= 480) base = Math.round(500 * dpr);    // điện thoại nhỏ
+  else if (w <= 768) base = Math.round(700 * dpr); // điện thoại lớn / phablet
+  else if (w <= 1024) base = 1000;                 // tablet
+  else base = 1200;                                // desktop
+
+  const factor = getNetworkSpeedFactor();
+  const adjusted = Math.round(base * factor);
+  return Math.max(adjusted, 360); // không cho ảnh nhỏ hơn 360px kẻo mờ quá
+}
+
 function renderLightboxImage() {
   const list  = viewerAllList.length ? viewerAllList : PHOTOS;
   const photo = list[viewerIndex];
@@ -783,7 +812,7 @@ function renderLightboxImage() {
   const spinner = document.getElementById('lb-spinner');
   img.classList.add('hidden'); spinner.style.display = 'flex'; spinner.textContent = 'Đang tải ảnh...';
   let displayUrl = photo.thumb;
-  if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w1200');
+  if (displayUrl && displayUrl.includes('drive.google.com/thumbnail')) displayUrl = displayUrl.replace(/sz=w\d+/, 'sz=w' + getLbImageWidth());
   else if (photo.full && !photo.full.includes('export=view')) displayUrl = photo.full;
   img.src = displayUrl;
   const bibLabel = photo.bib ? 'BIB ' + photo.bib : (photo.tab || '');
